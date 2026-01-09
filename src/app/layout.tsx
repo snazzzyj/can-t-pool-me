@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
-import { Providers } from '@/app/providers';
-import '@/styles/globals.css';
+import '../index.css';
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
   title: "Can't Pool Me - Birthday Game",
