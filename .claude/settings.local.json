@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npx tsc:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run lint:husky:*)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(python3:*)",
+      "Bash(tree:*)",
+      "Bash(mv:*)"
+    ]
+  }
+}

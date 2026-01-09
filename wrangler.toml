@@ -1,0 +1,24 @@
+name = "can-t-pool-me"
+type = "javascript"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+
+[env.production]
+name = "can-t-pool-me-prod"
+route = "example.com/*"
+zone_id = ""
+
+[env.staging]
+name = "can-t-pool-me-staging"
+route = "staging.example.com/*"
+zone_id = ""
+
+[build]
+command = "npm run build"
+cwd = "./"
+watch_paths = ["src/**/*.ts", "src/**/*.tsx"]
+
+[build.upload]
+format = "service-worker"
