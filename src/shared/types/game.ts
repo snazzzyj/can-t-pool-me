@@ -27,7 +27,6 @@ export type GameSession = {
 export type SceneDialogue = {
   readonly speaker: string;
   readonly text: string;
-  readonly emotion?: 'happy' | 'sad' | 'angry' | 'neutral' | 'surprised';
   readonly characterImage?: string;
 };
 

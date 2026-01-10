@@ -1,11 +1,20 @@
 'use client';
 
+import { useState } from 'react';
 import { WelcomeScreen } from '@/shared/components/welcome-screen';
+import { DialogueScene } from '../domains/visual-novel/features/DialogueScene';
 
 export default function Home() {
-  const handleStartClick = () => {
-    alert ('Adventure is out there...');
-  };
+  const [gameStarted, setGameStarted] = useState(false);
 
-  return <WelcomeScreen onStartClick={handleStartClick} />;
+  if (!gameStarted) {
+    return <WelcomeScreen onStartClick={() => setGameStarted(true)} />;
+  }
+
+  return (
+    <DialogueScene
+      sceneId={1}
+      onComplete={() => alert('Scene Complete!')}
+    />
+  );
 }

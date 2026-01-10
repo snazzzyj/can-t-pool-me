@@ -4,7 +4,7 @@
  * 
  * Usage:
  * <DialogueBox.Root>
- *   <DialogueBox.Speaker name="Alice" emotion="happy" image={...} />
+ *   <DialogueBox.Speaker name="Alice" image={...} />
  *   <DialogueBox.Text>Hello, world!</DialogueBox.Text>
  *   <DialogueBox.Controls>
  *     <button>Next</button>
@@ -37,23 +37,21 @@ function Root({ children, isAnimating = false }: DialogueBoxRootProps) {
 
 type DialogueBoxSpeakerProps = {
   readonly name: string;
-  readonly emotion?: 'happy' | 'sad' | 'angry' | 'neutral' | 'surprised';
   readonly image?: string;
 };
 
-function Speaker({ name, emotion = 'neutral', image }: DialogueBoxSpeakerProps) {
+function Speaker({ name, image }: DialogueBoxSpeakerProps) {
   return (
     <div className="flex items-center gap-4 mb-4">
       {image && (
         <img
           src={image}
           alt={name}
-          className={clsx('w-16 h-16 rounded-full', `emotion-${emotion}`)}
+          className="w-16 h-16 rounded-full object-contain"
         />
       )}
       <div>
         <h3 className="text-lg font-bold text-white">{name}</h3>
-        <p className="text-sm text-slate-400 capitalize">{emotion}</p>
       </div>
     </div>
   );
