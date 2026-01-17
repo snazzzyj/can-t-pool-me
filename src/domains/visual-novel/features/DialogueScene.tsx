@@ -1,6 +1,6 @@
 'use client';
 
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import { DialogueBox } from "@/shared/components/dialogue-box";
 import { SCENE_DATABASE } from "@/config/game";
 import type { Scene } from "@/shared/types/game";
@@ -13,6 +13,11 @@ type Props = {
 export function DialogueScene({ sceneId, onComplete }: Props) {
   const [dialogueIndex, setDialogueIndex] = useState(0);
   const scene: Scene | null = SCENE_DATABASE[sceneId] || null;
+  
+  // Reset dialogue index when scene changes
+  useEffect(() => {
+    setDialogueIndex(0);
+  }, [sceneId]);
   
   if (!scene) {
     return <div className="text-white">Scene not found</div>;
