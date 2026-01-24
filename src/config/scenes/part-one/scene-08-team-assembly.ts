@@ -11,4 +11,4 @@ const scene08TeamAssembly = {
   // Add scene configuration here
 };
 
-export default scene08TeamAssembly;
+export const SCENE_TEAM_ASSEMBLY = scene08TeamAssembly;

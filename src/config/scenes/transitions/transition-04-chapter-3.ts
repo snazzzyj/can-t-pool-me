@@ -3,12 +3,11 @@
  * Chapter 3 transition
  */
 
-const transition04Chapter3 = {
-  id: 'transition-04-chapter-3',
-  title: 'Chapter 3',
-  part: 'transition' as const,
-  order: 4,
-  // Add transition configuration here
-};
+import type { TransitionSlide } from '@/shared/types/game';
 
-export default transition04Chapter3;
+export const transition05ToBeContinued: TransitionSlide = {
+  type: 'transition',
+  title: 'To Be Continued...',
+  subtitle: 'The adventure is just beginning',
+  // backgroundImage: '/assets/backgrounds/transition-5.png', // Optional
+};

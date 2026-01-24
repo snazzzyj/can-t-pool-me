@@ -3,12 +3,11 @@
  * Opening chapter transition
  */
 
-const transition01Chapter1 = {
-  id: 'transition-01-chapter-1',
-  title: 'Chapter 1',
-  part: 'transition' as const,
-  order: 1,
-  // Add transition configuration here
-};
+import type { TransitionSlide } from '@/shared/types/game';
 
-export default transition01Chapter1;
+export const TRANSITION_CHAPTER_1: TransitionSlide = {
+  type: 'transition',
+  title: 'Chapter 1',
+  subtitle: 'The Mystery Begins',
+  // backgroundImage: '/assets/backgrounds/transition-1.png',
+};

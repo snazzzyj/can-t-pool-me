@@ -3,12 +3,11 @@
  * Ending transition
  */
 
-const transition05ToBeContinued = {
-  id: 'transition-05-to-be-continued',
-  title: 'To Be Continued',
-  part: 'transition' as const,
-  order: 5,
-  // Add transition configuration here
-};
+import type { TransitionSlide } from '@/shared/types/game';
 
-export default transition05ToBeContinued;
+export const transition05ToBeContinued: TransitionSlide = {
+  type: 'transition',
+  title: 'To Be Continued...',
+  subtitle: 'The adventure is just beginning',
+  // backgroundImage: '/assets/backgrounds/transition-5.png', // Optional
+};

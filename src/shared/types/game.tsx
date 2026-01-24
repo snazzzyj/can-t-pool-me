@@ -36,7 +36,7 @@ export type Scene = {
   readonly backgroundImage: string;
   readonly dialogues: ReadonlyArray<SceneDialogue>;
   readonly backgroundMusic?: string;
-  readonly duration: number; // in seconds
+  readonly duration?: number; // Made optional with ?
 };
 
 export type MiniGameType = 'quick-time' | 'memory' | 'quiz' | 'rhythm' | 'puzzle';
@@ -56,17 +56,10 @@ export type BossPhase = {
 };
 
 export type TransitionSlide = {
-  type: 'transition';
-  title: string;
-  subtitle: string;
-  backgroundImage?: string;
-};
-
-export type Scene = {
-  id: number;
-  title: string;
-  backgroundImage?: string;
-  dialogues: Dialogue[];
+  readonly type: 'transition';
+  readonly title: string;
+  readonly subtitle: string;
+  readonly backgroundImage?: string;
 };
 
 export type SceneEntry = Scene | TransitionSlide;

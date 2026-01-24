@@ -3,12 +3,15 @@
  * A mysterious caller reaches out to Rab
  */
 
-const scene03MysteriousCaller = {
-  id: 'scene-03-mysterious-caller',
-  title: 'Mysterious Caller',
-  part: 'one' as const,
-  order: 3,
-  // Add scene configuration here
-};
+import type { Scene } from '@/shared/types/game';
 
-export default scene03MysteriousCaller;
+export const SCENE_MYSTERIOUS_CALLER: Scene = {
+  sceneId: 3,
+  title: 'Mysterious Caller',
+  backgroundImage: '/assets/backgrounds/scene-1.jpg',
+  backgroundMusic: '/assets/audio/music/scene-1.mp3',
+  duration: 120,
+  dialogues: [
+    // TODO: Add dialogue content
+  ],
+};

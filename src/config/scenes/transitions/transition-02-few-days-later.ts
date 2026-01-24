@@ -3,12 +3,11 @@
  * Time skip transition
  */
 
-const transition02FewDaysLater = {
-  id: 'transition-02-few-days-later',
-  title: 'Few Days Later',
-  part: 'transition' as const,
-  order: 2,
-  // Add transition configuration here
-};
+import type { TransitionSlide } from '@/shared/types/game';
 
-export default transition02FewDaysLater;
+export const transition02FewDaysLater: TransitionSlide = {
+  type: 'transition',
+  title: 'A Few Days Later',
+  subtitle: 'Rab discovers something suspicious...',
+  // backgroundImage: '/assets/backgrounds/transition-2.png', // Optional
+};
