@@ -54,3 +54,19 @@ export type BossPhase = {
   readonly maxHealth: number;
   readonly difficulty: 'normal' | 'hard' | 'insane';
 };
+
+export type TransitionSlide = {
+  type: 'transition';
+  title: string;
+  subtitle: string;
+  backgroundImage?: string;
+};
+
+export type Scene = {
+  id: number;
+  title: string;
+  backgroundImage?: string;
+  dialogues: Dialogue[];
+};
+
+export type SceneEntry = Scene | TransitionSlide;

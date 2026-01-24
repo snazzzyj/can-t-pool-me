@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { DialogueBox } from "@/shared/components/dialogue-box";
+import { TransitionSlide } from "@/shared/components/transition-slide";
 import { SCENE_DATABASE } from "@/config/game";
-import type { Scene } from "@/shared/types/game";
+import type { Scene, TransitionSlide as TransitionSlideType } from "@/shared/types/game";
 
 type Props = {
   readonly sceneId: number;
@@ -12,17 +13,31 @@ type Props = {
 
 export function DialogueScene({ sceneId, onComplete }: Props) {
   const [dialogueIndex, setDialogueIndex] = useState(0);
-  const scene: Scene | null = SCENE_DATABASE[sceneId] || null;
+  const sceneData = SCENE_DATABASE[sceneId] || null;
   
   // Reset dialogue index when scene changes
   useEffect(() => {
     setDialogueIndex(0);
   }, [sceneId]);
   
-  if (!scene) {
+  if (!sceneData) {
     return <div className="text-white">Scene not found</div>;
   }
 
+  // Handle transition slides
+  if ('type' in sceneData && sceneData.type === 'transition') {
+    return (
+      <TransitionSlide
+        title={sceneData.title}
+        subtitle={sceneData.subtitle}
+        backgroundImage={sceneData.backgroundImage}
+        onContinue={onComplete}
+      />
+    );
+  }
+
+  // Handle regular dialogue scenes
+  const scene = sceneData as Scene;
   const currentDialogue = scene.dialogues[dialogueIndex];
   const isLastDialogue = dialogueIndex >= scene.dialogues.length - 1;
 
@@ -55,19 +70,19 @@ export function DialogueScene({ sceneId, onComplete }: Props) {
       <DialogueBox.Root isAnimating={true}>
         {currentDialogue && (
           <>
-          <DialogueBox.Speaker
-            name={currentDialogue.speaker}
-            image={currentDialogue.characterImage}
-          />
-          <DialogueBox.Text>{currentDialogue.text}</DialogueBox.Text>
-        </>
+            <DialogueBox.Speaker
+              name={currentDialogue.speaker}
+              image={currentDialogue.characterImage}
+            />
+            <DialogueBox.Text>{currentDialogue.text}</DialogueBox.Text>
+          </>
         )}
 
         <DialogueBox.Controls>
           <button
-          onClick={handlePrevious}
-          disabled={dialogueIndex === 0}
-          className="bg-slate-600 hover:bg-slate-700 text-black py-2 px-4 rounded disabled:opacity-50"
+            onClick={handlePrevious}
+            disabled={dialogueIndex === 0}
+            className="bg-slate-600 hover:bg-slate-700 text-black py-2 px-4 rounded disabled:opacity-50"
           >
             Previous
           </button>
@@ -81,4 +96,4 @@ export function DialogueScene({ sceneId, onComplete }: Props) {
       </DialogueBox.Root>
     </div>
   );
-} 
+}
