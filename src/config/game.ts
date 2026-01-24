@@ -113,26 +113,8 @@ export const SCENE_DATABASE: Record<number, Scene | TransitionSlide> = {
       {
         speaker: 'Rab',
         text: 'hmmm I wonder how they\'re doing that...',
-        characterImage: '/assets/characters/Rab-1.png',
+        characterImage: '/assets/characters/Rab/Rab_Idle_Suss.png',
       },
-    ],
-  },
-
-  4: {
-    type: 'transition',
-    title: 'Chapter 2',
-    subtitle: 'The plot thickens',
-    // backgroundImage: '/assets/backgrounds/transition-3.png', // Optional
-  },
-
-  5: {
-    type: 'scene',
-    sceneId: 3,
-    title: 'Mysterious Caller',
-    backgroundImage: '/assets/backgrounds/scene-1.jpg',
-    backgroundMusic: '/assets/audio/music/scene-1.mp3',
-    duration: 120,
-    dialogues: [
       {
         speaker: '...',
         text: '*phone vibrates*',
@@ -158,6 +140,25 @@ export const SCENE_DATABASE: Record<number, Scene | TransitionSlide> = {
         text: '*hangs up*',
         characterImage: '/assets/characters/',
       },
+    ],
+  },
+
+  4: {
+    type: 'transition',
+    title: 'Chapter 2',
+    subtitle: 'The plot thickens',
+    // backgroundImage: '/assets/backgrounds/transition-3.png', // Optional
+  },
+
+  5: {
+    type: 'scene',
+    sceneId: 3,
+    title: 'Mysterious Caller',
+    backgroundImage: '/assets/backgrounds/scene-1.jpg',
+    backgroundMusic: '/assets/audio/music/scene-1.mp3',
+    duration: 120,
+    dialogues: [
+      
     ],
   },
 

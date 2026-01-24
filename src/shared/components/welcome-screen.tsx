@@ -20,7 +20,7 @@ export function WelcomeScreen({ onStartClick }: Props) {
 
           <button
             onClick={onStartClick}
-            className="bg-pink-500 hover:bg-pink-600 text-black font-bold py-4 px-8 rounded-lg text-xl transition-colors"
+            className="bg-white hover:bg-gray-200 text-black font-bold py-4 px-8 rounded-lg text-xl transition-colors"
           >
             Start Game
           </button>

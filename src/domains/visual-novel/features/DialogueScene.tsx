@@ -82,13 +82,13 @@ export function DialogueScene({ sceneId, onComplete }: Props) {
           <button
             onClick={handlePrevious}
             disabled={dialogueIndex === 0}
-            className="bg-slate-600 hover:bg-slate-700 text-black py-2 px-4 rounded disabled:opacity-50"
+            className="bg-slate-600 hover:bg-slate-700 text-white py-2 px-4 rounded disabled:opacity-50"
           >
             Previous
           </button>
           <button
             onClick={handleNext}
-            className="bg-blue-500 hover:bg-blue-600 text-black py-2 px-4 rounded"
+            className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded"
           >
             {isLastDialogue ? 'Next Scene' : 'Next'}
           </button>

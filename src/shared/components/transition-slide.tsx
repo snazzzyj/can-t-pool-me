@@ -67,7 +67,7 @@ export function TransitionSlide({
         <button
           onClick={handleContinue}
           className={`
-            bg-blue-500 hover:bg-blue-600 text-white font-semibold
+            bg-gray-500 hover:bg-gray-600 text-white font-semibold
             py-3 px-8 rounded-lg shadow-lg
             transition-all duration-700 delay-500
             hover:scale-105 active:scale-95
