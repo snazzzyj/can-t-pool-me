@@ -5,7 +5,7 @@ The team is interrupted by a mysterious caller who reveals they've kidnapped Mus
 
 import type { Scene } from '@/shared/types/game';
 
-export const SCENE_MYSTERIOUS_CALLER: Scene = {
+export const SCENE_TEAM_ASSEMBLY: Scene = {
   sceneId: 7,
   title: 'The Kidnapping',
   backgroundImage: '/assets/backgrounds/scene-7.jpg',

@@ -8,6 +8,6 @@ import type { TransitionSlide } from '@/shared/types/game';
 export const transition03elyse: TransitionSlide = {
   type: 'transition',
   title: 'The Next Day...',
-  subtitle: '',
+  subtitle: 'Rab talks to Elyse',
   // backgroundImage: '/assets/backgrounds/transition-3.png', // Optional
 };
