@@ -128,7 +128,7 @@ export const SCENE_DATABASE: Record<number, Scene> = {
   {
     speaker: 'Rab',
     text: 'Who are you? Stop what?',
-    characterImage: '/assets/characters/Rab-1.png',
+    characterImage: '/assets/characters/Rab/Rab_Idle_Suss.png',
   },
   {
     speaker: 'Mysterious Caller',
