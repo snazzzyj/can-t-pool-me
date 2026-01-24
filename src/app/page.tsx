@@ -7,7 +7,7 @@ import { GAME_CONFIG } from '@/config/game';
 
 export default function Home() {
   const [gameStarted, setGameStarted] = useState(false);
-  const [currentSceneId, setCurrentSceneId] = useState(1);
+  const [currentSceneId, setCurrentSceneId] = useState(0);
 
   if (!gameStarted) {
     return <WelcomeScreen onStartClick={() => setGameStarted(true)} />;

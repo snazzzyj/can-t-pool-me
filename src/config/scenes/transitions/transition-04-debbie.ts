@@ -5,9 +5,9 @@
 
 import type { TransitionSlide } from '@/shared/types/game';
 
-export const transition05ToBeContinued: TransitionSlide = {
+export const transition04debbie: TransitionSlide = {
   type: 'transition',
-  title: 'To Be Continued...',
-  subtitle: 'The adventure is just beginning',
+  title: 'Night Time Coffee',
+  subtitle: 'Rab recruits Debbie',
   // backgroundImage: '/assets/backgrounds/transition-5.png', // Optional
 };

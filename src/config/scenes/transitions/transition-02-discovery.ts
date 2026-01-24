@@ -5,7 +5,7 @@
 
 import type { TransitionSlide } from '@/shared/types/game';
 
-export const transition02FewDaysLater: TransitionSlide = {
+export const transition02discovery: TransitionSlide = {
   type: 'transition',
   title: 'A Few Days Later',
   subtitle: 'Rab discovers something suspicious...',

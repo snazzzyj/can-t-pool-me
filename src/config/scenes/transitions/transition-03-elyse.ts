@@ -5,9 +5,9 @@
 
 import type { TransitionSlide } from '@/shared/types/game';
 
-export const transition03Chapter2: TransitionSlide = {
+export const transition03elyse: TransitionSlide = {
   type: 'transition',
-  title: 'Chapter 2',
-  subtitle: 'The plot thickens',
+  title: 'The Next Day...',
+  subtitle: '',
   // backgroundImage: '/assets/backgrounds/transition-3.png', // Optional
 };

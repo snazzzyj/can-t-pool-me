@@ -1,12 +1,12 @@
 /**
- * Scene 04: Jenn & Rab
+ * Scene 05: Jenn & Rab
  * Introduction of Jenn (Hacktress)
  */
 
 import type { Scene } from '@/shared/types/game';
 
 export const SCENE_JENN_AND_RAB: Scene = {
-  sceneId: 4,
+  sceneId: 5,
   title: 'Jenn & Rab',
   backgroundImage: '/assets/backgrounds/scene-1.jpg',
   backgroundMusic: '/assets/audio/music/scene-1.mp3',

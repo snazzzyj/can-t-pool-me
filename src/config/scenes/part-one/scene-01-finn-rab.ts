@@ -53,11 +53,6 @@ export const SCENE_FINN_AND_RAB: Scene = {
       characterImage: '/assets/characters/Rab-1.png',
     },
     {
-      speaker: 'Finn',
-      text: 'Oh what was that?',
-      characterImage: '/assets/characters/Finn.png',
-    },
-    {
       speaker: 'Rab',
       text: 'I was thinking something to do with pool? I\'m not sure yet man, but what do you think?',
       characterImage: '/assets/characters/Rab-1.png',
@@ -69,7 +64,7 @@ export const SCENE_FINN_AND_RAB: Scene = {
     },
     {
       speaker: 'Rab',
-      text: 'Alright man, I\'m gonna do more thinking on it. Goodnight! Or Goodmorning or whatever time it is there.',
+      text: 'Alright man, I\'m gonna do more thinking on it. Goodnight! Or Good morning or whatever time it is there.',
       characterImage: '/assets/characters/Rab-1.png',
     },
     {

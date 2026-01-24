@@ -1,13 +1,13 @@
 /**
- * Transition 05: To Be Continued
+ * Transition 07: Hostage Situation
  * Ending transition
  */
 
 import type { TransitionSlide } from '@/shared/types/game';
 
-export const transition05ToBeContinued: TransitionSlide = {
+export const transition07hostage: TransitionSlide = {
   type: 'transition',
-  title: 'To Be Continued...',
-  subtitle: 'The adventure is just beginning',
+  title: 'The gang\'s all here',
+  subtitle: 'The team schemes',
   // backgroundImage: '/assets/backgrounds/transition-5.png', // Optional
 };

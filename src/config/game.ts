@@ -6,7 +6,6 @@ import type { Scene, TransitionSlide } from '@/shared/types/game';
 import {
   // Part One scenes
   SCENE_FINN_AND_RAB,
-  SCENE_RAB_GETS_SUSPICIOUS,
   SCENE_MYSTERIOUS_CALLER,
   SCENE_JENN_AND_RAB,
   SCENE_ELYSE_AND_RAB,
@@ -16,10 +15,13 @@ import {
   // ... other scenes
   
   // Transitions
-  transition01Chapter1,
-  transition02FewDaysLater,
-  transition03Chapter2,
-  // ... other transitions
+  transition01intro,
+  transition02discovery,
+  transition03elyse,
+  transition04debbie,
+  transition05jenn,
+  transition06joel,
+  transition07hostage,  
 } from './scenes';
 
 export const GAME_CONFIG = {
@@ -29,17 +31,20 @@ export const GAME_CONFIG = {
 };
 
 export const SCENE_DATABASE: Record<number, Scene | TransitionSlide> = {
-  0: transition01Chapter1,
+  0: transition01intro,
   1: SCENE_FINN_AND_RAB,
-  2: transition02FewDaysLater,
-  3: SCENE_RAB_GETS_SUSPICIOUS,
-  4: transition03Chapter2,
-  5: SCENE_MYSTERIOUS_CALLER,  // Use it here
-  6: SCENE_JENN_AND_RAB,
-  7: SCENE_ELYSE_AND_RAB,
-  8: SCENE_DEBBIE_AND_RAB,
-  9: SCENE_JOEL_AND_RAB,
-  10: SCENE_TEAM_ASSEMBLY,
+  2: transition02discovery,
+  3: SCENE_MYSTERIOUS_CALLER,
+  4: transition03elyse,
+  5: SCENE_ELYSE_AND_RAB,
+  6: transition04debbie,
+  7: SCENE_DEBBIE_AND_RAB,
+  8: transition05jenn,
+  9: SCENE_JENN_AND_RAB,
+  10: transition06joel,
+  11: SCENE_JOEL_AND_RAB,
+  12: transition07hostage,
+  13: SCENE_TEAM_ASSEMBLY,
   // ... etc
 };
 
