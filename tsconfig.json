@@ -9,22 +9,19 @@
     ],
     "module": "ESNext",
     "skipLibCheck": true,
-    "jsx": "react-jsx",  // Changed from "preserve"
+    "jsx": "preserve", // Changed from "preserve"
     // Remove jsxImportSource when using react-jsx
-    
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    
     /* Path aliases */
     "baseUrl": ".",
     "paths": {
@@ -34,7 +31,12 @@
     },
     "allowJs": true,
     "incremental": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "src/**/*",
