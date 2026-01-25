@@ -40,7 +40,7 @@ export const SCENE_MYSTERIOUS_CALLER: Scene = {
     {
       speaker: 'Mysterious Caller',
       text: 'We know what you\'re doing and we suggest you stop immediately.',
-      characterImage: '/assets/characters/Mysterious-Caller.png',
+      characterImage: '/assets/characters/Hooded-Caller.png',
     },
     {
       speaker: 'Rab',
@@ -50,7 +50,7 @@ export const SCENE_MYSTERIOUS_CALLER: Scene = {
     {
       speaker: 'Mysterious Caller',
       text: 'It doesn\'t matter who we are. You know what to stop.',
-      characterImage: '/assets/characters/Mysterious-Caller.png',
+      characterImage: '/assets/characters/Hooded-Caller.png',
     },
     {
       speaker: 'Narrator',

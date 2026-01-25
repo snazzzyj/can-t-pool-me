@@ -15,7 +15,7 @@ export const SCENE_JOEL_AND_RAB: Scene = {
     {
       speaker: 'Joel',
       text: 'How did you get in here? I have like 50 traps and surveillance cameras.',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
     {
       speaker: 'Rab',
@@ -25,7 +25,7 @@ export const SCENE_JOEL_AND_RAB: Scene = {
     {
       speaker: 'Joel',
       text: 'Oh right.',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
     {
       speaker: 'Rab',
@@ -35,7 +35,7 @@ export const SCENE_JOEL_AND_RAB: Scene = {
     {
       speaker: 'Joel',
       text: 'Totally not hacking the dark web? Yes.',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
     {
       speaker: 'Rab',
@@ -50,7 +50,7 @@ export const SCENE_JOEL_AND_RAB: Scene = {
     {
       speaker: 'Joel',
       text: 'Who and when and why?',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
     {
       speaker: 'Rab',
@@ -65,7 +65,7 @@ export const SCENE_JOEL_AND_RAB: Scene = {
     {
       speaker: 'Joel',
       text: 'Will they have mint choc chip?',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
     {
       speaker: 'Debbie',
@@ -75,7 +75,7 @@ export const SCENE_JOEL_AND_RAB: Scene = {
     {
       speaker: 'Joel',
       text: 'I\'m in.',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
   ],
 };

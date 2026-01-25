@@ -20,7 +20,7 @@ export const SCENE_TEAM_ASSEMBLY: Scene = {
     {
       speaker: 'Joel',
       text: 'What are the entrances?',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
     {
       speaker: 'Rab',
@@ -40,7 +40,7 @@ export const SCENE_TEAM_ASSEMBLY: Scene = {
     {
       speaker: 'Mysterious Caller',
       text: 'You just don\'t know how to listen do you? Well it\'s too late now. We\'ve taken your son.',
-      characterImage: '/assets/characters/Mysterious-Caller.png',
+      characterImage: '/assets/characters/Hooded-Caller.png',
     },
     {
       speaker: 'Rab',
@@ -55,7 +55,7 @@ export const SCENE_TEAM_ASSEMBLY: Scene = {
     {
       speaker: 'Joel',
       text: 'Did you just assume their gender?',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
     {
       speaker: 'Debbie',
@@ -75,12 +75,12 @@ export const SCENE_TEAM_ASSEMBLY: Scene = {
     {
       speaker: 'Mysterious Caller',
       text: 'SHUT UP. If you don\'t destroy all of the evidence you have on us…',
-      characterImage: '/assets/characters/Mysterious-Caller.png',
+      characterImage: '/assets/characters/Hooded-Caller.png',
     },
     {
       speaker: 'Mysterious Caller',
       text: 'We kill him.',
-      characterImage: '/assets/characters/Mysterious-Caller.png',
+      characterImage: '/assets/characters/Hooded-Caller.png',
     },
     {
       speaker: 'Rab',
@@ -90,7 +90,7 @@ export const SCENE_TEAM_ASSEMBLY: Scene = {
     {
       speaker: 'Mysterious Caller',
       text: 'You have 48 hours.',
-      characterImage: '/assets/characters/Mysterious-Caller.png',
+      characterImage: '/assets/characters/Hooded-Caller.png',
     },
     {
       speaker: 'Elyse',
