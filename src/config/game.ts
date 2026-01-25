@@ -1,6 +1,6 @@
 /**
  * Visual Novel Configuration
- * 7 scenes across 2 parts with dialogue, characters, and music
+ * 16 scenes across 2 parts with dialogue, characters, and music
  */
 import type { Scene, TransitionSlide } from '@/shared/types/game';
 import {
@@ -12,7 +12,15 @@ import {
   SCENE_DEBBIE_AND_RAB,
   SCENE_JOEL_AND_RAB,
   SCENE_TEAM_ASSEMBLY,
-  // ... other scenes
+  
+  // Part Two scenes
+  scene09CodenameIntros,
+  scene10MinigameJoel,
+  scene11MinigameDebbie,
+  scene12MinigameJenn,
+  scene13MinigameElyse,
+  scene14BossBattle,
+  scene15RescueMushi,
   
   // Transitions
   transition01intro,
@@ -21,7 +29,8 @@ import {
   transition04debbie,
   transition05jenn,
   transition06joel,
-  transition07hostage,  
+  transition07hostage,
+  transition08heistBegins,
 } from './scenes';
 
 export const GAME_CONFIG = {
@@ -31,6 +40,7 @@ export const GAME_CONFIG = {
 };
 
 export const SCENE_DATABASE: Record<number, Scene | TransitionSlide> = {
+  // PART ONE
   0: transition01intro,
   1: SCENE_FINN_AND_RAB,
   2: transition02discovery,
@@ -45,16 +55,14 @@ export const SCENE_DATABASE: Record<number, Scene | TransitionSlide> = {
   11: SCENE_JOEL_AND_RAB,
   12: transition07hostage,
   13: SCENE_TEAM_ASSEMBLY,
-  // ... etc
+  
+  // PART TWO
+  14: transition08heistBegins,
+  15: scene09CodenameIntros,
+  16: scene10MinigameJoel,
+  17: scene11MinigameDebbie,
+  18: scene12MinigameJenn,
+  19: scene13MinigameElyse,
+  20: scene14BossBattle,
+  21: scene15RescueMushi,
 };
-
-export const MINI_GAME_TYPES = [
-  'quick-time',
-  'memory',
-  'quiz',
-  'rhythm',
-  'puzzle',
-] as const;
-
-export const BOSS_PHASES = 3;
-export const BOSS_HEALTH_PER_PHASE = 100;

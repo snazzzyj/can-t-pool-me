@@ -1,14 +1,39 @@
 /**
- * Scene 12: Minigame - Jenn
- * Jenn's minigame challenge
+ * Scene 12: Breaking In (Hacktress Game)
+ * The team discovers a hidden entrance with locks and puzzles, leading to Hacktress's minigame.
  */
 
 const scene12MinigameJenn = {
+  sceneId: 12,
   id: 'scene-12-minigame-jenn',
-  title: 'Minigame: Jenn',
+  title: 'Breaking In (Hacktress Game)',
   part: 'two' as const,
-  order: 12,
-  // Add scene configuration here
+  order: 18,
+  backgroundImage: '/assets/backgrounds/scene-12.jpg',
+  backgroundMusic: '/assets/audio/music/scene-12.mp3',
+  duration: 20,
+  dialogues: [
+    {
+      speaker: 'Sharker',
+      text: 'Okay, we need to find an entry point without being seen. Any ideas?',
+      characterImage: '/assets/characters/Rab-1.png',
+    },
+    {
+      speaker: 'Pxl',
+      text: 'I think I see a hidden entrance down there.',
+      characterImage: '/assets/characters/Debbie-1.png',
+    },
+    {
+      speaker: 'Big Iron McGee',
+      text: 'But it looks like there\'s a series of locks and puzzles.',
+      characterImage: '/assets/characters/Elyse-1.png',
+    },
+    {
+      speaker: 'Hacktress',
+      text: 'Puzzles?...',
+      characterImage: '/assets/characters/Jenn-1.png',
+    },
+  ],
 };
 
 export default scene12MinigameJenn;

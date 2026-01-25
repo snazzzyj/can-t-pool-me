@@ -10,3 +10,5 @@ export { transition04debbie } from './transition-04-debbie';
 export { transition05jenn } from './transition-05-jenn';
 export { transition06joel } from './transition-06-joel';
 export { transition07hostage } from './transition-07-hostage';
+export { transition08heistBegins } from './transition-08-heist-begins';
+
