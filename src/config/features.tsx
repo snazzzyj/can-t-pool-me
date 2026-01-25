@@ -7,4 +7,5 @@ export const features = {
   enableAudio: true,
   enableAnimations: true,
   enableDebugMode: process.env.NODE_ENV === 'development',
+  SCENE_NAVIGATION_MENU: true, // Add this line
 } as const;

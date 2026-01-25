@@ -1,38 +1,73 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { DialogueBox } from "@/shared/components/dialogue-box";
 import { TransitionSlide } from "@/shared/components/transition-slide";
+import { SceneNavigationMenu } from '@/shared/components/scene-navigation-menu';
 import { SCENE_DATABASE } from "@/config/game";
-import type { Scene, TransitionSlide as TransitionSlideType } from "@/shared/types/game";
+import { features } from "@/config/features";
+import { selectSceneId, setSceneId } from '@/store/slices/game-slice';
+import type { Scene } from "@/shared/types/game";
 
 type Props = {
-  readonly sceneId: number;
-  readonly onComplete: () => void;
+  readonly onComplete?: () => void; // Make optional
 };
 
-export function DialogueScene({ sceneId, onComplete }: Props) {
+export function DialogueScene({ onComplete }: Props) {
   const [dialogueIndex, setDialogueIndex] = useState(0);
+  const dispatch = useDispatch();
+  
+  // Get sceneId from Redux instead of props
+  const sceneId = useSelector(selectSceneId);
   const sceneData = SCENE_DATABASE[sceneId] || null;
   
   // Reset dialogue index when scene changes
   useEffect(() => {
+    console.log('Scene changed to:', sceneId);
     setDialogueIndex(0);
   }, [sceneId]);
   
   if (!sceneData) {
-    return <div className="text-white">Scene not found</div>;
+    return (
+      <div className="flex items-center justify-center h-screen bg-black">
+        <div className="text-white text-xl">
+          Scene {sceneId} not found in database
+        </div>
+      </div>
+    );
   }
+
+  // Handle transition completion
+  const handleTransitionComplete = () => {
+    // If there's an onComplete callback (normal game flow), use it
+    if (onComplete) {
+      onComplete();
+    } else {
+      // Otherwise, advance to the next scene in the database
+      const nextSceneId = sceneId + 1;
+      if (SCENE_DATABASE[nextSceneId]) {
+        console.log('Auto-advancing to next scene:', nextSceneId);
+        dispatch(setSceneId(nextSceneId));
+      } else {
+        console.log('No next scene available');
+      }
+    }
+  };
 
   // Handle transition slides
   if ('type' in sceneData && sceneData.type === 'transition') {
     return (
-      <TransitionSlide
-        title={sceneData.title}
-        subtitle={sceneData.subtitle}
-        backgroundImage={sceneData.backgroundImage}
-        onContinue={onComplete}
-      />
+      <>
+        <TransitionSlide
+          title={sceneData.title}
+          subtitle={sceneData.subtitle}
+          backgroundImage={sceneData.backgroundImage}
+          onContinue={handleTransitionComplete}
+        />
+        {/* Scene Navigation Menu */}
+        {features.SCENE_NAVIGATION_MENU && <SceneNavigationMenu />}
+      </>
     );
   }
 
@@ -43,7 +78,19 @@ export function DialogueScene({ sceneId, onComplete }: Props) {
 
   const handleNext = () => {
     if (isLastDialogue) {
-      onComplete();
+      // If there's an onComplete callback, use it
+      if (onComplete) {
+        onComplete();
+      } else {
+        // Otherwise, advance to the next scene
+        const nextSceneId = sceneId + 1;
+        if (SCENE_DATABASE[nextSceneId]) {
+          console.log('Auto-advancing to next scene:', nextSceneId);
+          dispatch(setSceneId(nextSceneId));
+        } else {
+          console.log('No next scene available - end of game');
+        }
+      }
     } else {
       setDialogueIndex(dialogueIndex + 1);
     }
@@ -94,6 +141,9 @@ export function DialogueScene({ sceneId, onComplete }: Props) {
           </button>
         </DialogueBox.Controls>
       </DialogueBox.Root>
+
+      {/* Scene Navigation Menu */}
+      {features.SCENE_NAVIGATION_MENU && <SceneNavigationMenu />}
     </div>
   );
 }

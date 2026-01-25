@@ -8,7 +8,6 @@ export const store = configureStore({
     game: gameReducer,
     players: playersReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
   devTools: process.env.NODE_ENV === 'development',
 });
 
