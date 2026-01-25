@@ -3,12 +3,11 @@
  * Sharker tasks Hackerman with hacking the mainframe to locate Mushi's whereabouts.
  */
 
-const scene10MinigameJoel = {
+import type { Scene } from '@/shared/types/game';
+
+export const scene10MinigameJoel: Scene = {
   sceneId: 10,
-  id: 'scene-10-minigame-joel',
   title: 'Hacking the Mainframe',
-  part: 'two' as const,
-  order: 16,
   backgroundImage: '/assets/backgrounds/scene-10.jpg',
   backgroundMusic: '/assets/audio/music/scene-10.mp3',
   duration: 10,

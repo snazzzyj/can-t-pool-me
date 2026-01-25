@@ -5,14 +5,15 @@
 import type { Scene, TransitionSlide } from '@/shared/types/game';
 import {
   // Part One scenes
-  SCENE_FINN_AND_RAB,
-  SCENE_MYSTERIOUS_CALLER,
-  SCENE_JENN_AND_RAB,
-  SCENE_ELYSE_AND_RAB,
-  SCENE_DEBBIE_AND_RAB,
-  SCENE_JOEL_AND_RAB,
-  SCENE_TEAM_ASSEMBLY,
-  
+  scene01FinnRab,
+  scene02MysteriousCaller,
+  scene03ElyseRab,
+  scene04DebbieRab,
+  scene05JennRab,
+  scene06JoelRab,
+  scene07TeamAssembly,
+
+
   // Part Two scenes
   scene09CodenameIntros,
   scene10MinigameJoel,
@@ -42,20 +43,20 @@ export const GAME_CONFIG = {
 export const SCENE_DATABASE: Record<number, Scene | TransitionSlide> = {
   // PART ONE
   0: transition01intro,
-  1: SCENE_FINN_AND_RAB,
+  1: scene01FinnRab,
   2: transition02discovery,
-  3: SCENE_MYSTERIOUS_CALLER,
+  3: scene02MysteriousCaller,
   4: transition03elyse,
-  5: SCENE_ELYSE_AND_RAB,
+  5: scene03ElyseRab,
   6: transition04debbie,
-  7: SCENE_DEBBIE_AND_RAB,
+  7: scene04DebbieRab,
   8: transition05jenn,
-  9: SCENE_JENN_AND_RAB,
+  9: scene05JennRab,
   10: transition06joel,
-  11: SCENE_JOEL_AND_RAB,
+  11: scene06JoelRab,
   12: transition07hostage,
-  13: SCENE_TEAM_ASSEMBLY,
-  
+  13: scene07TeamAssembly,
+
   // PART TWO
   14: transition08heistBegins,
   15: scene09CodenameIntros,

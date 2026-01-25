@@ -32,11 +32,15 @@ export type SceneDialogue = {
 
 export type Scene = {
   readonly sceneId: number;
+  readonly id?: string; // For Part Two scenes
   readonly title: string;
+  readonly part?: 'one' | 'two'; // For Part Two scenes
+  readonly order?: number; // For Part Two scenes
   readonly backgroundImage: string;
   readonly dialogues: ReadonlyArray<SceneDialogue>;
   readonly backgroundMusic?: string;
-  readonly duration?: number; // Made optional with ?
+  readonly duration?: number;
+  readonly nextScene?: string; // ← ADD THIS LINE - Links to next scene
 };
 
 export type MiniGameType = 'quick-time' | 'memory' | 'quiz' | 'rhythm' | 'puzzle';

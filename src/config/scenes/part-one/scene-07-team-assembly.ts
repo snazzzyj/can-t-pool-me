@@ -1,11 +1,12 @@
 /**
-Scene 07: The Kidnapping
-The team is interrupted by a mysterious caller who reveals they've kidnapped Mushi and demands Rab destroy all evidence within 48 hours.
+ * Scene 07: The Kidnapping
+ * The team is interrupted by a mysterious caller who reveals they've kidnapped Mushi 
+ * and demands Rab destroy all evidence within 48 hours.
  */
 
 import type { Scene } from '@/shared/types/game';
 
-export const SCENE_TEAM_ASSEMBLY: Scene = {
+export const scene07TeamAssembly: Scene = {
   sceneId: 7,
   title: 'The Kidnapping',
   backgroundImage: '/assets/backgrounds/scene-7.jpg',
@@ -104,3 +105,5 @@ export const SCENE_TEAM_ASSEMBLY: Scene = {
     },
   ],
 };
+
+export default scene07TeamAssembly; // ← Change export to default

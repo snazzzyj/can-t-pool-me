@@ -3,12 +3,11 @@
  * The team discovers a hidden entrance with locks and puzzles, leading to Hacktress's minigame.
  */
 
-const scene12MinigameJenn = {
+import type { Scene } from '@/shared/types/game';
+
+export const scene12MinigameJenn: Scene = {
   sceneId: 12,
-  id: 'scene-12-minigame-jenn',
   title: 'Breaking In (Hacktress Game)',
-  part: 'two' as const,
-  order: 18,
   backgroundImage: '/assets/backgrounds/scene-12.jpg',
   backgroundMusic: '/assets/audio/music/scene-12.mp3',
   duration: 20,

@@ -3,12 +3,11 @@
  * The team scrambles to save Mushi and confronts the pool villain in a final showdown
  */
 
-const scene15RescueMushi = {
+import type { Scene } from '@/shared/types/game';
+
+export const scene15RescueMushi: Scene = {
   sceneId: 15,
-  id: 'scene-15-rescue-mushi',
   title: 'Rescue Mushi',
-  part: 'two' as const,
-  order: 21,
   backgroundImage: '/assets/backgrounds/scene-15.jpg',
   backgroundMusic: '/assets/audio/music/scene-15.mp3',
   duration: 30,

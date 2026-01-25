@@ -5,7 +5,7 @@
 
 import type { Scene } from '@/shared/types/game';
 
-export const SCENE_FINN_AND_RAB: Scene = {
+export const scene01FinnRab: Scene = {
   sceneId: 1,
   title: 'Finn & Rab',
   backgroundImage: '/assets/backgrounds/scene-1.jpg',

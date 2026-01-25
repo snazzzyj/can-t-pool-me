@@ -3,12 +3,11 @@
  * The team confronts the Pool Villain to rescue Mushi in an epic showdown.
  */
 
-const scene14BossBattle = {
+import type { Scene } from '@/shared/types/game';
+
+export const scene14BossBattle: Scene = {
   sceneId: 14,
-  id: 'scene-14-boss-battle',
   title: 'Boss Battle',
-  part: 'two' as const,
-  order: 20,
   backgroundImage: '/assets/backgrounds/scene-14.jpg',
   backgroundMusic: '/assets/audio/music/scene-14.mp3',
   duration: 20,

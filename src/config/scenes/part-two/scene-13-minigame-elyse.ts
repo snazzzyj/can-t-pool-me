@@ -3,12 +3,11 @@
  * The team encounters guards and Labubus, leading to Elyse's minigame challenge.
  */
 
-const scene13MinigameElyse = {
+import type { Scene } from '@/shared/types/game';
+
+export const scene13MinigameElyse: Scene = {
   sceneId: 13,
-  id: 'scene-13-minigame-elyse',
   title: 'Operator (Elyse Game)',
-  part: 'two' as const,
-  order: 19,
   backgroundImage: '/assets/backgrounds/scene-13.jpg',
   backgroundMusic: '/assets/audio/music/scene-13.mp3',
   duration: 30,

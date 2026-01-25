@@ -3,12 +3,11 @@
  * The team discovers the location and Pxl offers a shortcut to save time.
  */
 
-const scene11MinigameDebbie = {
+import type { Scene } from '@/shared/types/game';
+
+export const scene11MinigameDebbie: Scene = {
   sceneId: 11,
-  id: 'scene-11-minigame-debbie',
   title: 'On the Way to Save the Day',
-  part: 'two' as const,
-  order: 17,
   backgroundImage: '/assets/backgrounds/scene-11.jpg',
   backgroundMusic: '/assets/audio/music/scene-11.mp3',
   duration: 20,

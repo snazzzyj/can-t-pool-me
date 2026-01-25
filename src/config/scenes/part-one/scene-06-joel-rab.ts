@@ -5,7 +5,7 @@ The team recruits Joel, finding him in his tech-filled lair, and convinces him t
 
 import type { Scene } from '@/shared/types/game';
 
-export const SCENE_JOEL_AND_RAB: Scene = {
+export const scene06JoelRab: Scene = {
   sceneId: 6,
   title: 'Joel & Rab',
   backgroundImage: '/assets/backgrounds/scene-6.jpg',

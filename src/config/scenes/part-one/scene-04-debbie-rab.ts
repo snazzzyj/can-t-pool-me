@@ -5,7 +5,7 @@ Rab visits Debbie at her cafe and recruits her to investigate a mysterious pool 
 
 import type { Scene } from '@/shared/types/game';
 
-export const SCENE_DEBBIE_AND_RAB: Scene = {
+export const scene04DebbieRab: Scene = {
   sceneId: 4,
   title: 'Debbie & Rab',
   backgroundImage: '/assets/backgrounds/scene-5.jpg',

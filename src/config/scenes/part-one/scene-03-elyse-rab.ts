@@ -5,7 +5,7 @@ Rab and Elyse discuss suspicious activity and consider investigating further.
 
 import type { Scene } from '@/shared/types/game';
 
-export const SCENE_ELYSE_AND_RAB: Scene = {
+export const scene03ElyseRab: Scene = {
   sceneId: 3,
   title: 'Elyse & Rab',
   backgroundImage: '/assets/backgrounds/scene-4.jpg',

@@ -5,7 +5,7 @@ Rab discovers a news article about a pool player who never misses, then receives
 
 import type { Scene } from '@/shared/types/game';
 
-export const SCENE_MYSTERIOUS_CALLER: Scene = {
+export const scene02MysteriousCaller: Scene = {
   sceneId: 2,
   title: 'Mysterious Caller',
   backgroundImage: '/assets/backgrounds/scene-3.jpg',
