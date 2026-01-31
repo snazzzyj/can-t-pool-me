@@ -16,15 +16,17 @@ type Props = {
 
 export function DialogueScene({ onComplete }: Props) {
   const [dialogueIndex, setDialogueIndex] = useState(0);
+  const [showMinigame, setShowMinigame] = useState(false); 
   const dispatch = useDispatch();
   
   const sceneId = useSelector(selectSceneId);
   const sceneData = SCENE_DATABASE[sceneId] || null;
   
-  // Reset dialogue index when scene changes
+  // Reset dialogue index and minigame state when scene changes
   useEffect(() => {
     console.log('Scene changed to:', sceneId);
     setDialogueIndex(0);
+    setShowMinigame(false); 
   }, [sceneId]);
   
   if (!sceneData) {
@@ -69,12 +71,22 @@ export function DialogueScene({ onComplete }: Props) {
 
   // Handle regular dialogue scenes
   const scene = sceneData as Scene;
+  
+  if (showMinigame && scene.minigameComponent) {
+    const MinigameComponent = scene.minigameComponent;
+    console.log('🎮 Rendering minigame component for scene:', sceneId);
+    return <MinigameComponent />;
+  }
+
   const currentDialogue = scene.dialogues[dialogueIndex];
   const isLastDialogue = dialogueIndex >= scene.dialogues.length - 1;
 
   const handleNext = () => {
     if (isLastDialogue) {
-      if (onComplete) {
+      if (scene.minigameComponent) {
+        console.log('🎮 Scene has minigame, showing it now');
+        setShowMinigame(true);
+      } else if (onComplete) {
         onComplete();
       } else {
         const nextSceneId = sceneId + 1;
@@ -98,7 +110,6 @@ export function DialogueScene({ onComplete }: Props) {
 
   return (
     <div className="relative w-full h-screen bg-black">
-      {/* Background Image */}
       {scene.backgroundImage && (
         <img
           src={scene.backgroundImage}
@@ -107,7 +118,6 @@ export function DialogueScene({ onComplete }: Props) {
         />
       )}
       
-      {/* Dialogue Box */}
       <DialogueBox.Root isAnimating={true}>
         {currentDialogue && (
           <>
@@ -131,7 +141,7 @@ export function DialogueScene({ onComplete }: Props) {
             onClick={handleNext}
             className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded"
           >
-            {isLastDialogue ? 'Next Scene' : 'Next'}
+            {isLastDialogue ? (scene.minigameComponent ? 'Start Game' : 'Next Scene') : 'Next'}
           </button>
         </DialogueBox.Controls>
       </DialogueBox.Root>

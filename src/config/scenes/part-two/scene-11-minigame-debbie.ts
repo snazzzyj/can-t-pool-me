@@ -4,6 +4,7 @@
  */
 
 import type { Scene } from '@/shared/types/game';
+import PixelRunnerScene from '@/domains/mini-games/pxl-runner/PixelRunnerScene';
 
 export const scene11MinigameDebbie: Scene = {
   sceneId: 11,
@@ -33,6 +34,8 @@ export const scene11MinigameDebbie: Scene = {
       characterImage: '/assets/characters/Debbie-1.png',
     },
   ],
+
+  minigameComponent: PixelRunnerScene,
 };
 
 export default scene11MinigameDebbie;
