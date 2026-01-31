@@ -2,10 +2,10 @@ import { PlayerInfo } from '../types/puzzle-perfect.types';
 
 export const PLAYERS: PlayerInfo[] = [
   { id: 'jenn', name: 'Jenn', color: '#00FFFF', portrait: '/assets/characters/Jenn-1.png' },
-  { id: 'joel', name: 'Joel', color: '#00FF00', portrait: '/assets/characters/Joel-1.png' },
-  { id: 'debbie', name: 'Debbie', color: '#FF00FF', portrait: '/assets/characters/Debbie-1.png' },
   { id: 'elyse', name: 'Elyse', color: '#FFA500', portrait: '/assets/characters/Elyse-1.png' },
   { id: 'rab', name: 'Rab', color: '#9d00ff', portrait: '/assets/characters/Rab-1.png' },
+  { id: 'debbie', name: 'Debbie', color: '#FF00FF', portrait: '/assets/characters/Debbie-1.png' },
+  { id: 'joel', name: 'Joel', color: '#00FF00', portrait: '/assets/characters/Joel-1.png' },
 ];
 
 export const MAX_LIVES = 3;

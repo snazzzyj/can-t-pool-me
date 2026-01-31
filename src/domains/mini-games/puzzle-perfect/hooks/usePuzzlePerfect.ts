@@ -17,6 +17,7 @@ export const usePuzzlePerfect = (
   const [gameStatus, setGameStatus] = useState<PuzzlePerfectState['gameStatus']>('idle');
   const [puzzlesCompleted, setPuzzlesCompleted] = useState(0);
   const [isWarning, setIsWarning] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   // Stats
   const [roundResults, setRoundResults] = useState<RoundResult[]>([]);
@@ -49,7 +50,7 @@ export const usePuzzlePerfect = (
     setGameStatus('round-failed');
   }, []);
 
-  const { timeLeft, addTime } = useRoundTimer(
+  const { timeLeft, addTime, reset: resetTimer } = useRoundTimer(
     roundConfig.timeLimit,
     gameStatus === 'playing',
     handleTimeExpire
@@ -83,7 +84,7 @@ export const usePuzzlePerfect = (
     // But we know we do batches of 5.
     // So puzzlesCompleted % 5 should give 0..4
     const count = overrideCount ?? puzzlesCompleted;
-    const targetIndex = count % 5;
+    const targetIndex = currentRound === 4 ? 0 : count % config.puzzlesPerPlayer;
 
     setCurrentPuzzle({
       shape,
@@ -100,8 +101,9 @@ export const usePuzzlePerfect = (
     setPuzzlesCompleted(0);
     resetLives();
     setCurrentPlayerIndex(0);
+    resetTimer();
     // nextPuzzle will be triggered by effect when status/index changes
-  }, [resetLives]);
+  }, [resetLives, resetTimer]);
 
   // Ensure nextPuzzle runs when turn changes or round starts (status playing)
   useEffect(() => {
@@ -174,16 +176,8 @@ export const usePuzzlePerfect = (
             nextPuzzle(newCompleted);
           }
         } else {
-          // Round 4 (Frenzy) - usually alternating or strictly following 'puzzlesPerPlayer' config behavior
-          // If Round 4 config says 2 puzzles per player, we might want same logic?
-          // For now, assuming Round 4 behaves like "Ping Pong" or "Rapid Fire" usually implies changing turns.
-          // But if config has puzzlesPerPlayer=2, we should probably respect that?
-          // Let's stick to strict config adherence:
-          if (newCompleted % roundConfig.puzzlesPerPlayer === 0) {
-            advanceTurn();
-          } else {
-            nextPuzzle(newCompleted);
-          }
+          // Round 4 (Frenzy) - Cycle players every puzzle
+          advanceTurn();
         }
       }
     } else {
@@ -213,6 +207,10 @@ export const usePuzzlePerfect = (
           advanceTurn();
         }, 500);
       }
+
+      // Flash Red Effect
+      setIsError(true);
+      setTimeout(() => setIsError(false), 500);
     }
   }, [
     gameStatus,
@@ -231,12 +229,16 @@ export const usePuzzlePerfect = (
       setCurrentRound(prev => (prev + 1));
       startRound();
     } else {
-      // Game Over - Win
-      const totalTime = roundResults.reduce((acc, r) => acc + r.timeUsed, 0);
-      const totalErrors = playerStats.reduce((acc, p) => acc + p.errorCount, 0);
-      onComplete({ playerStats, roundResults, totalTime, totalErrors });
+      // Game Over - Show Results
+      setGameStatus('game-complete');
     }
-  }, [currentRound, roundResults, playerStats, onComplete, startRound]);
+  }, [currentRound, startRound]);
+
+  const finishGame = useCallback(() => {
+    const totalTime = roundResults.reduce((acc, r) => acc + r.timeUsed, 0);
+    const totalErrors = playerStats.reduce((acc, p) => acc + p.errorCount, 0);
+    onComplete({ playerStats, roundResults, totalTime, totalErrors });
+  }, [roundResults, playerStats, onComplete]);
 
   const retryRound = useCallback(() => {
     startRound();
@@ -252,13 +254,16 @@ export const usePuzzlePerfect = (
       currentPuzzle,
       puzzlesCompleted,
       isWarning,
-      roundConfig
+      isError,
+      roundConfig,
+      playerStats
     },
     actions: {
       startRound,
       handleConfirm,
       advanceRound,
-      retryRound
+      retryRound,
+      finishGame
     }
   };
 };

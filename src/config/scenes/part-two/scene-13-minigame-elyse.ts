@@ -15,7 +15,7 @@ export const scene13MinigameElyse: Scene = {
     {
       speaker: 'Hackerman',
       text: 'Guards everywhere.',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
     {
       speaker: 'Big Iron McGee',

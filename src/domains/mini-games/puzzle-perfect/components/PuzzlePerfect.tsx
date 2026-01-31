@@ -9,6 +9,7 @@ import { PlayerIndicator } from './PlayerIndicator';
 import { PLAYERS } from '../constants/puzzle-perfect.constants';
 import { GameStats } from '../types/puzzle-perfect.types';
 import { PlayerSelection } from './PlayerSelection';
+import { GameResults } from './GameResults';
 
 interface PuzzlePerfectProps {
   onComplete: (stats: GameStats) => void;
@@ -28,13 +29,16 @@ export const PuzzlePerfect: React.FC<PuzzlePerfectProps> = ({ onComplete, onFail
       lives,
       timeLeft,
       currentPuzzle,
-      roundConfig
+      roundConfig,
+      playerStats,
+      isError
     },
     actions: {
       startRound,
       handleConfirm,
       advanceRound,
-      retryRound
+      retryRound,
+      finishGame
     }
   } = usePuzzlePerfect(onComplete, onFail, playerCount);
 
@@ -113,6 +117,11 @@ export const PuzzlePerfect: React.FC<PuzzlePerfectProps> = ({ onComplete, onFail
         <div className="absolute inset-0 bg-[url('/assets/textures/grid.png')] opacity-20" />
       </div>
 
+      {/* Red Flash Overlay */}
+      {isError && (
+        <div className="absolute inset-0 bg-red-600/40 z-[100] pointer-events-none animate-pulse" />
+      )}
+
       {/* Top HUD */}
       <div className="w-full flex justify-between items-center z-10">
         <GameTimer
@@ -121,12 +130,13 @@ export const PuzzlePerfect: React.FC<PuzzlePerfectProps> = ({ onComplete, onFail
           isWarning={timeLeft < roundConfig.timeLimit * 0.2}
         />
 
-        <div className="flex flex-col items-center">
-          <h2 className="text-xl font-bold tracking-widest text-cyan-400">ROUND {currentRound}/4</h2>
-          <span className="text-xs text-slate-400 uppercase tracking-widest">{roundConfig.label}</span>
-        </div>
-
         <LivesDisplay lives={lives[currentPlayerIndex]} />
+      </div>
+
+      {/* Primary Round Title - Perfectly Centered at Top */}
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 pointer-events-none">
+        <h2 className="text-xl font-bold tracking-widest text-cyan-400">ROUND {currentRound}/4</h2>
+        <span className="text-xs text-slate-400 uppercase tracking-widest">{roundConfig.label}</span>
       </div>
 
       {/* Player Indicators */}
@@ -137,39 +147,52 @@ export const PuzzlePerfect: React.FC<PuzzlePerfectProps> = ({ onComplete, onFail
       {/* Main Game Area */}
       <div className="flex-1 w-full flex items-center justify-center relative z-20">
 
+        {/* Large Middle Round Title (Watermark) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none z-0 opacity-10">
+          <h2 className="text-[120px] font-black tracking-tighter text-cyan-900 uppercase">ROUND {currentRound}</h2>
+          <span className="text-2xl text-cyan-800 uppercase tracking-[1em] -mt-6">
+            {roundConfig.label}
+          </span>
+        </div>
+
         {/* Game Content */}
         {gameStatus === 'playing' && currentPuzzle && (
           <div className="relative w-full max-w-4xl h-96 flex items-center justify-center">
 
-            {/* Target Holes (All 5 visible -> or just playerCount for this round?) 
-                Actually, the target holes represent the 5 PUZZLES per player, not the players themselves.
-                Wait, "Logic for Rounds 1-3: 5 puzzles in a row per player".
-                The UI shows 5 circles.
-                Are they "Player 1's puzzle", "Player 2's puzzle"?
-                No, usually it's "Puzzle 1, Puzzle 2... Puzzle 5" for the current player.
-                So we ALWAYS show 5 holes because `puzzlesPerPlayer` is 5 (mostly).
-                So we don't map activePlayers here. We map `roundConfig.puzzlesPerPlayer`.
-            */}
-            <div className="flex justify-between w-full px-12 items-center absolute">
-              {Array.from({ length: roundConfig.puzzlesPerPlayer }).map((_, idx) => (
+            {/* Target Holes */}
+            <div className={`flex w-full px-12 items-center absolute ${currentRound === 4 ? 'justify-center' : 'justify-between'}`}>
+              {currentRound === 4 ? (
                 <TargetHole
-                  key={idx}
+                  key="frenzy-hole"
                   shape={currentPuzzle.shape}
-                  isActive={idx === currentPuzzle.targetHoleIndex}
-                  isFilled={idx < (state.puzzlesCompleted % roundConfig.puzzlesPerPlayer)}
+                  isActive={true}
+                  isFilled={false}
                   color={currentPlayer.color}
                   ghostOrientation={orientation}
                   totalOrientations={roundConfig.orientations}
                   correctOrientation={currentPuzzle.correctOrientation}
                 />
-              ))}
+              ) : (
+                Array.from({ length: roundConfig.puzzlesPerPlayer }).map((_, idx) => (
+                  <TargetHole
+                    key={idx}
+                    shape={currentPuzzle.shape}
+                    isActive={idx === currentPuzzle.targetHoleIndex}
+                    isFilled={idx < (state.puzzlesCompleted % roundConfig.puzzlesPerPlayer)}
+                    color={currentPlayer.color}
+                    ghostOrientation={orientation}
+                    totalOrientations={roundConfig.orientations}
+                    correctOrientation={currentPuzzle.correctOrientation}
+                  />
+                ))
+              )}
             </div>
 
             {/* Active Piece (Floating) */}
             <div
               className="absolute transition-all duration-300 pointer-events-none"
               style={{
-                top: '10%'
+                top: '0%'
               }}
             >
               <PuzzlePiece
@@ -209,9 +232,17 @@ export const PuzzlePerfect: React.FC<PuzzlePerfectProps> = ({ onComplete, onFail
               onClick={advanceRound}
               className="px-8 py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded shadow-[0_0_20px_rgba(8,145,178,0.5)] transition-all transform hover:scale-105"
             >
-              PROCEED TO LAYER {Math.min(4, currentRound + 1)}
+              {currentRound < 4 ? `PROCEED TO LAYER ${currentRound + 1}` : 'SYSTEM OVERRIDE COMPLETE'}
             </button>
           </div>
+        )}
+
+        {/* Results Screen */}
+        {(gameStatus === 'game-complete') && (
+          <GameResults
+            playerStats={playerStats}
+            onExit={finishGame}
+          />
         )}
 
       </div>

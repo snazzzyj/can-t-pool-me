@@ -56,5 +56,9 @@ export const useRoundTimer = (
     setTimeLeft(prev => prev + amount);
   }, []);
 
-  return { timeLeft, addTime };
+  const reset = useCallback(() => {
+    setTimeLeft(initialTime);
+  }, [initialTime]);
+
+  return { timeLeft, addTime, reset };
 };
