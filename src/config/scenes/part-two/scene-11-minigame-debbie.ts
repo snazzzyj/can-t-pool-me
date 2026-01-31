@@ -4,7 +4,7 @@
  */
 
 import type { Scene } from '@/shared/types/game';
-import PixelRunnerScene from '@/domains/mini-games/pxl-runner/PixelRunnerScene';
+import PixelRunnerScene from '@/domains/mini-games/pxl-runner/PxlRunnerScene';
 
 export const scene11MinigameDebbie: Scene = {
   sceneId: 11,

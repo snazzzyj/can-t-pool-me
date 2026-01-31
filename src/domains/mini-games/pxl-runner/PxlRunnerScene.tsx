@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSceneId, setSceneId } from '@/store/slices/game-slice';
-import PixelRunner from './PixelRunner';
+import PixelRunner from './PxlRunner';
+import './pxl-runner.css';
 
 /**
  * Wrapper component that connects PixelRunner minigame to Redux

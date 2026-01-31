@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Press_Start_2P } from 'next/font/google';
 import { GameState, LevelType, PlayerData, Obstacle } from './types';
 import { 
   PLAYERS_INIT, 
@@ -18,10 +18,17 @@ import AnimalSelection from './components/AnimalSelection';
 import PlayerCountSelection from './components/PlayerCountSelection';
 import HUD from './components/HUD';
 import Overlays from './components/Overlays';
+import './pxl-runner.css';
+
+const pressStart2P = Press_Start_2P({ 
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 // Maps codenames to the actual filename in /assets/characters/
 const CHARACTER_ASSET_MAP: Record<string, string> = {
-  'Rab': 'Rab-1',
+  'Sharker': 'Rab-1',
   'Big Iron McGee': 'Elyse-1',
   '.pxl': 'Debbie-1',
   'Hacktress': 'Jenn-1',
@@ -254,7 +261,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
   }, [gameState]);
 
   return (
-    <div className="w-full h-screen bg-black overflow-hidden flex items-center justify-center font-['Press_Start_2P'] select-none">
+    <div className={`pxl-runner-container ${pressStart2P.className} w-full h-screen overflow-hidden flex items-center justify-center select-none`}>
       <div 
         style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT, transform: `scale(${scale})`, transformOrigin: 'center center' }}
         className="relative bg-black flex flex-col overflow-hidden shadow-2xl"
@@ -298,7 +305,6 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
                           className="absolute -top-10 left-1/2 -translate-x-1/2 w-16 h-16 object-contain rounded-full border-2 border-white bg-slate-800"
                           alt={p.codename}
                           onError={(e) => {
-                            // Fallback if character PNG is missing - show a colored box with initial
                             const target = e.target as HTMLImageElement;
                             target.style.display = 'none';
                             const parent = target.parentElement;

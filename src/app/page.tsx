@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { WelcomeScreen } from '@/shared/components/welcome-screen';
 import { DialogueScene } from '../domains/visual-novel/features/DialogueScene';
-import PixelRunner from '../domains/mini-games/pxl-runner/PixelRunner';
+import PixelRunner from '../domains/mini-games/pxl-runner/PxlRunner';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectSceneId, setSceneId } from '@/store/slices/game-slice';
 

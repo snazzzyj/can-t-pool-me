@@ -8,9 +8,7 @@ interface PlayerCountSelectionProps {
 const PlayerCountSelection: React.FC<PlayerCountSelectionProps> = ({ onSelect }) => {
   return (
     <div className="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center z-50 p-10">
-      <h1 className="text-4xl text-white mb-2 animate-pulse tracking-widest text-center">PIXEL RUNNER</h1>
-      <p className="text-gray-400 mb-12 text-center uppercase text-xs tracking-widest">A DEBBIE (.PXL) CHALLENGE</p>
-      
+      <h1 className="text-4xl text-white mb-2 animate-pulse tracking-widest text-center">PIXEL RUNNER</h1>      
       <div className="p-8 border-4 border-white border-opacity-20 rounded-lg bg-black bg-opacity-40 text-center w-full max-w-2xl">
         <p className="text-xl text-white mb-8 tracking-wide">HOW MANY RUNNERS IN THE TEAM?</p>
         
@@ -25,11 +23,7 @@ const PlayerCountSelection: React.FC<PlayerCountSelectionProps> = ({ onSelect })
             </button>
           ))}
         </div>
-        
-        <p className="text-[10px] text-gray-500 mt-12 italic uppercase tracking-widest">
-          Recommended: 5 players for the full birthday experience!
-        </p>
-      </div>
+        </div>
     </div>
   );
 };

@@ -1,0 +1,62 @@
+/* src/domains/mini-games/pxl-runner/pxl-runner.css */
+
+/* Scoped root variables for pxl-runner */
+.pxl-runner-container {
+  --game-bg: #000000;
+  --scrollbar-track: #000;
+  --scrollbar-thumb: #333;
+  --scrollbar-thumb-hover: #444;
+  --scrollbar-width: 8px;
+  
+  /* Container styles */
+  background-color: var(--game-bg);
+  color: white;
+  overflow: hidden;
+  
+  /* Crucial for pixel art games */
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Reset box-sizing for all children */
+.pxl-runner-container * {
+  box-sizing: border-box;
+}
+
+/* Canvas display */
+.pxl-runner-container canvas {
+  display: block;
+}
+
+/* Custom Scrollbar */
+.pxl-runner-container ::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+.pxl-runner-container ::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+.pxl-runner-container ::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+.pxl-runner-container ::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Animations */
+@keyframes pulse-soft {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0.7; 
+  }
+}
+
+.pxl-runner-container .animate-pulse-soft {
+  animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

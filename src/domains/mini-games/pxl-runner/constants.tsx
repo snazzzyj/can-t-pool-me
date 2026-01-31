@@ -17,7 +17,7 @@ export const ANIMALS: Animal[] = [
   { id: 'frog', name: 'Frog', assetPath: '/assets/minigames/pxl-runner/animals/frog.png' },
   { id: 'goose', name: 'Goose', assetPath: '/assets/minigames/pxl-runner/animals/goose.png' },
   { id: 'dino', name: 'Dino', assetPath: '/assets/minigames/pxl-runner/animals/dino.png' },
-  { id: 'rabbit', name: 'Rabbit', assetPath: '/assets/minigames/pxl-runner/animals/rabbit.png' },
+  { id: 'rabbit', name: 'Rabbit', assetPath: '/assets/minigames/pxl-runner/animals/bun.png' },
 ];
 
 export const PLAYERS_INIT = [
