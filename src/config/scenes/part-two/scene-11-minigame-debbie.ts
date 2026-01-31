@@ -20,7 +20,7 @@ export const scene11MinigameDebbie: Scene = {
     },
     {
       speaker: 'Hackerman',
-      text: 'I know where it is. But it\'s gonna be like a 5 hour drive.',
+      text: 'Only about halfway across the world.',
       characterImage: '/assets/characters/Joel-Vinny.png',
     },
     {
@@ -30,7 +30,7 @@ export const scene11MinigameDebbie: Scene = {
     },
     {
       speaker: 'Pxl',
-      text: 'I think I know a shortcut…',
+      text: 'I think I know a way we can get there...',
       characterImage: '/assets/characters/Debbie-1.png',
     },
   ],
