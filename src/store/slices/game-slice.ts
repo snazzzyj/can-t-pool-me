@@ -4,7 +4,6 @@ import type { GamePhase } from '@/shared/types/game';
 /**
  * Game State Slice
  * Manages global game progression, session, and loading states
- * Following: Avoid context duplication - "game" context is implicit from filename
  */
 
 type State = {
@@ -13,7 +12,6 @@ type State = {
   readonly isLoading: boolean;
   readonly error: string | null;
   readonly sceneId: number;
-  readonly currentScene: string;
 };
 
 const initialState: State = {
@@ -22,7 +20,6 @@ const initialState: State = {
   isLoading: false,
   error: null,
   sceneId: 1,
-  currentScene: 'scene-01-finn-rab', // or your starting scene
 };
 
 const gameSlice = createSlice({
@@ -44,9 +41,6 @@ const gameSlice = createSlice({
     setSceneId: (state, action: PayloadAction<number>) => {
       state.sceneId = action.payload;
     },
-    setCurrentScene: (state, action: PayloadAction<string>) => {
-      state.currentScene = action.payload;
-    },
     reset: () => initialState,
   },
 });
@@ -56,13 +50,15 @@ export const {
   setSessionId, 
   setIsLoading, 
   setError, 
-  setSceneId, 
-  setCurrentScene,
+  setSceneId,
   reset 
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
 
 // Selectors
-export const selectCurrentScene = (state: { game: State }) => state.game.currentScene;
 export const selectSceneId = (state: { game: State }) => state.game.sceneId;
+
+// Derived selector - formats scene ID as string for menu
+export const selectCurrentSceneString = (state: { game: State }) => 
+  `db-${String(state.game.sceneId).padStart(2, '0')}`;

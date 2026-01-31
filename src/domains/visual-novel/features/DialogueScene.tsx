@@ -11,14 +11,13 @@ import { selectSceneId, setSceneId } from '@/store/slices/game-slice';
 import type { Scene } from "@/shared/types/game";
 
 type Props = {
-  readonly onComplete?: () => void; // Make optional
+  readonly onComplete?: () => void;
 };
 
 export function DialogueScene({ onComplete }: Props) {
   const [dialogueIndex, setDialogueIndex] = useState(0);
   const dispatch = useDispatch();
   
-  // Get sceneId from Redux instead of props
   const sceneId = useSelector(selectSceneId);
   const sceneData = SCENE_DATABASE[sceneId] || null;
   
@@ -40,11 +39,9 @@ export function DialogueScene({ onComplete }: Props) {
 
   // Handle transition completion
   const handleTransitionComplete = () => {
-    // If there's an onComplete callback (normal game flow), use it
     if (onComplete) {
       onComplete();
     } else {
-      // Otherwise, advance to the next scene in the database
       const nextSceneId = sceneId + 1;
       if (SCENE_DATABASE[nextSceneId]) {
         console.log('Auto-advancing to next scene:', nextSceneId);
@@ -65,7 +62,6 @@ export function DialogueScene({ onComplete }: Props) {
           backgroundImage={sceneData.backgroundImage}
           onContinue={handleTransitionComplete}
         />
-        {/* Scene Navigation Menu */}
         {features.SCENE_NAVIGATION_MENU && <SceneNavigationMenu />}
       </>
     );
@@ -78,27 +74,25 @@ export function DialogueScene({ onComplete }: Props) {
 
   const handleNext = () => {
     if (isLastDialogue) {
-      // If there's an onComplete callback, use it
       if (onComplete) {
         onComplete();
       } else {
-        // Otherwise, advance to the next scene
         const nextSceneId = sceneId + 1;
         if (SCENE_DATABASE[nextSceneId]) {
-          console.log('Auto-advancing to next scene:', nextSceneId);
+          console.log('Advancing to next scene:', nextSceneId);
           dispatch(setSceneId(nextSceneId));
         } else {
           console.log('No next scene available - end of game');
         }
       }
     } else {
-      setDialogueIndex(dialogueIndex + 1);
+      setDialogueIndex(prev => prev + 1);
     }
   };
 
   const handlePrevious = () => {
     if (dialogueIndex > 0) {
-      setDialogueIndex(dialogueIndex - 1);
+      setDialogueIndex(prev => prev - 1);
     }
   };
 

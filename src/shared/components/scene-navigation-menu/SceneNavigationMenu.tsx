@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllScenes, SceneMenuItem as SceneMenuItemType } from './scene-menu.utils';
 import { SceneMenuItem } from './SceneMenuItem';
 import { cn } from '@/shared/utils/styles';
-import { setSceneId, setCurrentScene, selectCurrentScene, selectSceneId } from '@/store/slices/game-slice';
+import { setSceneId, selectSceneId, selectCurrentSceneString } from '@/store/slices/game-slice';
 
 export const SceneNavigationMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,8 +14,8 @@ export const SceneNavigationMenu: React.FC = () => {
   
   const dispatch = useDispatch();
   
-  const currentScene = useSelector(selectCurrentScene);
   const currentSceneId = useSelector(selectSceneId);
+  const currentSceneString = useSelector(selectCurrentSceneString);
 
   useEffect(() => {
     const allScenes = getAllScenes();
@@ -26,14 +26,11 @@ export const SceneNavigationMenu: React.FC = () => {
   const handleSceneSelect = (sceneIdString: string) => {
     console.log('Scene selected:', sceneIdString);
     
-    // Extract the database key from the string (e.g., "db-17" -> 17)
     const databaseKey = parseInt(sceneIdString.split('-').pop() || '0', 10);
     
     console.log('Dispatching scene change to database key:', databaseKey);
     
-    // Update sceneId with the database key
     dispatch(setSceneId(databaseKey));
-    dispatch(setCurrentScene(sceneIdString));
     
     setIsOpen(false);
   };
@@ -44,12 +41,6 @@ export const SceneNavigationMenu: React.FC = () => {
     }
   };
 
-  // Convert current numeric scene ID to string format for comparison
-  const currentSceneString = currentSceneId !== undefined
-    ? `db-${String(currentSceneId).padStart(2, '0')}` 
-    : '';
-
-  // Group scenes by part
   const partOneScenes = scenes.filter(s => s.part === 'one');
   const partTwoScenes = scenes.filter(s => s.part === 'two');
 
@@ -108,19 +99,15 @@ export const SceneNavigationMenu: React.FC = () => {
           onKeyDown={handleKeyDown}
           sideOffset={5}
         >
-          {/* Header */}
           <div className="px-4 py-3 border-b-2 border-slate-600 bg-slate-900">
             <h2 className="text-sm font-bold text-slate-200 uppercase tracking-wide">
               Scene Navigation
             </h2>
-            {currentSceneId !== undefined && (
-              <p className="text-xs text-slate-400 mt-1">
-                Current: Database Key {currentSceneId}
-              </p>
-            )}
+            <p className="text-xs text-slate-400 mt-1">
+              Current: Database Key {currentSceneId}
+            </p>
           </div>
 
-          {/* Scrollable content */}
           <div className="overflow-y-auto max-h-[calc(100vh-10rem)]">
             {partOneScenes.length > 0 && (
               <div>
