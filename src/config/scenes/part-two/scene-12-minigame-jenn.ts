@@ -4,6 +4,7 @@
  */
 
 import type { Scene } from '@/shared/types/game';
+import PuzzlePerfectScene from '@/domains/mini-games/puzzle-perfect/PuzzlePerfectScene';
 
 export const scene12MinigameJenn: Scene = {
   sceneId: 12,
@@ -33,6 +34,7 @@ export const scene12MinigameJenn: Scene = {
       characterImage: '/assets/characters/Jenn-1.png',
     },
   ],
+  minigameComponent: PuzzlePerfectScene,
 };
 
 export default scene12MinigameJenn;
