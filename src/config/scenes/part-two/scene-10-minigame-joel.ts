@@ -4,9 +4,10 @@
  */
 
 import type { Scene } from '@/shared/types/game';
+import HackingMainframeScene from '@/domains/mini-games/hacking-mainframe/HackingMainframeScene';
 
 export const scene10MinigameJoel: Scene = {
-  sceneId: 10,
+  sceneId: 16,
   title: 'Hacking the Mainframe',
   backgroundImage: '/assets/backgrounds/scene-10.jpg',
   backgroundMusic: '/assets/audio/music/scene-10.mp3',
@@ -23,6 +24,8 @@ export const scene10MinigameJoel: Scene = {
       characterImage: '/assets/characters/Joel-Vinny.png',
     },
   ],
-};
 
+    minigameComponent: HackingMainframeScene,
+    nextScene: 17,
+};
 export default scene10MinigameJoel;

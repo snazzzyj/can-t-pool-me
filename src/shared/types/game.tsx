@@ -39,8 +39,8 @@ export type Scene = {
   readonly dialogues: ReadonlyArray<SceneDialogue>;
   readonly backgroundMusic?: string;
   readonly duration?: number;
-  readonly nextScene?: string;
-  readonly minigameComponent?: React.ComponentType;
+  readonly nextScene?: number;
+readonly minigameComponent?: React.ComponentType<{ onComplete: () => void }>;
 };
 
 export type MiniGameType = 'quick-time' | 'memory' | 'quiz' | 'rhythm' | 'puzzle';

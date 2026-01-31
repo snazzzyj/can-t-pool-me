@@ -75,8 +75,15 @@ export function DialogueScene({ onComplete }: Props) {
   if (showMinigame && scene.minigameComponent) {
     const MinigameComponent = scene.minigameComponent;
     console.log('🎮 Rendering minigame component for scene:', sceneId);
-    return <MinigameComponent />;
+  return <MinigameComponent onComplete={() => {
+  console.log('✅ Minigame completed, advancing to next scene');
+  const nextSceneId = sceneId + 1;
+  if (SCENE_DATABASE[nextSceneId]) {
+    dispatch(setSceneId(nextSceneId));
+  } else {
+    console.log('No next scene available - end of game');
   }
+}} />;  }
 
   const currentDialogue = scene.dialogues[dialogueIndex];
   const isLastDialogue = dialogueIndex >= scene.dialogues.length - 1;

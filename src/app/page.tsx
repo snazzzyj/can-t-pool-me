@@ -16,9 +16,12 @@ export default function Home() {
     return <WelcomeScreen onStartClick={() => setGameStarted(true)} />;
   }
 
-  if (sceneId === 11) { // Assuming scene-11-minigame-debbie is sceneId 11
+  // Debbie's Pixel Runner minigame (Scene 11)
+  if (sceneId === 11) { 
     return <PixelRunner onComplete={() => dispatch(setSceneId(sceneId + 1))} />;
   }
+console.log('Current sceneId:', sceneId);
 
   return <DialogueScene />;
 }
+
