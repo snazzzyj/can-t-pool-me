@@ -30,7 +30,7 @@ export const scene11MinigameDebbie: Scene = {
     },
     {
       speaker: 'Pxl',
-      text: 'I think I know a way we can get there...',
+      text: 'I think I know a way we can get there fast...',
       characterImage: '/assets/characters/Debbie-1.png',
     },
   ],
