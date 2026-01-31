@@ -1,5 +1,12 @@
 import React from 'react';
+import { Press_Start_2P } from 'next/font/google';
 import { ANIMALS } from '../constants';
+
+const pressStart2P = Press_Start_2P({ 
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 interface AnimalSelectionProps {
   currentPlayer: { codename: string; key: string; color: string; assetPath: string } | undefined;
@@ -12,19 +19,22 @@ const AnimalSelection: React.FC<AnimalSelectionProps> = ({ currentPlayer, select
   if (!currentPlayer) return null;
 
   return (
-    <div className="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center z-50 p-10 font-['Press_Start_2P'] text-white">
+    <div className={`${pressStart2P.className} absolute inset-0 bg-slate-900 flex flex-col items-center justify-center z-50 p-10 text-white`}>
       <h1 className="text-4xl mb-8 text-center leading-relaxed">TEAM ASSEMBLY</h1>
       <div 
         className="p-8 border-8 rounded-lg bg-black/60 text-center w-full max-w-2xl"
         style={{ borderColor: currentPlayer.color }}
       >
         <div className="flex flex-col items-center mb-6">
-          <img 
-            src={currentPlayer.assetPath} 
-            className="w-24 h-24 mb-4 rounded-full border-4 border-white bg-slate-800" 
-            alt={currentPlayer.codename} 
-            onError={(e) => { (e.target as HTMLImageElement).src = 'https://api.dicebear.com/7.x/pixel-art/svg?seed=' + currentPlayer.codename }}
-          />
+          <div className="w-24 h-24 mb-4 rounded-full border-4 border-white bg-slate-800 overflow-hidden flex items-center justify-center p-2">
+            <img 
+              src={currentPlayer.assetPath} 
+              className="w-full h-full object-contain" 
+              alt={currentPlayer.codename} 
+              style={{ imageRendering: 'pixelated' }}
+              onError={(e) => { (e.target as HTMLImageElement).src = 'https://api.dicebear.com/7.x/pixel-art/svg?seed=' + currentPlayer.codename }}
+            />
+          </div>
           <p className="text-2xl mb-2 uppercase">{currentPlayer.codename}</p>
           <p className="text-sm text-gray-400 uppercase">JUMP CONTROL: [{currentPlayer.key}]</p>
         </div>
@@ -42,6 +52,7 @@ const AnimalSelection: React.FC<AnimalSelectionProps> = ({ currentPlayer, select
                 src={animal.assetPath} 
                 alt={animal.name}
                 className="w-16 h-16 mb-3 group-hover:scale-110 transition-transform object-contain"
+                style={{ imageRendering: 'pixelated' }}
               />
               <span className="text-[10px] uppercase font-bold">{animal.name}</span>
             </button>

@@ -12,7 +12,8 @@ import {
   GROUND_Y,
   GRAVITY,
   INVINCIBILITY_DURATION,
-  DEATH_DURATION
+  DEATH_DURATION,
+  ANIMALS
 } from './constants';
 import AnimalSelection from './components/AnimalSelection';
 import PlayerCountSelection from './components/PlayerCountSelection';
@@ -54,6 +55,17 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
   const obstaclesRef = useRef<Obstacle[][]>([[], [], [], [], []]);
   const spawnTimerRef = useRef<number[]>([0, 0, 0, 0, 0]);
 
+  // Helper function to get character position based on animal
+  const getCharacterPosition = (animalPath: string) => {
+    if (animalPath.includes('Chicken.png')) return { left: '5%', top: '-5px' };
+    if (animalPath.includes('Dino.png')) return { left: '45%', top: '0px' };
+    if (animalPath.includes('Snail.png')) return { left: '35%', top: '0px' };
+    if (animalPath.includes('Frog.png')) return { left: '50%', top: '0px' };
+    if (animalPath.includes('Bun.png')) return { left: '48%', top: '-10px' };
+    if (animalPath.includes('Goos.png')) return { left: '42%', top: '0px' };
+    return { left: '50%', top: '0px' };
+  };
+
   useEffect(() => {
     const handleResize = () => {
       const scaleX = window.innerWidth / SCREEN_WIDTH;
@@ -86,9 +98,17 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
     setGameState(GameState.ANIMAL_SELECTION);
   };
 
-  const handleAnimalSelect = (animalEmoji: string) => {
+  const handleAnimalSelect = (animalId: string) => {
     const newPlayers = [...players];
-    newPlayers[selectingPlayerIndex].animal = animalEmoji;
+    
+    // Find the selected animal from ANIMALS array
+    const selectedAnimal = ANIMALS.find(a => a.id === animalId);
+    
+    if (selectedAnimal) {
+      // Store the asset path instead of emoji
+      newPlayers[selectingPlayerIndex].animal = selectedAnimal.assetPath;
+    }
+    
     setPlayers(newPlayers);
 
     if (selectingPlayerIndex < numPlayers - 1) {
@@ -298,11 +318,22 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
                       className={`absolute z-20 ${p.isInvincible ? 'animate-pulse opacity-60' : ''}`}
                       style={{ left: PLAYER_X, top: p.y - 70 }}
                     >
-                      <div className="relative">
-                        <span className="text-6xl filter drop-shadow-lg">{p.animal}</span>
+                      <div className="relative flex items-center justify-center">
+                        {/* Animal sprite - main character */}
+                        <img 
+                          src={p.animal}
+                          alt={p.codename}
+                          className="w-16 h-16 object-contain"
+                          style={{ imageRendering: 'pixelated' }}
+                        />
+                        {/* Character avatar - positioned based on animal */}
                         <img 
                           src={p.assetPath} 
-                          className="absolute -top-10 left-1/2 -translate-x-1/2 w-16 h-16 object-contain rounded-full border-2 border-white bg-slate-800"
+                          className="absolute -translate-x-1/2 -translate-y-1/2 w-10 h-10 object-contain"
+                          style={{ 
+                            imageRendering: 'pixelated',
+                            ...getCharacterPosition(p.animal)
+                          }}
                           alt={p.codename}
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
@@ -310,8 +341,11 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
                             const parent = target.parentElement;
                             if (parent && !parent.querySelector('.fallback-avatar')) {
                               const fallback = document.createElement('div');
-                              fallback.className = 'fallback-avatar absolute -top-10 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full border-2 border-white flex items-center justify-center text-xl font-bold';
+                              fallback.className = 'fallback-avatar absolute -translate-x-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-xs font-bold';
                               fallback.style.backgroundColor = p.color;
+                              const position = getCharacterPosition(p.animal);
+                              fallback.style.left = position.left;
+                              fallback.style.top = position.top;
                               fallback.innerText = p.codename.charAt(0);
                               parent.appendChild(fallback);
                             }
