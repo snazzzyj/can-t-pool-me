@@ -61,9 +61,16 @@ export const SHOOTER_LANE_X: Record<'left' | 'center' | 'right', number> = {
 
 /** Shooter portrait Y (above ammo bar) */
 export const SHOOTER_PORTRAIT_Y = 950;
+/** Shooter movement speed px/s */
+export const SHOOTER_SPEED = 400;
 /** Collector track: min and max X for bucket center */
 export const COLLECTOR_MIN_X = 200;
 export const COLLECTOR_MAX_X = 1720;
+
+/** Shooter track bounds (prevent them from leaving their designated areas if desired, or allow full screen) */
+/** For now, let's allow them to move across the whole screen but stay within safe margins */
+export const SHOOTER_MIN_X = 100;
+export const SHOOTER_MAX_X = 1820;
 
 /** Level configs: labubus per wave, base speed (px/s), wave duration, ammo per shooter */
 export const LEVEL_CONFIGS: Record<1 | 2 | 3, LevelConfig> = {
@@ -71,19 +78,19 @@ export const LEVEL_CONFIGS: Record<1 | 2 | 3, LevelConfig> = {
     labubusPerWave: 15,
     baseSpeed: 120,
     waveDurationSeconds: 45,
-    ammoPerShooter: Math.ceil(15 * AMMO_MULTIPLIER), // 20
+    ammoPerShooter: 40,
   },
   2: {
     labubusPerWave: 20,
     baseSpeed: 160,
     waveDurationSeconds: 45,
-    ammoPerShooter: Math.ceil(20 * AMMO_MULTIPLIER), // 26
+    ammoPerShooter: 40,
   },
   3: {
     labubusPerWave: 25,
     baseSpeed: 200,
     waveDurationSeconds: 45,
-    ammoPerShooter: Math.ceil(25 * AMMO_MULTIPLIER), // 33
+    ammoPerShooter: 40,
   },
 };
 

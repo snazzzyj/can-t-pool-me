@@ -3,7 +3,7 @@
  */
 
 /** Screen shake duration in ms */
-export const SHAKE_DURATION_MS = 200;
+export const SHAKE_DURATION_MS = 500;
 /** Screen shake intensity in px */
 export const SHAKE_INTENSITY = 5;
 
@@ -18,6 +18,6 @@ export function applyDecay(
   durationMs: number
 ): number {
   if (current <= 0) return 0;
-  const decay = (deltaMs / durationMs) * current;
-  return Math.max(0, current - decay);
+  // Linear decay: decreases by (1 / durationMs) per ms
+  return Math.max(0, current - (deltaMs / durationMs));
 }

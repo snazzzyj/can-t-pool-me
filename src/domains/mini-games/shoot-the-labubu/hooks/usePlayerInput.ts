@@ -12,11 +12,19 @@ export interface PlayerInputState {
   shootRab: boolean;
   shootJenn: boolean;
   shootJoel: boolean;
+  rabMove: -1 | 0 | 1;
+  jennMove: -1 | 0 | 1;
+  joelMove: -1 | 0 | 1;
   elyseMove: -1 | 0 | 1;
   debbieMove: -1 | 0 | 1;
 }
 
-const KEYS = ['KeyR', 'KeyH', 'KeyJ', 'ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD'] as const;
+const KEYS = [
+  'Digit1', 'Digit2', 'Digit3',
+  'Digit7', 'Digit8', 'Digit9',
+  'KeyJ', 'KeyK', 'KeyL',
+  'ArrowLeft', 'ArrowRight', 'KeyA', 'KeyD'
+] as const;
 
 function deriveMove(left: boolean, right: boolean): -1 | 0 | 1 {
   if (left && !right) return -1;
@@ -29,6 +37,9 @@ export function usePlayerInput() {
     shootRab: false,
     shootJenn: false,
     shootJoel: false,
+    rabMove: 0,
+    jennMove: 0,
+    joelMove: 0,
     elyseMove: 0,
     debbieMove: 0,
   });
@@ -40,9 +51,23 @@ export function usePlayerInput() {
       const keys = keysPressed.current;
       const s = stateRef.current;
 
-      s.shootRab = keys.has('KeyR') || keys.has('r');
-      s.shootJenn = keys.has('KeyH') || keys.has('h');
-      s.shootJoel = keys.has('KeyJ') || keys.has('j');
+      // Rab: 1 (Left), 2 (Shoot), 3 (Right)
+      s.shootRab = keys.has('Digit2') || keys.has('2');
+      const rabLeft = keys.has('Digit1') || keys.has('1');
+      const rabRight = keys.has('Digit3') || keys.has('3');
+      s.rabMove = deriveMove(rabLeft, rabRight);
+
+      // Jenn: 7 (Left), 8 (Shoot), 9 (Right)
+      s.shootJenn = keys.has('Digit8') || keys.has('8');
+      const jennLeft = keys.has('Digit7') || keys.has('7');
+      const jennRight = keys.has('Digit9') || keys.has('9');
+      s.jennMove = deriveMove(jennLeft, jennRight);
+
+      // Joel: J (Left), K (Shoot), L (Right)
+      s.shootJoel = keys.has('KeyK') || keys.has('k');
+      const joelLeft = keys.has('KeyJ') || keys.has('j');
+      const joelRight = keys.has('KeyL') || keys.has('l');
+      s.joelMove = deriveMove(joelLeft, joelRight);
 
       const elyseLeft = keys.has('ArrowLeft') || keys.has('arrowleft');
       const elyseRight = keys.has('ArrowRight') || keys.has('arrowright');
@@ -60,7 +85,7 @@ export function usePlayerInput() {
       // Check if it's one of our monitored keys
       if (
         KEYS.includes(code as (typeof KEYS)[number]) ||
-        ['r', 'h', 'j', 'a', 'd', 'arrowleft', 'arrowright'].includes(lowerKey)
+        ['1', '2', '3', '7', '8', '9', 'j', 'k', 'l', 'a', 'd', 'arrowleft', 'arrowright'].includes(lowerKey)
       ) {
         // Prevent scrolling with arrows
         if (lowerKey.startsWith('arrow')) e.preventDefault();

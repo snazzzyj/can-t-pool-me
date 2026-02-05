@@ -27,6 +27,9 @@ import {
   COLLECTOR_SPEED,
   COLLECTOR_MIN_X,
   COLLECTOR_MAX_X,
+  SHOOTER_SPEED,
+  SHOOTER_MIN_X,
+  SHOOTER_MAX_X,
   BODIES_PER_HEAL,
   HP_PER_HEAL,
   INTER_WAVE_PAUSE_MS,
@@ -119,13 +122,23 @@ export function useShootTheLabubu(
 
   const retry = useCallback(() => {
     if (onRetry) onRetry();
-    const init = createInitialState();
-    setState(init);
-    stateRef.current = init;
+    const currentLevel = stateRef.current.currentLevel;
+    const config = LEVEL_CONFIGS[currentLevel];
+
+    setState(() => ({
+      ...createInitialState(),
+      gameStatus: 'countdown',
+      currentLevel: currentLevel,
+      currentWave: 1,
+      waveTimer: config.waveDurationSeconds,
+      shooters: createShooterState(currentLevel),
+      sharedHealth: MAX_HEALTH,
+    }));
+
     waveSpawnIndexRef.current = 0;
     waveSpawnListRef.current = [];
     waveCompleteAtRef.current = null;
-    countdownEndRef.current = null;
+    countdownEndRef.current = Date.now() + COUNTDOWN_SECONDS * 1000;
   }, [onRetry]);
 
   const startWave = useCallback((level: 1 | 2 | 3, wave: 1 | 2 | 3) => {
@@ -133,20 +146,25 @@ export function useShootTheLabubu(
     waveSpawnIndexRef.current = 0;
     waveSpawnListRef.current = getWavePattern(level, wave);
 
-    setState((prev) => ({
-      ...prev,
-      gameStatus: 'playing',
-      currentLevel: level,
-      currentWave: wave,
-      waveTimer: config.waveTimer ? config.waveTimer : config.waveDurationSeconds,
-      waveStartTime: Date.now(),
-      shooters: createShooterState(level),
-      labubus: [],
-      bullets: [],
-      fallingBodies: [],
-      poofs: [],
-      floatingTexts: [],
-    }));
+    setState((prev) => {
+      // Only reset shooters at the start of a level (wave 1)
+      const shooters = wave === 1 ? createShooterState(level) : prev.shooters;
+
+      return {
+        ...prev,
+        gameStatus: 'playing',
+        currentLevel: level,
+        currentWave: wave,
+        waveTimer: config.waveDurationSeconds,
+        waveStartTime: Date.now(),
+        shooters,
+        labubus: [],
+        bullets: [],
+        fallingBodies: [],
+        poofs: [],
+        floatingTexts: [],
+      };
+    });
   }, []);
 
   const continueToNextLevel = useCallback(() => {
@@ -233,6 +251,17 @@ export function useShootTheLabubu(
         next.collectors = {
           elyse: { ...s.collectors.elyse, position: { ...s.collectors.elyse.position, x: Math.max(COLLECTOR_MIN_X, Math.min(COLLECTOR_MAX_X, elyseX)) } },
           debbie: { ...s.collectors.debbie, position: { ...s.collectors.debbie.position, x: Math.max(COLLECTOR_MIN_X, Math.min(COLLECTOR_MAX_X, debbieX)) } },
+        };
+
+        // Input handling: Shooters Movement
+        const rabX = s.shooters.rab.position.x + input.rabMove * SHOOTER_SPEED * deltaSec;
+        const jennX = s.shooters.jenn.position.x + input.jennMove * SHOOTER_SPEED * deltaSec;
+        const joelX = s.shooters.joel.position.x + input.joelMove * SHOOTER_SPEED * deltaSec;
+
+        next.shooters = {
+          rab: { ...s.shooters.rab, position: { ...s.shooters.rab.position, x: Math.max(SHOOTER_MIN_X, Math.min(SHOOTER_MAX_X, rabX)) } },
+          jenn: { ...s.shooters.jenn, position: { ...s.shooters.jenn.position, x: Math.max(SHOOTER_MIN_X, Math.min(SHOOTER_MAX_X, jennX)) } },
+          joel: { ...s.shooters.joel, position: { ...s.shooters.joel.position, x: Math.max(SHOOTER_MIN_X, Math.min(SHOOTER_MAX_X, joelX)) } },
         };
 
         // Input handling: Shooting

@@ -21,11 +21,12 @@ export const PreGameInstructions: React.FC<PreGameInstructionsProps> = ({ onStar
         levels!
       </p>
       <div className="mb-6 max-w-md space-y-2 text-left text-xs">
-        <p><strong>Rab (left):</strong> [R] shoot</p>
+        <p><strong>Rab:</strong> [1] Left, [2] Shoot, [3] Right</p>
+        <p><strong>Jenn:</strong> [7] Left, [8] Shoot, [9] Right</p>
+        <p><strong>Joel:</strong> [J] Left, [K] Shoot, [L] Right</p>
+        <p className="pt-2 text-[10px] opacity-70">Collectors:</p>
         <p><strong>Elyse:</strong> [←] [→] move bucket</p>
         <p><strong>Debbie:</strong> [A] [D] move bucket</p>
-        <p><strong>Jenn (center):</strong> [H] shoot</p>
-        <p><strong>Joel (right):</strong> [J] shoot</p>
       </div>
       <button
         type="button"
