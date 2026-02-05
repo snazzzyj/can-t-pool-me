@@ -30,7 +30,7 @@ export function WelcomeScreen({ onStartClick }: Props) {
         </h1>
 
         <p className={`text-2xl text-purple-200 mb-8 ${pressStart2P.className}`}>
-          A Birthday Adventure
+          One last shot
         </p>
 
         <button
