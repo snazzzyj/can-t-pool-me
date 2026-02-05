@@ -4,6 +4,7 @@
  */
 
 import type { Scene } from '@/shared/types/game';
+import { ShootTheLabubuScene } from '@/domains/mini-games/shoot-the-labubu/ShootTheLabubuScene';
 
 export const scene13MinigameElyse: Scene = {
   sceneId: 13,
@@ -11,6 +12,7 @@ export const scene13MinigameElyse: Scene = {
   backgroundImage: '/assets/backgrounds/scene-13.jpg',
   backgroundMusic: '/assets/audio/music/scene-13.mp3',
   duration: 30,
+  minigameComponent: ShootTheLabubuScene,
   dialogues: [
     {
       speaker: 'Hackerman',

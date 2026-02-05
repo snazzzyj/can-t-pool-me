@@ -11,9 +11,14 @@ interface LabubuSpriteProps {
 
 const LabubuSprite: React.FC<LabubuSpriteProps> = memo(({ labubu, isFalling }) => {
   const src = LABUBU_SPRITES[labubu.color];
+  // Deterministic variety based on ID
+  const idNum = parseInt(labubu.id.replace(/\D/g, '') || '0', 10);
+  const bobDelay = `-${(idNum % 20) / 10}s`;
+  const bobDuration = `${2 + (idNum % 5) / 5}s`;
+
   return (
     <div
-      className="absolute will-change-transform"
+      className={`absolute will-change-transform ${!isFalling ? 'labubu-bobbing' : ''}`}
       style={{
         left: labubu.position.x,
         top: labubu.position.y,
@@ -21,6 +26,9 @@ const LabubuSprite: React.FC<LabubuSpriteProps> = memo(({ labubu, isFalling }) =
         height: LABUBU_SIZE,
         transform: isFalling ? 'rotate(15deg)' : undefined,
         imageRendering: 'pixelated',
+        zIndex: isFalling ? 1 : 2,
+        animationDelay: !isFalling ? bobDelay : undefined,
+        animationDuration: !isFalling ? bobDuration : undefined,
       }}
     >
       <img
@@ -33,6 +41,7 @@ const LabubuSprite: React.FC<LabubuSpriteProps> = memo(({ labubu, isFalling }) =
     </div>
   );
 });
+
 
 LabubuSprite.displayName = 'LabubuSprite';
 export default LabubuSprite;

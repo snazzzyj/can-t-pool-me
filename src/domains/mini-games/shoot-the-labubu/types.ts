@@ -60,6 +60,19 @@ export interface ShooterStats {
   kills: number;
 }
 
+export interface PoofEntity {
+  id: string;
+  position: { x: number; y: number };
+  createdAt: number;
+}
+
+export interface FloatingTextEntity {
+  id: string;
+  position: { x: number; y: number };
+  text: string;
+  createdAt: number;
+}
+
 export interface ShootTheLabubuState {
   gameStatus: GameStatus;
   currentLevel: 1 | 2 | 3;
@@ -79,6 +92,8 @@ export interface ShootTheLabubuState {
   labubus: LabubuEntity[];
   bullets: BulletEntity[];
   fallingBodies: FallingBodyEntity[];
+  poofs: PoofEntity[];
+  floatingTexts: FloatingTextEntity[];
   stats: {
     totalBodiesCaught: number;
     elyseBodies: number;
@@ -96,6 +111,7 @@ export interface ShootTheLabubuState {
   /** Wave start time for speed ramp (0% -> 25% over wave) */
   waveStartTime: number | null;
 }
+
 
 export interface LevelConfig {
   labubusPerWave: number;

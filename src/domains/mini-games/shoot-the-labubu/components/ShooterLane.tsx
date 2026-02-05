@@ -21,6 +21,7 @@ const ShooterLane: React.FC<ShooterLaneProps> = memo(({ shooter, shooterName, po
         left: shooter.position.x - 32,
         top: shooter.position.y - 80,
         width: 64,
+        zIndex: 4,
       }}
     >
       <div

@@ -5,43 +5,108 @@
   image-rendering: crisp-edges;
 }
 
+.level-bg {
+  z-index: 0;
+}
+
+@keyframes labubu-bob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.labubu-bobbing {
+  animation: labubu-bob 2s ease-in-out infinite;
+}
+
+
 /* Level 1: Mansion Entrance - warm tones, ornate */
 .level-bg.level-1 {
-  background: linear-gradient(
-    180deg,
-    #2c1810 0%,
-    #4a2c1a 20%,
-    #6b3a22 40%,
-    #8b4513 60%,
-    #654321 80%,
-    #3d2817 100%
-  );
+  background: linear-gradient(180deg,
+      #2c1810 0%,
+      #4a2c1a 20%,
+      #6b3a22 40%,
+      #8b4513 60%,
+      #654321 80%,
+      #3d2817 100%);
   background-size: 100% 100%;
 }
 
 /* Level 2: Pool Hall Basement - dark, green felt */
 .level-bg.level-2 {
-  background: linear-gradient(
-    180deg,
-    #0d1f0d 0%,
-    #1a331a 25%,
-    #0f2d0f 50%,
-    #1e4620 75%,
-    #2d5c2e 100%
-  );
+  background: linear-gradient(180deg,
+      #0d1f0d 0%,
+      #1a331a 25%,
+      #0f2d0f 50%,
+      #1e4620 75%,
+      #2d5c2e 100%);
   background-size: 100% 100%;
 }
 
 /* Level 3: Cyberpunk Lair - neon blue, high-tech */
 .level-bg.level-3 {
-  background: linear-gradient(
-    180deg,
-    #0a0a12 0%,
-    #1a1a2e 30%,
-    #16213e 60%,
-    #0f3460 80%,
-    #1a1a2e 100%
-  );
+  background: linear-gradient(180deg,
+      #0a0a12 0%,
+      #1a1a2e 30%,
+      #16213e 60%,
+      #0f3460 80%,
+      #1a1a2e 100%);
   background-size: 100% 100%;
   box-shadow: inset 0 0 200px rgba(0, 150, 255, 0.08);
+}
+
+/* Animations */
+@keyframes poof {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.poof-effect {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: poof 250ms ease-out forwards;
+  z-index: 5;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+
+.floating-text {
+  position: absolute;
+  color: #4ade80;
+  font-weight: bold;
+  pointer-events: none;
+  animation: float-up 1s ease-out forwards;
+  z-index: 20;
 }

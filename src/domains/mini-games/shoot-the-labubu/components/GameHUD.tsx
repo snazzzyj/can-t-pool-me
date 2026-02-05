@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { ShooterState, CollectorState } from '../types';
-import { MAX_HEALTH, SCREEN_WIDTH, TOP_BAR_HEIGHT, BOTTOM_BAR_TOP } from '../constants';
+import { SCREEN_HEIGHT, TOP_BAR_HEIGHT, BOTTOM_BAR_TOP } from '../constants';
 import { Press_Start_2P } from 'next/font/google';
 
 const pressStart2P = Press_Start_2P({ weight: '400', subsets: ['latin'], display: 'swap' });

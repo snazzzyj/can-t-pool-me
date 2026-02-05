@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useShootTheLabubu } from './hooks/useShootTheLabubu';
 import { usePlayerInput } from './hooks/usePlayerInput';
-import { SCREEN_WIDTH, SCREEN_HEIGHT, BULLET_SIZE, CHARACTER_PORTRAITS, BOTTOM_BAR_TOP } from './constants';
+import { SCREEN_WIDTH, SCREEN_HEIGHT, BULLET_SIZE, CHARACTER_PORTRAITS } from './constants';
 import GameHUD from './components/GameHUD';
 import LabubuSprite from './components/LabubuSprite';
 import ShooterLane from './components/ShooterLane';
@@ -12,7 +12,11 @@ import StatsScreen from './components/StatsScreen';
 import GameOverScreen from './components/GameOverScreen';
 import PreGameInstructions from './components/PreGameInstructions';
 import CountdownOverlay from './components/CountdownOverlay';
+import { Press_Start_2P } from 'next/font/google';
 import './shoot-the-labubu.css';
+
+const pressStart2P = Press_Start_2P({ weight: '400', subsets: ['latin'], display: 'swap' });
+
 
 interface ShootTheLabubuProps {
   onComplete: () => void;
@@ -82,7 +86,6 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
 
   // Game Over
   if (state.gameStatus === 'game-over') {
-    const wavesSurvived = state.currentWave; // approximate; could track in state
     return (
       <div className="shoot-the-labubu-root flex h-screen w-full items-center justify-center bg-black">
         <div
@@ -202,6 +205,26 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
             shooterName="Joel"
             portraitSrc={CHARACTER_PORTRAITS.joel}
           />
+
+          {/* Poofs */}
+          {state.poofs.map((p) => (
+            <div
+              key={p.id}
+              className="poof-effect"
+              style={{ left: p.position.x - 9, top: p.position.y - 9 }}
+            />
+          ))}
+
+          {/* Floating Text */}
+          {state.floatingTexts.map((t) => (
+            <div
+              key={t.id}
+              className={`${pressStart2P.className} floating-text text-xl`}
+              style={{ left: t.position.x - 50, top: t.position.y }}
+            >
+              {t.text}
+            </div>
+          ))}
         </div>
 
         <GameHUD
@@ -228,9 +251,8 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
             style={{ opacity: state.healFlash * 0.2, zIndex: 15 }}
           />
         )}
-
-        {state.gameStatus === 'countdown' && <CountdownOverlay />}
       </div>
     </div>
   );
 }
+
