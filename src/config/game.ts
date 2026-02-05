@@ -22,7 +22,8 @@ import {
   scene13MinigameElyse,
   scene14BossBattle,
   scene15RescueMushi,
-  
+  scene16Victory,
+
   // Transitions
   transition01intro,
   transition02discovery,
@@ -36,7 +37,7 @@ import {
 
 export const GAME_CONFIG = {
   MAX_PLAYERS: 5,
-  SCENE_COUNT: 16, // Total scenes including transitions
+  SCENE_COUNT: 17, // Total scenes including transitions
   MINI_GAMES_COUNT: 4,
 };
 
@@ -66,4 +67,5 @@ export const SCENE_DATABASE: Record<number, Scene | TransitionSlide> = {
   19: scene13MinigameElyse,
   20: scene14BossBattle,
   21: scene15RescueMushi,
+  22: scene16Victory,
 };

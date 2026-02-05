@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectSceneId, setSceneId } from '@/store/slices/game-slice';
 
 export default function Home() {
-  const [gameStarted, setGameStarted] = useState(false);
+  const [gameStarted, setGameStarted] = useState(true);
   const dispatch = useDispatch();
   const sceneId = useSelector(selectSceneId);
 
@@ -17,10 +17,10 @@ export default function Home() {
   }
 
   // Debbie's Pixel Runner minigame (Scene 11)
-  if (sceneId === 11) { 
+  if (sceneId === 11) {
     return <PixelRunner onComplete={() => dispatch(setSceneId(sceneId + 1))} />;
   }
-console.log('Current sceneId:', sceneId);
+  console.log('Current sceneId:', sceneId);
 
   return <DialogueScene />;
 }

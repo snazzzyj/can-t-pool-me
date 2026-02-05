@@ -19,7 +19,7 @@ const initialState: State = {
   sessionId: null,
   isLoading: false,
   error: null,
-  sceneId: 1,
+  sceneId: 22,
 };
 
 const gameSlice = createSlice({
@@ -45,13 +45,13 @@ const gameSlice = createSlice({
   },
 });
 
-export const { 
-  setPhase, 
-  setSessionId, 
-  setIsLoading, 
-  setError, 
+export const {
+  setPhase,
+  setSessionId,
+  setIsLoading,
+  setError,
   setSceneId,
-  reset 
+  reset
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
@@ -60,5 +60,5 @@ export default gameSlice.reducer;
 export const selectSceneId = (state: { game: State }) => state.game.sceneId;
 
 // Derived selector - formats scene ID as string for menu
-export const selectCurrentSceneString = (state: { game: State }) => 
+export const selectCurrentSceneString = (state: { game: State }) =>
   `db-${String(state.game.sceneId).padStart(2, '0')}`;

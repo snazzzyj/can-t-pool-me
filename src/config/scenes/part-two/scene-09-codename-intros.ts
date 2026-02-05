@@ -3,7 +3,7 @@
  * The team introduces themselves with their hacker codenames.
  */
 
-const scene09CodenameIntros = {
+export const scene09CodenameIntros = {
   sceneId: 9,
   id: 'scene-09-codename-intros',
   title: 'Codename Intros',
