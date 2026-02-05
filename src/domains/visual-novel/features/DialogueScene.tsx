@@ -9,6 +9,7 @@ import { SCENE_DATABASE } from "@/config/game";
 import { features } from "@/config/features";
 import { selectSceneId, setSceneId } from '@/store/slices/game-slice';
 import type { Scene } from "@/shared/types/game";
+import { useBackgroundMusic } from '@/shared/hooks/useBackgroundMusic'; // ADD THIS IMPORT
 
 type Props = {
   readonly onComplete?: () => void;
@@ -16,19 +17,25 @@ type Props = {
 
 export function DialogueScene({ onComplete }: Props) {
   const [dialogueIndex, setDialogueIndex] = useState(0);
-  const [showMinigame, setShowMinigame] = useState(false); 
+  const [showMinigame, setShowMinigame] = useState(false);
   const dispatch = useDispatch();
-  
+
   const sceneId = useSelector(selectSceneId);
   const sceneData = SCENE_DATABASE[sceneId] || null;
-  
-  // Reset dialogue index and minigame state when scene changes
+
+  useBackgroundMusic('backgroundMusic' in (sceneData || {}) ? sceneData.backgroundMusic : undefined);
+
   useEffect(() => {
     console.log('Scene changed to:', sceneId);
     setDialogueIndex(0);
-    setShowMinigame(false); 
-  }, [sceneId]);
-  
+    // If scene has minigame and no dialogues, SHOW it immediately
+    if (sceneData && 'minigameComponent' in sceneData && sceneData.minigameComponent && (!('dialogues' in sceneData) || sceneData.dialogues.length === 0)) {
+      setShowMinigame(true);
+    } else {
+      setShowMinigame(false);
+    }
+  }, [sceneId, sceneData]);
+
   if (!sceneData) {
     return (
       <div className="flex items-center justify-center h-screen bg-black">
@@ -71,22 +78,24 @@ export function DialogueScene({ onComplete }: Props) {
 
   // Handle regular dialogue scenes
   const scene = sceneData as Scene;
-  
+
   if (showMinigame && scene.minigameComponent) {
     const MinigameComponent = scene.minigameComponent;
     console.log('🎮 Rendering minigame component for scene:', sceneId);
-  return <MinigameComponent onComplete={() => {
-  console.log('✅ Minigame completed, advancing to next scene');
-  const nextSceneId = sceneId + 1;
-  if (SCENE_DATABASE[nextSceneId]) {
-    dispatch(setSceneId(nextSceneId));
-  } else {
-    console.log('No next scene available - end of game');
+    return <MinigameComponent onComplete={() => {
+      console.log('✅ Minigame completed, advancing to next scene');
+      const nextSceneId = sceneId + 1;
+      if (SCENE_DATABASE[nextSceneId]) {
+        dispatch(setSceneId(nextSceneId));
+      } else {
+        console.log('No next scene available - end of game');
+      }
+    }} />;
   }
-}} />;  }
 
-  const currentDialogue = scene.dialogues[dialogueIndex];
-  const isLastDialogue = dialogueIndex >= scene.dialogues.length - 1;
+  const dialogues = scene.dialogues || [];
+  const currentDialogue = dialogues[dialogueIndex];
+  const isLastDialogue = dialogueIndex >= dialogues.length - 1;
 
   const handleNext = () => {
     if (isLastDialogue) {
@@ -124,7 +133,7 @@ export function DialogueScene({ onComplete }: Props) {
           className="absolute inset-0 w-full h-full object-cover opacity-70"
         />
       )}
-      
+
       <DialogueBox.Root isAnimating={true}>
         {currentDialogue && (
           <>
@@ -148,7 +157,7 @@ export function DialogueScene({ onComplete }: Props) {
             onClick={handleNext}
             className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded"
           >
-            {isLastDialogue ? (scene.minigameComponent ? 'Start Game' : 'Next Scene') : 'Next'}
+            {isLastDialogue ? (scene.minigameComponent ? 'Start Game' : 'Next') : 'Next'}
           </button>
         </DialogueBox.Controls>
       </DialogueBox.Root>

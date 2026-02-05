@@ -10,21 +10,20 @@ const pressStart2P = Press_Start_2P({
   subsets: ['latin']
 });
 
+import { useDispatch } from 'react-redux';
+import { reset } from '@/store/slices/game-slice';
+
 interface VictorySceneProps {
   onComplete: () => void;
 }
 
-const VictoryScene: React.FC<VictorySceneProps> = () => {
+const VictoryScene: React.FC<VictorySceneProps> = ({ onComplete: _onComplete }) => {
   const [view, setView] = useState<'victory' | 'credits'>('victory');
+  const dispatch = useDispatch();
 
   const handlePlayAgain = () => {
-    // This will reset the entire game state and take user back to WelcomeScreen
-    // assuming Home component renders WelcomeScreen when gameStarted is false 
-    // or phase is 'menu'.
-    // Looking at Home component: it uses gameStarted local state.
-    // We might need to refresh or use a more global reset.
-    // For now, let's trigger a page reload or a clean reset if possible.
-    window.location.reload();
+    // Reset the entire game state to take the user back to the WelcomeScreen
+    dispatch(reset());
   };
 
   return (

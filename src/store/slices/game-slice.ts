@@ -19,7 +19,7 @@ const initialState: State = {
   sessionId: null,
   isLoading: false,
   error: null,
-  sceneId: 22,
+  sceneId: 0,
 };
 
 const gameSlice = createSlice({
@@ -58,6 +58,7 @@ export default gameSlice.reducer;
 
 // Selectors
 export const selectSceneId = (state: { game: State }) => state.game.sceneId;
+export const selectGamePhase = (state: { game: State }) => state.game.phase;
 
 // Derived selector - formats scene ID as string for menu
 export const selectCurrentSceneString = (state: { game: State }) =>
