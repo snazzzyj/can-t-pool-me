@@ -15,7 +15,7 @@ export const scene03ElyseRab: Scene = {
     {
       speaker: 'Rab',
       text: 'It just doesn\'t make sense. They never seem to miss a shot, yet most of the shots are impossible!',
-      characterImage: '/assets/characters/Rab-1.png',
+      characterImage: '/assets/characters/Rab/Rab_Idle_Suss.png',
     },
     {
       speaker: 'Elyse',
@@ -25,12 +25,12 @@ export const scene03ElyseRab: Scene = {
     {
       speaker: 'Rab',
       text: 'Almost certainly…',
-      characterImage: '/assets/characters/Rab-1.png',
+      characterImage: '/assets/characters/Rab_Concerned.png',
     },
     {
       speaker: 'Rab',
       text: 'I\'m not sure what. But I\'m going to find out.',
-      characterImage: '/assets/characters/Rab-1.png',
+      characterImage: '/assets/characters/Rab/Rab_Concerned.png',
     },
     {
       speaker: 'Elyse',

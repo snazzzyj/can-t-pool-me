@@ -1,0 +1,276 @@
+.boss-battle-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  z-index: 100;
+}
+
+.timing-bars-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.boss-timing-bar-container {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  min-width: 600px;
+  max-width: 800px;
+  height: 60px;
+  margin: 10px 0;
+  background: rgba(30, 30, 30, 0.9);
+  border: 2px solid #555;
+  border-radius: 8px;
+  padding: 0 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  padding-right: 10px;
+}
+
+.player-info .portrait {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid white;
+  margin-right: 10px;
+}
+
+.player-info .key-hint {
+  font-size: 20px;
+  color: gold;
+}
+
+.bar-track {
+  flex-grow: 1;
+  height: 40px;
+  background: #222;
+  position: relative;
+  overflow: hidden;
+}
+
+.green-zone {
+  position: absolute;
+  height: 100%;
+  background: rgba(0, 255, 0, 0.5);
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 1);
+  border-left: 1px solid rgba(0, 255, 0, 0.8);
+  border-right: 1px solid rgba(0, 255, 0, 0.8);
+}
+
+.moving-line {
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  background: white;
+  box-shadow: 0 0 10px white;
+  z-index: 2;
+  transform: translateX(-50%);
+}
+
+.moving-line.stopped {
+  width: 6px;
+}
+
+.moving-line.success {
+  background: #00ff00;
+  box-shadow: 0 0 15px #00ff00;
+}
+
+.moving-line.fail {
+  background: #ff4444;
+  box-shadow: 0 0 15px #ff4444;
+}
+
+.status-indicator {
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.boss-hud {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+  pointer-events: none;
+}
+
+.boss-timer {
+  position: absolute;
+  bottom: 40px;
+  font-size: 32px;
+}
+
+.boss-timer.warning {
+  color: #ff4444;
+  animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.villain-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.villain-sprite {
+  height: 200px;
+  image-rendering: pixelated;
+}
+
+.villain-sprite.shake {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(5px, 0);
+  }
+
+  25% {
+    transform: translate(-5px, 0);
+  }
+
+  50% {
+    transform: translate(5px, 0);
+  }
+
+  75% {
+    transform: translate(-5px, 0);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Final Level Styles */
+.final-level-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.progress-bar-container {
+  width: 80%;
+  height: 30px;
+  background: #333;
+  border: 2px solid white;
+  margin: 20px 0;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00);
+  transition: width 0.1s linear;
+}
+
+.character-team {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.character-lane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.character-swing-sprite {
+  height: 120px;
+  image-rendering: pixelated;
+}
+
+.character-swing-sprite.swinging {
+  animation: swing 0.2s;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-20deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.pre-game-instructions {
+  text-align: center;
+}
+
+.key-assignment-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.key-assignment-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.key-assignment-item img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.btn-start {
+  background: gold;
+  color: black;
+  border: none;
+  padding: 15px 30px;
+  font-family: inherit;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn-start:hover {
+  background: white;
+}

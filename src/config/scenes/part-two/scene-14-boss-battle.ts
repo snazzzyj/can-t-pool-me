@@ -4,6 +4,7 @@
  */
 
 import type { Scene } from '@/shared/types/game';
+import BossBattleScene from '@/domains/mini-games/boss-battle/BossBattleScene';
 
 export const scene14BossBattle: Scene = {
   sceneId: 14,
@@ -15,17 +16,17 @@ export const scene14BossBattle: Scene = {
     {
       speaker: 'Pool Villain',
       text: 'What?! How did you get in here?',
-      characterImage: '/assets/characters/Pool-Villain.png',
+      characterImage: '/assets/characters/Villain/Hooded-Villain.png',
     },
     {
       speaker: 'Sharker',
       text: 'Doesn\'t matter. Give us back Mushi or else.',
-      characterImage: '/assets/characters/Rab-1.png',
+      characterImage: '/assets/characters/Rab/Rab_Concerned.png',
     },
     {
       speaker: 'Pool Villain',
       text: 'Hahahah you imbeciles think you can defeat me? You can die trying.',
-      characterImage: '/assets/characters/Pool-Villain.png',
+      characterImage: '/assets/characters/Villain/Hooded-Villain.png',
     },
     {
       speaker: 'Sharker',
@@ -33,6 +34,7 @@ export const scene14BossBattle: Scene = {
       characterImage: '/assets/characters/Rab-1.png',
     },
   ],
+  minigameComponent: BossBattleScene,
 };
 
 export default scene14BossBattle;
