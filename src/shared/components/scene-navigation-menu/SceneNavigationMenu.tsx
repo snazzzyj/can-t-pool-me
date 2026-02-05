@@ -7,13 +7,14 @@ import { getAllScenes, SceneMenuItem as SceneMenuItemType } from './scene-menu.u
 import { SceneMenuItem } from './SceneMenuItem';
 import { cn } from '@/shared/utils/styles';
 import { setSceneId, selectSceneId, selectCurrentSceneString } from '@/store/slices/game-slice';
+import { Menu, X } from 'lucide-react';
 
 export const SceneNavigationMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scenes, setScenes] = useState<SceneMenuItemType[]>([]);
-  
+
   const dispatch = useDispatch();
-  
+
   const currentSceneId = useSelector(selectSceneId);
   const currentSceneString = useSelector(selectCurrentSceneString);
 
@@ -25,13 +26,13 @@ export const SceneNavigationMenu: React.FC = () => {
 
   const handleSceneSelect = (sceneIdString: string) => {
     console.log('Scene selected:', sceneIdString);
-    
+
     const databaseKey = parseInt(sceneIdString.split('-').pop() || '0', 10);
-    
+
     console.log('Dispatching scene change to database key:', databaseKey);
-    
+
     dispatch(setSceneId(databaseKey));
-    
+
     setIsOpen(false);
   };
 
@@ -99,14 +100,6 @@ export const SceneNavigationMenu: React.FC = () => {
           onKeyDown={handleKeyDown}
           sideOffset={5}
         >
-          <div className="px-4 py-3 border-b-2 border-slate-600 bg-slate-900">
-            <h2 className="text-sm font-bold text-slate-200 uppercase tracking-wide">
-              Scene Navigation
-            </h2>
-            <p className="text-xs text-slate-400 mt-1">
-              Current: Database Key {currentSceneId}
-            </p>
-          </div>
 
           <div className="overflow-y-auto max-h-[calc(100vh-10rem)]">
             {partOneScenes.length > 0 && (
