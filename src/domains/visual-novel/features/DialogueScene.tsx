@@ -28,10 +28,10 @@ export function DialogueScene({ onComplete }: Props) {
     sceneData && 'backgroundMusic' in sceneData ? sceneData.backgroundMusic : undefined,
     sceneData && 'musicVolume' in sceneData ? sceneData.musicVolume : undefined
   );
+
   useEffect(() => {
-    console.log('Scene changed to:', sceneId);
     setDialogueIndex(0);
-    // If scene has minigame and no dialogues, SHOW it immediately
+    // If scene has minigame and no dialogues, show it immediately
     if (sceneData && 'minigameComponent' in sceneData && sceneData.minigameComponent && (!('dialogues' in sceneData) || sceneData.dialogues.length === 0)) {
       setShowMinigame(true);
     } else {
@@ -56,10 +56,7 @@ export function DialogueScene({ onComplete }: Props) {
     } else {
       const nextSceneId = sceneId + 1;
       if (SCENE_DATABASE[nextSceneId]) {
-        console.log('Auto-advancing to next scene:', nextSceneId);
         dispatch(setSceneId(nextSceneId));
-      } else {
-        console.log('No next scene available');
       }
     }
   };
@@ -84,14 +81,10 @@ export function DialogueScene({ onComplete }: Props) {
 
   if (showMinigame && scene.minigameComponent) {
     const MinigameComponent = scene.minigameComponent;
-    console.log('🎮 Rendering minigame component for scene:', sceneId);
     return <MinigameComponent onComplete={() => {
-      console.log('✅ Minigame completed, advancing to next scene');
       const nextSceneId = sceneId + 1;
       if (SCENE_DATABASE[nextSceneId]) {
         dispatch(setSceneId(nextSceneId));
-      } else {
-        console.log('No next scene available - end of game');
       }
     }} />;
   }
@@ -103,17 +96,13 @@ export function DialogueScene({ onComplete }: Props) {
   const handleNext = () => {
     if (isLastDialogue) {
       if (scene.minigameComponent) {
-        console.log('🎮 Scene has minigame, showing it now');
         setShowMinigame(true);
       } else if (onComplete) {
         onComplete();
       } else {
         const nextSceneId = sceneId + 1;
         if (SCENE_DATABASE[nextSceneId]) {
-          console.log('Advancing to next scene:', nextSceneId);
           dispatch(setSceneId(nextSceneId));
-        } else {
-          console.log('No next scene available - end of game');
         }
       }
     } else {
@@ -129,13 +118,51 @@ export function DialogueScene({ onComplete }: Props) {
 
   return (
     <div className="relative w-full h-screen bg-black">
+      {/* Background Image */}
       {scene.backgroundImage && (
         <img
           src={getAssetPath(scene.backgroundImage)}
           alt={scene.title}
-          className="absolute inset-0 w-full h-full object-cover opacity-70"
+          className="absolute inset-0 w-full h-full object-cover object-bottom-right"
         />
       )}
+
+      {/* Character Overlays */}
+      {scene.characters?.map((character, index) => {
+        const basePositionClass =
+          character.position === 'left' ? 'left-0' :
+            character.position === 'right' ? 'right-0' :
+              'left-1/2';
+
+        // Build transform string
+        let transformString = '';
+        if (character.mirror) {
+          transformString += 'scaleX(-1) ';
+        }
+        if (character.scale) {
+          transformString += `scale(${character.scale}) `;
+        }
+        if (character.position === 'center' && !character.offsetX) {
+          transformString += 'translateX(-50%)';
+        }
+
+        return (
+          <img
+            key={index}
+            src={getAssetPath(character.image)}
+            alt="Character"
+            className={`absolute ${basePositionClass}`}
+            style={{
+              bottom: character.offsetY || '0',
+              left: character.offsetX || undefined,
+              right: character.position === 'right' && character.offsetX ? character.offsetX : undefined,
+              zIndex: character.zIndex || 10,
+              transform: transformString.trim() || undefined,
+              transformOrigin: 'bottom center',
+            }}
+          />
+        );
+      })}
 
       <DialogueBox.Root isAnimating={true}>
         {currentDialogue && (

@@ -42,6 +42,16 @@ export type Scene = {
   readonly duration?: number;
   readonly nextScene?: number;
   readonly minigameComponent?: React.ComponentType<{ onComplete: () => void }>;
+
+  readonly characters?: ReadonlyArray<{
+    readonly image: string;
+    readonly position?: 'left' | 'center' | 'right';
+    readonly zIndex?: number;
+    readonly scale?: number;
+    readonly offsetX?: string;
+    readonly offsetY?: string;
+    readonly mirror?: boolean; // Add this
+  }>;
 };
 
 export type MiniGameType = 'quick-time' | 'memory' | 'quiz' | 'rhythm' | 'puzzle';

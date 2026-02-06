@@ -8,8 +8,38 @@ import type { Scene } from '@/shared/types/game';
 export const scene05JennRab: Scene = {
   sceneId: 5,
   title: 'Jenn & Rab',
-  backgroundImage: '/assets/backgrounds/scene-1.jpg',
+  backgroundImage: '/assets/backgrounds/Jenn_Screen.png',
   backgroundMusic: '/assets/audio/music/scene-1.mp3',
+
+  characters: [
+    {
+      image: '/assets/characters/Jenn-Skateboard.png',
+      position: 'left',
+      zIndex: 9,
+      scale: 3,
+      offsetX: '10%',
+      offsetY: '55%',
+    },
+    {
+      image: '/assets/characters/Jenn-1.png',
+      position: 'left',
+      zIndex: 10,
+      scale: 3,
+      offsetX: '10%',
+      offsetY: '55%',
+    },
+
+    {
+      image: '/assets/characters/Rab-1.png',
+      position: 'right',
+      zIndex: 10,
+      scale: 3,
+      offsetX: '82%',
+      offsetY: '55%',
+      mirror: true,
+    }
+  ],
+
   duration: 120,
   dialogues: [
     {
