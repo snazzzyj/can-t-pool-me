@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { GameStatus } from './types';
 import { useHackingMainframe } from './hooks/useHackingMainframe';
@@ -7,6 +6,8 @@ import PreGameInstructions from './components/PreGameInstructions';
 import GameHUD from './components/GameHUD';
 import TerminalWindow from './components/TerminalWindow';
 import StatsScreen from './components/StatsScreen';
+import { useBackgroundMusic } from '@/shared/hooks/useBackgroundMusic';
+import { HACKING_MAINFRAME_AUDIO } from './audio/audioConfig';
 
 interface HackingMainframeProps {
   onComplete: () => void;
@@ -19,6 +20,14 @@ const HackingMainframe: React.FC<HackingMainframeProps> = ({ onComplete }) => {
   } = useHackingMainframe();
 
   const [countdown, setCountdown] = useState(3);
+
+  // Start background music when game enters playing state
+  useBackgroundMusic(
+    status === GameStatus.PRE_GAME || status === GameStatus.PLAYING || status === GameStatus.COUNTDOWN
+      ? HACKING_MAINFRAME_AUDIO.backgroundMusic
+      : undefined,
+    0.5
+  );
 
   useEffect(() => {
     if (status === GameStatus.COUNTDOWN) {
@@ -45,13 +54,13 @@ const HackingMainframe: React.FC<HackingMainframeProps> = ({ onComplete }) => {
 
       {(status === GameStatus.PLAYING || status === GameStatus.COUNTDOWN) && (
         <div className="z-10 w-full max-w-5xl px-4 flex flex-col items-center">
-          <GameHUD 
+          <GameHUD
             timeRemaining={timeRemaining} currentRound={roundIdx + 1}
             currentCommand={commandIdx + 1} totalCommands={currentRound.commands.length}
             lives={lives} roundTitle={currentRound.title} currentPlayer={currentPlayer}
           />
           <TerminalWindow commandText={currentCommand?.text || ''} typedIndex={typedChars} errorIndex={errorIdx} shake={shake} />
-          
+
           <div className="mt-8 text-gray-500 text-xs uppercase tracking-widest text-center max-w-2xl border border-gray-900 p-2 rounded bg-black bg-opacity-50">
             RELAY PROTOCOL: Hand over keyboard to {currentPlayer.toUpperCase()}
           </div>

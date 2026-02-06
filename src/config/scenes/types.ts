@@ -9,6 +9,7 @@ export interface SceneMetadata {
   title: string;
   part: 'one' | 'two' | 'transition';
   order: number;
+  musicVolume?: number;
 }
 
 // Example: Extended scene configuration type

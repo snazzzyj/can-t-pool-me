@@ -34,13 +34,14 @@ export type Scene = {
   readonly sceneId: number;
   readonly id?: string;
   readonly title: string;
-  readonly order?: number; 
+  readonly order?: number;
   readonly backgroundImage: string;
   readonly dialogues: ReadonlyArray<SceneDialogue>;
   readonly backgroundMusic?: string;
+  readonly musicVolume?: number;
   readonly duration?: number;
   readonly nextScene?: number;
-readonly minigameComponent?: React.ComponentType<{ onComplete: () => void }>;
+  readonly minigameComponent?: React.ComponentType<{ onComplete: () => void }>;
 };
 
 export type MiniGameType = 'quick-time' | 'memory' | 'quiz' | 'rhythm' | 'puzzle';

@@ -9,8 +9,7 @@ export const scene03ElyseRab: Scene = {
   sceneId: 3,
   title: 'Elyse & Rab',
   backgroundImage: '/assets/backgrounds/scene-4.jpg',
-  backgroundMusic: '/assets/audio/music/scene-4.mp3',
-  duration: 45,
+  backgroundMusic: '/assets/audio/Scheming%20music.mp3#t=20',
   dialogues: [
     {
       speaker: 'Rab',

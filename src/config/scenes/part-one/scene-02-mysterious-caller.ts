@@ -9,8 +9,7 @@ export const scene02MysteriousCaller: Scene = {
   sceneId: 2,
   title: 'Mysterious Caller',
   backgroundImage: '/assets/backgrounds/scene-3.jpg',
-  backgroundMusic: '/assets/audio/music/scene-3.mp3',
-  duration: 35,
+  backgroundMusic: '/assets/audio/Scheming%20music.mp3',
   dialogues: [
     {
       speaker: 'Narrator',

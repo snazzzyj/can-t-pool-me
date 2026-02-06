@@ -9,7 +9,7 @@ import { SCENE_DATABASE } from "@/config/game";
 import { features } from "@/config/features";
 import { selectSceneId, setSceneId } from '@/store/slices/game-slice';
 import type { Scene } from "@/shared/types/game";
-import { useBackgroundMusic } from '@/shared/hooks/useBackgroundMusic'; // ADD THIS IMPORT
+import { useBackgroundMusic } from '@/shared/hooks/useBackgroundMusic';
 
 type Props = {
   readonly onComplete?: () => void;
@@ -23,8 +23,10 @@ export function DialogueScene({ onComplete }: Props) {
   const sceneId = useSelector(selectSceneId);
   const sceneData = SCENE_DATABASE[sceneId] || null;
 
-  useBackgroundMusic('backgroundMusic' in (sceneData || {}) ? sceneData.backgroundMusic : undefined);
-
+  useBackgroundMusic(
+    'backgroundMusic' in (sceneData || {}) ? sceneData.backgroundMusic : undefined,
+    'musicVolume' in (sceneData || {}) ? sceneData.musicVolume : undefined
+  );
   useEffect(() => {
     console.log('Scene changed to:', sceneId);
     setDialogueIndex(0);

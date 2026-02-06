@@ -7,10 +7,10 @@ const pressStart2P = Press_Start_2P({
 });
 
 const CREDIT_ITEMS = [
-  { role: 'PRODUCTION', name: 'OUTTA CONTEXT PRODUCTIONS' },
-  { role: 'DIRECTOR', name: 'HACKTRESS' },
-  { role: 'LEAD DEVELOPER', name: 'AI' },
+  { role: 'PRODUCTION', name: 'OUTTA\'CONTEXT PRODUCTIONS' },
+  { role: 'LEAD VIBE CODER', name: 'HACKTRESS' },
   { role: 'ART & DESIGN', name: '.PXL' },
+  { role: 'LEAD DEVELOPER', name: 'AI' },
   { role: 'LEVEL DESIGN CONSULTANTS', name: 'DEBBIE, ELYSE, JOEL' },
   { role: 'SPECIAL THANKS', name: 'MUSHI' },
 ];
