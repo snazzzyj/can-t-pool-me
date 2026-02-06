@@ -21,11 +21,11 @@ export const scene10MinigameJoel: Scene = {
     {
       speaker: 'Hackerman',
       text: 'I\'m on it. Let me hack the mainframe.',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
   ],
 
-    minigameComponent: HackingMainframeScene,
-    nextScene: 17,
+  minigameComponent: HackingMainframeScene,
+  nextScene: 17,
 };
 export default scene10MinigameJoel;

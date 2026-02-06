@@ -15,22 +15,21 @@ export const scene15RescueMushi: Scene = {
     {
       speaker: 'Everyone',
       text: 'Mushi!',
-      characterImage: '/assets/characters/Narrator.png',
     },
     {
       speaker: 'Mushi',
-      text: '<3 <3 (only replies in emojis)',
+      text: '<3 <3',
       characterImage: '/assets/characters/Mushi.png',
     },
     {
       speaker: 'Pool villain',
       text: 'You\'ll never get away with this!',
-      characterImage: '/assets/characters/Pool-Villain.png',
+      characterImage: '/assets/characters/Villain/Hooded-Villain.png',
     },
     {
       speaker: 'Sharker',
       text: 'No, you\'ll never get away with this.',
-      characterImage: '/assets/characters/Rab-1.png',
+      characterImage: '/assets/characters/Rab/Rab_Concerned.png',
     },
     {
       speaker: 'Narrator',
@@ -39,7 +38,7 @@ export const scene15RescueMushi: Scene = {
     {
       speaker: 'Sharker',
       text: 'Memento Mori bitch.',
-      characterImage: '/assets/characters/Rab-1.png',
+      characterImage: '/assets/characters/Rab/Rab_Concerned.png',
     },
   ],
 };

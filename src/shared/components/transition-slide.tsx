@@ -1,7 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { Press_Start_2P } from 'next/font/google';
 import { getAssetPath } from '@/shared/utils/game';
+
+const pressStart2P = Press_Start_2P({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 type TransitionSlideProps = {
   readonly title: string;
@@ -45,8 +51,9 @@ export function TransitionSlide({
         {/* Title */}
         <h1
           className={`
-            text-4xl md:text-6xl font-bold text-white text-center mb-4
+            text-4xl md:text-5xl font-bold text-white text-center mb-8
             transition-all duration-700 delay-100
+            ${pressStart2P.className}
             ${isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}
           `}
         >
@@ -77,17 +84,6 @@ export function TransitionSlide({
         >
           Continue
         </button>
-
-        {/* Optional: Press any key hint */}
-        <p
-          className={`
-            text-sm text-gray-500 mt-6
-            transition-all duration-700 delay-700
-            ${isAnimating ? 'opacity-100' : 'opacity-0'}
-          `}
-        >
-          Press any key to continue
-        </p>
       </div>
 
       {/* Decorative Elements (optional) */}
