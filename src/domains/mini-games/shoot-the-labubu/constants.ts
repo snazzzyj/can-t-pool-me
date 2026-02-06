@@ -115,6 +115,8 @@ export const LABUBU_SPRITES: Record<'red' | 'blue' | 'green' | 'yellow' | 'purpl
   purple: '/assets/minigames/shoot-the-labubu/Labubus/Labubu-5.png',
 };
 
+export const BASKET_SPRITE = '/assets/minigames/shoot-the-labubu/Basket.png';
+
 export const LABUBU_COLORS: Array<'red' | 'blue' | 'green' | 'yellow' | 'purple'> = [
   'red',
   'blue',

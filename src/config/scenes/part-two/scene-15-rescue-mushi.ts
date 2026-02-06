@@ -34,8 +34,7 @@ export const scene15RescueMushi: Scene = {
     },
     {
       speaker: 'Narrator',
-      text: '*Rab destroys the cue*',
-      characterImage: '/assets/characters/Narrator.png',
+      text: 'Rab destroys the cue',
     },
     {
       speaker: 'Sharker',

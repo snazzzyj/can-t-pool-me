@@ -31,12 +31,10 @@ export const scene07TeamAssembly: Scene = {
     {
       speaker: 'Narrator',
       text: 'RING RING, RING RING',
-      characterImage: '/assets/characters/Narrator.png',
     },
     {
       speaker: 'Narrator',
       text: 'Anonymous caller calls Rab\'s laptop',
-      characterImage: '/assets/characters/Narrator.png',
     },
     {
       speaker: 'Mysterious Caller',
@@ -70,8 +68,7 @@ export const scene07TeamAssembly: Scene = {
     },
     {
       speaker: 'Narrator',
-      text: '*Mysterious Caller puts Mushy on FaceTime*',
-      characterImage: '/assets/characters/Narrator.png',
+      text: 'Mysterious Caller puts Mushi on FaceTime',
     },
     {
       speaker: 'Mysterious Caller',
@@ -106,4 +103,4 @@ export const scene07TeamAssembly: Scene = {
   ],
 };
 
-export default scene07TeamAssembly; // ← Change export to default
+export default scene07TeamAssembly;

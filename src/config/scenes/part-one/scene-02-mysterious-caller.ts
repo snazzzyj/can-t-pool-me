@@ -14,7 +14,6 @@ export const scene02MysteriousCaller: Scene = {
     {
       speaker: 'Narrator',
       text: 'Rab clicks on News article of Pool player who never misses a shot',
-      characterImage: '/assets/characters/Narrator.png',
     },
     {
       speaker: 'Rab',
@@ -24,17 +23,14 @@ export const scene02MysteriousCaller: Scene = {
     {
       speaker: 'Narrator',
       text: 'RING RING, RING RING',
-      characterImage: '/assets/characters/Narrator.png',
     },
     {
       speaker: 'Narrator',
       text: 'Rab\'s Phone vibrates from an unknown caller',
-      characterImage: '/assets/characters/Narrator.png',
     },
     {
       speaker: 'Narrator',
       text: 'Rab picks up',
-      characterImage: '/assets/characters/Narrator.png',
     },
     {
       speaker: 'Mysterious Caller',
@@ -54,7 +50,6 @@ export const scene02MysteriousCaller: Scene = {
     {
       speaker: 'Narrator',
       text: 'hangs up',
-      characterImage: '/assets/characters/Narrator.png',
     },
   ],
 };

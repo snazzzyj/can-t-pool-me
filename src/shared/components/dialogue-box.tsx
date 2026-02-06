@@ -59,11 +59,12 @@ function Speaker({ name, image }: DialogueBoxSpeakerProps) {
 
 type DialogueBoxTextProps = {
   readonly children: string;
+  readonly className?: string;
 };
 
-function Text({ children }: DialogueBoxTextProps) {
+function Text({ children, className }: DialogueBoxTextProps) {
   return (
-    <p className="text-slate-100 text-lg leading-relaxed mb-6">{children}</p>
+    <p className={clsx("text-slate-100 text-lg leading-relaxed mb-6", className)}>{children}</p>
   );
 }
 

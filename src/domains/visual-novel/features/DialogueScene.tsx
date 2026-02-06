@@ -24,8 +24,8 @@ export function DialogueScene({ onComplete }: Props) {
   const sceneData = SCENE_DATABASE[sceneId] || null;
 
   useBackgroundMusic(
-    'backgroundMusic' in (sceneData || {}) ? sceneData.backgroundMusic : undefined,
-    'musicVolume' in (sceneData || {}) ? sceneData.musicVolume : undefined
+    sceneData && 'backgroundMusic' in sceneData ? sceneData.backgroundMusic : undefined,
+    sceneData && 'musicVolume' in sceneData ? sceneData.musicVolume : undefined
   );
   useEffect(() => {
     console.log('Scene changed to:', sceneId);
@@ -139,11 +139,15 @@ export function DialogueScene({ onComplete }: Props) {
       <DialogueBox.Root isAnimating={true}>
         {currentDialogue && (
           <>
-            <DialogueBox.Speaker
-              name={currentDialogue.speaker}
-              image={currentDialogue.characterImage}
-            />
-            <DialogueBox.Text>{currentDialogue.text}</DialogueBox.Text>
+            {currentDialogue.speaker !== 'Narrator' && (
+              <DialogueBox.Speaker
+                name={currentDialogue.speaker}
+                image={currentDialogue.characterImage}
+              />
+            )}
+            <DialogueBox.Text className={currentDialogue.speaker === 'Narrator' ? 'italic font-medium text-slate-300' : ''}>
+              {currentDialogue.text}
+            </DialogueBox.Text>
           </>
         )}
 
