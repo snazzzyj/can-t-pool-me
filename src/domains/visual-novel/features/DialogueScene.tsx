@@ -10,6 +10,7 @@ import { features } from "@/config/features";
 import { selectSceneId, setSceneId } from '@/store/slices/game-slice';
 import type { Scene } from "@/shared/types/game";
 import { useBackgroundMusic } from '@/shared/hooks/useBackgroundMusic';
+import { getAssetPath } from "@/shared/utils/game";
 
 type Props = {
   readonly onComplete?: () => void;
@@ -130,7 +131,7 @@ export function DialogueScene({ onComplete }: Props) {
     <div className="relative w-full h-screen bg-black">
       {scene.backgroundImage && (
         <img
-          src={scene.backgroundImage}
+          src={getAssetPath(scene.backgroundImage)}
           alt={scene.title}
           className="absolute inset-0 w-full h-full object-cover opacity-70"
         />

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { getAssetPath } from '@/shared/utils/game';
 
 type TransitionSlideProps = {
   readonly title: string;
@@ -27,7 +28,7 @@ export function TransitionSlide({
       {/* Background Image (optional) */}
       {backgroundImage && (
         <img
-          src={backgroundImage}
+          src={getAssetPath(backgroundImage)}
           alt="Transition background"
           className="absolute inset-0 w-full h-full object-cover opacity-40"
         />

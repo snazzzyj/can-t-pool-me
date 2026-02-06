@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
 import gameReducer from './slices/game-slice';
 import playersReducer from './slices/players-slice';
 

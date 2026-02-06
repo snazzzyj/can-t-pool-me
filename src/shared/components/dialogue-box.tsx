@@ -16,6 +16,7 @@
 
 import type { ReactNode } from 'react';
 import clsx from 'clsx';
+import { getAssetPath } from '@/shared/utils/game';
 
 type DialogueBoxRootProps = {
   readonly children: ReactNode;
@@ -45,7 +46,7 @@ function Speaker({ name, image }: DialogueBoxSpeakerProps) {
     <div className="flex items-center gap-4 mb-4">
       {image && (
         <img
-          src={image}
+          src={getAssetPath(image)}
           alt={name}
           className="w-16 h-16 rounded-full object-contain"
         />

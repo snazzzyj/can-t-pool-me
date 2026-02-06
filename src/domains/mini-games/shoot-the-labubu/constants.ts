@@ -3,6 +3,7 @@
  */
 
 import type { LevelConfig } from './types';
+import { getAssetPath } from '@/shared/utils/game';
 
 export const SCREEN_WIDTH = 1920;
 export const SCREEN_HEIGHT = 1080;
@@ -99,23 +100,23 @@ export const WAVE_SPEED_RAMP_END = 1.25;
 
 /** Character portrait paths (shooters and collectors) */
 export const CHARACTER_PORTRAITS = {
-  rab: '/assets/characters/Rab-1.png',
-  jenn: '/assets/characters/Jenn-1.png',
-  joel: '/assets/characters/Joel-1.png',
-  elyse: '/assets/characters/Elyse-1.png',
-  debbie: '/assets/characters/Debbie-1.png',
+  rab: getAssetPath('/assets/characters/Rab-1.png'),
+  jenn: getAssetPath('/assets/characters/Jenn-1.png'),
+  joel: getAssetPath('/assets/characters/Joel-1.png'),
+  elyse: getAssetPath('/assets/characters/Elyse-1.png'),
+  debbie: getAssetPath('/assets/characters/Debbie-1.png'),
 } as const;
 
 /** Labubu sprite paths: Labubu-1 through Labubu-5 map to colors */
 export const LABUBU_SPRITES: Record<'red' | 'blue' | 'green' | 'yellow' | 'purple', string> = {
-  red: '/assets/minigames/shoot-the-labubu/Labubus/Labubu-1.png',
-  blue: '/assets/minigames/shoot-the-labubu/Labubus/Labubu-2.png',
-  green: '/assets/minigames/shoot-the-labubu/Labubus/Labubu-3.png',
-  yellow: '/assets/minigames/shoot-the-labubu/Labubus/Labubu-4.png',
-  purple: '/assets/minigames/shoot-the-labubu/Labubus/Labubu-5.png',
+  red: getAssetPath('/assets/minigames/shoot-the-labubu/Labubus/Labubu-1.png'),
+  blue: getAssetPath('/assets/minigames/shoot-the-labubu/Labubus/Labubu-2.png'),
+  green: getAssetPath('/assets/minigames/shoot-the-labubu/Labubus/Labubu-3.png'),
+  yellow: getAssetPath('/assets/minigames/shoot-the-labubu/Labubus/Labubu-4.png'),
+  purple: getAssetPath('/assets/minigames/shoot-the-labubu/Labubus/Labubu-5.png'),
 };
 
-export const BASKET_SPRITE = '/assets/minigames/shoot-the-labubu/Basket.png';
+export const BASKET_SPRITE = getAssetPath('/assets/minigames/shoot-the-labubu/Basket.png');
 
 export const LABUBU_COLORS: Array<'red' | 'blue' | 'green' | 'yellow' | 'purple'> = [
   'red',

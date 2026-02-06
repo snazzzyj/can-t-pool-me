@@ -2,6 +2,7 @@
 
 import { Press_Start_2P } from 'next/font/google';
 import { useState, useRef } from 'react';
+import { getAssetPath } from '@/shared/utils/game';
 
 const pressStart2P = Press_Start_2P({
   weight: '400',
@@ -18,7 +19,7 @@ export function WelcomeScreen({ onStartClick }: Props) {
 
   const startMusic = () => {
     if (!audioRef.current) {
-      audioRef.current = new Audio('/assets/audio/Scheming%20music.mp3');
+      audioRef.current = new Audio(getAssetPath('/assets/audio/Scheming%20music.mp3'));
       audioRef.current.loop = true;
       audioRef.current.volume = 0.5;
       audioRef.current.play().catch(err => console.warn('Audio play failed:', err));
@@ -53,7 +54,7 @@ export function WelcomeScreen({ onStartClick }: Props) {
     <div
       className="flex flex-col items-start justify-center min-h-screen p-16 relative"
       style={{
-        backgroundImage: 'url(/assets/backgrounds/Start_Screen-1.png)',
+        backgroundImage: `url(${getAssetPath('/assets/backgrounds/Start_Screen-1.png')})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

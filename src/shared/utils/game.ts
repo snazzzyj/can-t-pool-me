@@ -2,6 +2,22 @@
  * Utility functions for game logic
  */
 
+const isProd = process.env.NODE_ENV === 'production';
+const BASE_PATH = isProd ? '/can-t-pool-me' : '';
+
+/**
+ * Get the full path for an asset, prepending the base path if in production
+ */
+export function getAssetPath(path: string): string {
+  if (!path) return '';
+  if (path.startsWith('http') || path.startsWith('data:')) return path;
+
+  // Ensure the path starts with / but not //
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  return `${BASE_PATH}${normalizedPath}`;
+}
+
+
 export function generateSessionId(): string {
   return `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }

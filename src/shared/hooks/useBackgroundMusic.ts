@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { getAssetPath } from '@/shared/utils/game';
 
 export const useBackgroundMusic = (musicPath?: string, volume: number = 0.5) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -7,7 +8,7 @@ export const useBackgroundMusic = (musicPath?: string, volume: number = 0.5) => 
     if (!musicPath) return;
 
     // Create audio element
-    const audio = new Audio(musicPath);
+    const audio = new Audio(getAssetPath(musicPath));
     audio.loop = true;
     audio.volume = volume;
     audioRef.current = audio;
