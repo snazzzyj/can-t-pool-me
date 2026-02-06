@@ -4,7 +4,7 @@
  * Separated from presentation layer (components)
  */
 
-import type { Scene } from '@/shared/types/game';
+import type { Scene, SceneEntry } from '@/shared/types/game';
 import { SCENE_DATABASE } from '@/config/game';
 
 type SceneNavigationState = {
@@ -21,7 +21,7 @@ export const visualNovelService = {
   /**
    * Get scene by ID
    */
-  getScene(sceneId: number): Scene | null {
+  getScene(sceneId: number): SceneEntry | null {
     return SCENE_DATABASE[sceneId] ?? null;
   },
 

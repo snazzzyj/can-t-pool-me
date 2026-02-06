@@ -54,7 +54,7 @@ const playersSlice = createSlice({
       state.currentId = action.payload;
     },
     setAll: (state, action: PayloadAction<ReadonlyArray<Player>>) => {
-      state.items = action.payload;
+      state.items = [...action.payload];
     },
     reset: () => initialState,
   },

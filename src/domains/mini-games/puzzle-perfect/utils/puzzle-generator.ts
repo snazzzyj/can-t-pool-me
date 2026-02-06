@@ -1,4 +1,4 @@
-export const generatePuzzleShape = (complexity: string, orientations: number): number[][] => {
+export const generatePuzzleShape = (complexity: string): number[][] => {
   const numSides = getNumSides(complexity);
   const vertices: number[][] = [];
   const radius = 40; // Base radius

@@ -73,7 +73,7 @@ export const usePuzzlePerfect = (
     // We also need roundConfig inside this callback. 
     // roundConfig is derived from currentRound, so dependent on currentRound.
 
-    const shape = generatePuzzleShape(config.complexity, config.orientations);
+    const shape = generatePuzzleShape(config.complexity);
     const correct = Math.floor(Math.random() * config.orientations);
     const initial = Math.floor(Math.random() * config.orientations);
 

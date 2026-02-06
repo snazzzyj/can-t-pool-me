@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export const useRoundTimer = (
   initialTime: number,
@@ -6,25 +6,12 @@ export const useRoundTimer = (
   onTimeExpire: () => void
 ) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
-  const startTimeRef = useRef<number | null>(null);
-  const animationFrameRef = useRef<number | null>(null);
-  const initialTimeRef = useRef(initialTime);
 
   // Reset timer when initialTime changes (new round)
   useEffect(() => {
     setTimeLeft(initialTime);
-    initialTimeRef.current = initialTime;
-    startTimeRef.current = null;
   }, [initialTime]);
 
-  const tick = useCallback((timestamp: number) => {
-    if (!startTimeRef.current) startTimeRef.current = timestamp;
-
-    // Calculate elapsed time based on when we started THIS resume cycle
-    // But we need to account for paused time.
-    // Simpler approach for React hooks without complex pause/resume logic:
-    // Just subtract delta from previous frame.
-  }, []);
 
   // Use a simpler interval or delta approach for robustness
   useEffect(() => {

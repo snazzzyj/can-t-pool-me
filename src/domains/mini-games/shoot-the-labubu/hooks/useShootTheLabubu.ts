@@ -12,8 +12,6 @@ import type {
   BulletEntity,
   FallingBodyEntity,
   ShooterId,
-  PoofEntity,
-  FloatingTextEntity,
 } from '../types';
 import {
   SCREEN_WIDTH,

@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllScenes, SceneMenuItem as SceneMenuItemType } from './scene-menu.utils';
 import { SceneMenuItem } from './SceneMenuItem';
 import { cn } from '@/shared/utils/styles';
-import { setSceneId, selectSceneId, selectCurrentSceneString } from '@/store/slices/game-slice';
-import { Menu, X } from 'lucide-react';
+import { setSceneId, selectCurrentSceneString } from '@/store/slices/game-slice';
 
 export const SceneNavigationMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +14,6 @@ export const SceneNavigationMenu: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const currentSceneId = useSelector(selectSceneId);
   const currentSceneString = useSelector(selectCurrentSceneString);
 
   useEffect(() => {

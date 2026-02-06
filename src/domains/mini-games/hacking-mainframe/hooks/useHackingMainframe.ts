@@ -1,9 +1,9 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { GameStatus, RoundStat, PlayerKey, PlayerStats } from '../types';
+import { GameStatus, RoundStat, PlayerStats } from '../types';
 import { ROUNDS_DATA, MAX_LIVES, PLAYER_ORDER, VILLAIN_ADDRESS } from '../constants';
 
-export const useHackingMainframe = (onVictory?: () => void) => {
+export const useHackingMainframe = () => {
   const [status, setStatus] = useState<GameStatus>(GameStatus.PRE_GAME);
   const [roundIdx, setRoundIdx] = useState(0);
   const [commandIdx, setCommandIdx] = useState(0);
@@ -12,7 +12,7 @@ export const useHackingMainframe = (onVictory?: () => void) => {
   const [lives, setLives] = useState(MAX_LIVES);
   const [timeRemaining, setTimeRemaining] = useState(10);
   const [shake, setShake] = useState(false);
-  
+
   const [roundStartTime, setRoundStartTime] = useState(0);
   const [currentRoundStats, setCurrentRoundStats] = useState<RoundStat | null>(null);
   const [playerAccuracy, setPlayerAccuracy] = useState<Record<string, PlayerStats>>({
@@ -43,7 +43,7 @@ export const useHackingMainframe = (onVictory?: () => void) => {
       joel: { correct: 0, total: 0 },
     });
     setRoundStartTime(Date.now());
-    setStatus(GameStatus.COUNTDOWN); 
+    setStatus(GameStatus.COUNTDOWN);
   }, []);
 
   const startCommand = useCallback(() => {
@@ -79,13 +79,13 @@ export const useHackingMainframe = (onVictory?: () => void) => {
         playerAccuracy,
       };
       setCurrentRoundStats(stats);
-      
+
       if (roundIdx + 1 < ROUNDS_DATA.length) {
         setStatus(GameStatus.ROUND_COMPLETE);
       } else {
         setStatus(GameStatus.VICTORY);
       }
-      
+
       if (timerRef.current) clearInterval(timerRef.current);
     }
   }, [commandIdx, currentRound, playerAccuracy, roundStartTime, lives, roundIdx]);
