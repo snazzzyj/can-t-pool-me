@@ -2,7 +2,7 @@ import VictoryScene from '@/domains/mini-games/victory/VictoryScene';
 import type { Scene } from '@/shared/types/game';
 
 export const scene16Victory: Scene = {
-  sceneId: 24,
+  sceneId: 23,
   title: 'Victory',
   backgroundImage: '/assets/backgrounds/scene-15.jpg',
   backgroundMusic: '/assets/audio/FANCY SOCKS AND BIRKENSTOCKS 8-BIT.mp3',

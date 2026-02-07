@@ -1,9 +1,9 @@
 export const PLAYER_CONFIG = [
-  { id: 1, name: 'Rab', key: 'Q', portrait: '/assets/characters/Rab-1.png' },
-  { id: 2, name: 'Elyse', key: 'W', portrait: '/assets/characters/Elyse-1.png' },
-  { id: 3, name: 'Debbie', key: 'E', portrait: '/assets/characters/Debbie-1.png' },
-  { id: 4, name: 'Jenn', key: 'R', portrait: '/assets/characters/Jenn-1.png' },
-  { id: 5, name: 'Joel', key: 'T', portrait: '/assets/characters/Joel-1.png' },
+  { id: 1, name: 'Rab', key: 'R', portrait: '/assets/characters/Rab-1.png' },
+  { id: 2, name: 'Elyse', key: 'E', portrait: '/assets/characters/Elyse-1.png' },
+  { id: 3, name: 'Debbie', key: 'D', portrait: '/assets/characters/Debbie-1.png' },
+  { id: 4, name: 'Jenn', key: 'H', portrait: '/assets/characters/Jenn-1.png' },
+  { id: 5, name: 'Joel', key: 'J', portrait: '/assets/characters/Joel-1.png' },
 ] as const;
 
 export const TIMING_LEVELS = {
@@ -31,7 +31,8 @@ export const VILLAIN_ASSETS = {
   DAZED: '/assets/characters/Villain/Dazed Heavy Eyelids.png',
   STAGGERING: '/assets/characters/Villain/Dizzy with Halo.png',
   DIZZY: '/assets/characters/Villain/Dizzy with halo.png',
-  DEAD: '/assets/characters/Villain/Staggering.png',
+  DEAD: '/assets/characters/Villain/Villain_Dead.png',
+  KNOCKED_OUT: '/assets/characters/Villain/Staggering.png',
   CUE: '/assets/characters/Weapons/Cue.png',
   IMPACT: '/assets/characters/Weapons/DizzyHalo.png',
 };

@@ -25,13 +25,13 @@ const ShooterLane: React.FC<ShooterLaneProps> = memo(({ shooter, shooterName, po
       }}
     >
       <div
-        className={`relative overflow-hidden rounded border-2 border-white/30 bg-slate-800 ${!shooter.isAlive ? 'opacity-50 grayscale' : ''}`}
+        className={`relative flex items-center justify-center ${!shooter.isAlive ? 'opacity-50 grayscale' : ''}`}
         style={{ width: 64, height: 64 }}
       >
         <img
           src={portraitSrc}
           alt={shooterName}
-          className="h-full w-full object-cover"
+          className="h-full w-auto object-contain"
           style={{ imageRendering: 'pixelated' }}
           draggable={false}
         />

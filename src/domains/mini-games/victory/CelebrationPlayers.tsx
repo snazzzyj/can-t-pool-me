@@ -19,7 +19,6 @@ export const CelebrationPlayers: React.FC = () => {
             alt={player.name}
             className="w-32 h-32 object-contain"
           />
-          <span className="text-white text-xs mt-2 opacity-50">{player.name}</span>
         </div>
       ))}
     </div>

@@ -11,7 +11,6 @@ export { scene13MinigameElyse } from './scene-13-minigame-elyse';
 export { scene14BossBattle } from './scene-14-boss-battle';
 export { scene15RescueMushi } from './scene-15-rescue-mushi';
 export { scene15FinalStrike } from './scene-15-final-strike';
-export { scene15Aftermath } from './scene-15-aftermath';
 export { scene16Victory } from './scene-16-victory';
 
 // Import them to create the array
@@ -23,7 +22,6 @@ import { scene13MinigameElyse } from './scene-13-minigame-elyse';
 import { scene14BossBattle } from './scene-14-boss-battle';
 import { scene15RescueMushi } from './scene-15-rescue-mushi';
 import { scene15FinalStrike } from './scene-15-final-strike';
-import { scene15Aftermath } from './scene-15-aftermath';
 import { scene16Victory } from './scene-16-victory';
 
 // Export as array
@@ -36,6 +34,5 @@ export const partTwoScenes = [
   scene14BossBattle,
   scene15RescueMushi,
   scene15FinalStrike,
-  scene15Aftermath,
   scene16Victory,
 ];

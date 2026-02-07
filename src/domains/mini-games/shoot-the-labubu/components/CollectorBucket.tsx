@@ -26,11 +26,13 @@ const CollectorBucket: React.FC<CollectorBucketProps> = memo(
           <img
             src={portraitSrc}
             alt={collectorName}
-            className="h-12 w-12 rounded border border-white/30 bg-slate-800 object-cover"
+            className="h-12 w-auto object-contain"
             style={{
               imageRendering: 'pixelated',
               position: 'absolute',
-              top: 0
+              top: 0,
+              left: '50%',
+              transform: 'translateX(-50%)'
             }}
             draggable={false}
           />
