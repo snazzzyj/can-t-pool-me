@@ -9,9 +9,13 @@ import type { Scene } from '@/shared/types/game';
 export const scene07TeamAssembly: Scene = {
   sceneId: 7,
   title: 'The Kidnapping',
-  backgroundImage: '/assets/backgrounds/scene-7.jpg',
+  backgroundImage: '/assets/characters/Mushi-Hostage.png',
+  backgroundPosition: 'center top',
+  backgroundTransform: 'scale(0.5) translateY(-15%)',
   backgroundMusic: '/assets/audio/music/scene-7.mp3',
   duration: 60,
+
+
   dialogues: [
     {
       speaker: 'Elyse',
@@ -34,7 +38,7 @@ export const scene07TeamAssembly: Scene = {
     },
     {
       speaker: 'Narrator',
-      text: 'Anonymous caller calls Rab\'s laptop',
+      text: 'Anonymous caller calls Rab\'s phone',
     },
     {
       speaker: 'Mysterious Caller',

@@ -8,9 +8,10 @@ import type { Scene } from '@/shared/types/game';
 export const scene06JoelRab: Scene = {
   sceneId: 6,
   title: 'Joel & Rab',
-  backgroundImage: '/assets/backgrounds/scene-6.jpg',
+  backgroundImage: '/assets/backgrounds/Joel_Screen.png',
   backgroundMusic: '/assets/audio/music/scene-6.mp3',
   duration: 45,
+
   dialogues: [
     {
       speaker: 'Joel',

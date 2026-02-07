@@ -138,33 +138,42 @@ export function DialogueScene({ onComplete }: Props) {
             character.position === 'right' ? 'right-0' :
               'left-1/2';
 
-        // Build transform string
-        let transformString = '';
+        // Build img transform string (scale and mirror)
+        let imgTransform = '';
         if (character.mirror) {
-          transformString += 'scaleX(-1) ';
+          imgTransform += 'scaleX(-1) ';
         }
         if (character.scale) {
-          transformString += `scale(${character.scale}) `;
-        }
-        if (character.position === 'center' && !character.offsetX) {
-          transformString += 'translateX(-50%)';
+          imgTransform += `scale(${character.scale}) `;
         }
 
+        // Animation class
+        const animationClass = character.animation === 'spin-in' ? 'animate-spin-in' : '';
+
         return (
-          <img
+          <div
             key={index}
-            src={getAssetPath(character.image)}
-            alt="Character"
             className={`absolute ${basePositionClass}`}
             style={{
               bottom: character.offsetY || '0',
               left: character.offsetX || undefined,
               right: character.position === 'right' && character.offsetX ? character.offsetX : undefined,
               zIndex: character.zIndex || 10,
-              transform: transformString.trim() || undefined,
+              transform: character.position === 'center' && !character.offsetX ? 'translateX(-50%)' : undefined,
               transformOrigin: 'bottom center',
             }}
-          />
+          >
+            <div className={animationClass} style={{ transformOrigin: 'center center' }}>
+              <img
+                src={getAssetPath(character.image)}
+                alt="Character"
+                style={{
+                  transform: imgTransform.trim() || undefined,
+                  transformOrigin: 'bottom center',
+                }}
+              />
+            </div>
+          </div>
         );
       })}
 

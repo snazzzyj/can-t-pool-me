@@ -53,6 +53,7 @@ export type Scene = {
     readonly offsetX?: string;
     readonly offsetY?: string;
     readonly mirror?: boolean; // Add this
+    readonly animation?: 'spin-in';
   }>;
 };
 

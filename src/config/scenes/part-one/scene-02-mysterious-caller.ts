@@ -10,6 +10,15 @@ export const scene02MysteriousCaller: Scene = {
   title: 'Mysterious Caller',
   backgroundImage: '/assets/backgrounds/scene-3.jpg',
   backgroundMusic: '/assets/audio/Scheming%20music.mp3',
+  characters: [
+    {
+      image: '/assets/characters/Newspaper-1.png',
+      position: 'center',
+      scale: 6.0,
+      animation: 'spin-in',
+      offsetY: '35%',
+    },
+  ],
   dialogues: [
     {
       speaker: 'Narrator',
