@@ -54,22 +54,6 @@ export type Scene = {
   }>;
 };
 
-export type MiniGameType = 'quick-time' | 'memory' | 'quiz' | 'rhythm' | 'puzzle';
-
-export type MiniGameScore = {
-  readonly playerId: string;
-  readonly gameType: MiniGameType;
-  readonly score: number;
-  readonly completedAt: Date;
-};
-
-export type BossPhase = {
-  readonly phaseNumber: number;
-  readonly health: number;
-  readonly maxHealth: number;
-  readonly difficulty: 'normal' | 'hard' | 'insane';
-};
-
 export type TransitionSlide = {
   readonly type: 'transition';
   readonly title: string;
