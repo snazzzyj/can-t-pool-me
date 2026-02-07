@@ -12,6 +12,7 @@ const CREDIT_ITEMS = [
   { role: 'ART & DESIGN', name: '.PXL' },
   { role: 'LEAD DEVELOPER', name: 'AI' },
   { role: 'LEVEL DESIGN CONSULTANTS', name: 'DEBBIE, ELYSE, JOEL' },
+  { role: 'WITH CAMEO APPEARNCE FROM', name: 'FINN THE GINGER' },
   { role: 'SPECIAL THANKS', name: 'MUSHI' },
 ];
 

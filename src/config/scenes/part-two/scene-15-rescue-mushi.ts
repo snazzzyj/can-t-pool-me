@@ -31,15 +31,6 @@ export const scene15RescueMushi: Scene = {
       text: 'No, you\'ll never get away with this.',
       characterImage: '/assets/characters/Rab/Rab_Concerned.png',
     },
-    {
-      speaker: 'Narrator',
-      text: 'Rab destroys the cue',
-    },
-    {
-      speaker: 'Sharker',
-      text: 'Memento Mori bitch.',
-      characterImage: '/assets/characters/Rab/Rab_Concerned.png',
-    },
   ],
 };
 

@@ -27,6 +27,11 @@ export const SCORING = {
 };
 
 export const VILLAIN_ASSETS = {
-  ALIVE: '/assets/characters/Villain/Hooded-Villain.png',
-  DEAD: '/assets/characters/Villain/Villain_Dead.png',
+  HEALTHY: '/assets/characters/Villain/Hooded-Villain.png',
+  DAZED: '/assets/characters/Villain/Dazed Heavy Eyelids.png',
+  STAGGERING: '/assets/characters/Villain/Dizzy with Halo.png',
+  DIZZY: '/assets/characters/Villain/Dizzy with halo.png',
+  DEAD: '/assets/characters/Villain/Staggering.png',
+  CUE: '/assets/characters/Weapons/Cue.png',
+  IMPACT: '/assets/characters/Weapons/DizzyHalo.png',
 };

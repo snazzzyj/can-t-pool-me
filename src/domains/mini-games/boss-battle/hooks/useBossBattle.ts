@@ -109,7 +109,9 @@ export const useBossBattle = (onVictory: (score: number) => void) => {
             if (currentLevel < 3) {
               startLevel(currentLevel + 1);
             } else {
-              startLevel(4);
+              // Now we end after level 3 and let the visual novel handle the final hit scene
+              setStatus('victory');
+              setTimeout(() => onVictory(score + SCORING.LEVEL_COMPLETE_BONUS), 3000);
             }
           }, 2000);
         } else {

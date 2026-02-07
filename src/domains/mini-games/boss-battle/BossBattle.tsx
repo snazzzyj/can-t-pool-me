@@ -42,17 +42,19 @@ export const BossBattle: React.FC<BossBattleProps> = ({ onComplete }) => {
     }
   }, [status, startLevel]);
 
-  const damageState = currentLevel === 1 ? 'healthy'
-    : currentLevel === 2 ? 'dazed'
-      : currentLevel === 3 ? 'staggering'
-        : status === 'victory' ? 'knocked-out'
+  const damageState = status === 'victory' ? 'knocked-out'
+    : currentLevel === 1 ? 'healthy'
+      : currentLevel === 2 ? 'dazed'
+        : currentLevel === 3 ? 'staggering'
           : 'kneeling';
 
   return (
     <div className={`${pressStart2P.className} boss-battle-overlay`}>
       <div className="boss-hud">
-        <div className="level-info">LEVEL {currentLevel === 4 ? 'FINAL' : `${currentLevel}/3`}</div>
-        <div className="score-info">SCORE: {score}</div>
+        <div className="hud-left">
+          <div className="level-info">LEVEL {currentLevel === 4 ? 'FINAL' : `${currentLevel}/3`}</div>
+          <div className="score-info">SCORE: {score}</div>
+        </div>
       </div>
 
       {status === 'instructions' && (
@@ -86,15 +88,18 @@ export const BossBattle: React.FC<BossBattleProps> = ({ onComplete }) => {
       )}
 
       {status === 'playing' && currentLevel === 4 && (
-        <FinalLevel
-          onComplete={handleFinalComplete}
-          onPress={handleFinalPress}
-        />
+        <>
+          <PoolVillain damageState={damageState} isBeingHit={isVillainHit} />
+          <FinalLevel
+            onComplete={handleFinalComplete}
+            onPress={handleFinalPress}
+          />
+        </>
       )}
 
       {status === 'retry' && (
         <div className="retry-screen">
-          <h2>THE POOL VILLAIN IS TOO STRONG!</h2>
+          <h2>YOU MISSED!</h2>
           <button className="btn-start" onClick={retry}>TRY AGAIN</button>
         </div>
       )}
@@ -103,7 +108,7 @@ export const BossBattle: React.FC<BossBattleProps> = ({ onComplete }) => {
         <div className="victory-screen">
           <PoolVillain damageState="knocked-out" isBeingHit={false} />
           <h1 className="victory-text">VICTORY!</h1>
-          <p>The Pool Villain has been defeated!</p>
+          <p>You kicked the shit out of him</p>
         </div>
       )}
     </div>

@@ -42,6 +42,8 @@
   align-items: center;
   width: 100px;
   padding-right: 10px;
+  object-fit: cover;
+
 }
 
 .player-info .portrait {
@@ -50,6 +52,7 @@
   border-radius: 50%;
   border: 1px solid white;
   margin-right: 10px;
+  object-fit: cover;
 }
 
 .player-info .key-hint {
@@ -175,6 +178,87 @@
 
   100% {
     transform: translate(0, 0);
+  }
+}
+
+.pool-cue {
+  position: absolute;
+  top: 20%;
+  right: -50px;
+  height: 150px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  transform: rotate(-45deg);
+}
+
+.pool-cue.hit {
+  animation: cue-hit 1s ease-in-out forwards;
+}
+
+@keyframes cue-hit {
+  0% {
+    opacity: 0;
+    transform: translate(80px, -80px) rotate(-45deg);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translate(40px, -40px) rotate(-45deg);
+  }
+
+  40% {
+    /* Impact */
+    transform: translate(-30px, 30px) rotate(-45deg);
+  }
+
+  80% {
+    /* Sustain visible */
+    opacity: 1;
+    transform: translate(-35px, 35px) rotate(-45deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-40px, 40px) rotate(-45deg);
+  }
+}
+
+.hit-impact {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 11;
+  image-rendering: pixelated;
+}
+
+.hit-impact.visible {
+  animation: impact-pop 0.6s ease-out forwards;
+}
+
+@keyframes impact-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  30% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
   }
 }
 

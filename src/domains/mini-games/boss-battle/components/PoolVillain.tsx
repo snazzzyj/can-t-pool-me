@@ -7,41 +7,42 @@ interface PoolVillainProps {
 }
 
 export const PoolVillain: React.FC<PoolVillainProps> = ({ damageState, isBeingHit }) => {
-  const isDead = damageState === 'knocked-out';
-  const asset = isDead ? VILLAIN_ASSETS.DEAD : VILLAIN_ASSETS.ALIVE;
-
-  // Style shifts based on damage state to simulate condition if we only have one "alive" sprite
-  const getFilter = () => {
+  const getAsset = () => {
     switch (damageState) {
-      case 'dazed': return 'sepia(0.3)';
-      case 'staggering': return 'sepia(0.6) hue-rotate(-20deg)';
-      case 'kneeling': return 'sepia(0.9) hue-rotate(-40deg)';
-      default: return 'none';
-    }
-  };
-
-  const getTransform = () => {
-    switch (damageState) {
-      case 'kneeling': return 'translateY(40px) scaleY(0.8)';
-      default: return 'none';
+      case 'healthy': return VILLAIN_ASSETS.HEALTHY;
+      case 'dazed': return VILLAIN_ASSETS.DAZED;
+      case 'staggering': return VILLAIN_ASSETS.STAGGERING;
+      case 'kneeling': return VILLAIN_ASSETS.DIZZY;
+      case 'knocked-out': return VILLAIN_ASSETS.DEAD;
+      default: return VILLAIN_ASSETS.HEALTHY;
     }
   };
 
   return (
-    <div className="villain-container">
+    <div className="villain-container" style={{ position: 'relative' }}>
       <img
-        src={asset}
+        src={getAsset()}
         alt="Pool Villain"
         className={`villain-sprite ${isBeingHit ? 'shake' : ''}`}
         style={{
-          filter: getFilter(),
-          transform: getTransform(),
           transition: 'all 0.3s ease'
         }}
       />
-      <div className="status-label" style={{ marginTop: '10px', fontSize: '14px', color: '#ff4444' }}>
-        {damageState.toUpperCase()}
-      </div>
+
+      {/* Pool Cue Hit Effect */}
+      <img
+        src={VILLAIN_ASSETS.CUE}
+        alt="Pool Cue"
+        className={`pool-cue ${isBeingHit ? 'hit' : ''}`}
+      />
+
+      {/* Impact Effect */}
+      <img
+        src={VILLAIN_ASSETS.IMPACT}
+        alt="Impact"
+        className={`hit-impact ${isBeingHit ? 'visible' : ''}`}
+      />
+
     </div>
   );
 };
