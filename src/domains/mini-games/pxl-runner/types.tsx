@@ -49,6 +49,7 @@ export interface LevelConfig {
   speed: number;
   spawnFreq: [number, number];
   bgColor: string;
+  backgroundImage: string;
   obstacles: Array<{
     type: string;
     width: number;

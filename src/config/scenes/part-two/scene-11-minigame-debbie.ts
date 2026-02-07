@@ -9,7 +9,7 @@ import PixelRunnerScene from '@/domains/mini-games/pxl-runner/PxlRunnerScene';
 export const scene11MinigameDebbie: Scene = {
   sceneId: 11,
   title: 'Roadtrip',
-  backgroundImage: '/assets/backgrounds/scene-11.jpg',
+  backgroundImage: '/assets/backgrounds/Laptop_Research2.png',
   backgroundMusic: '/assets/audio/music/scene-11.mp3',
   duration: 20,
   dialogues: [
@@ -21,12 +21,12 @@ export const scene11MinigameDebbie: Scene = {
     {
       speaker: 'Hackerman',
       text: 'Only about halfway across the world.',
-      characterImage: '/assets/characters/Joel-Vinny.png',
+      characterImage: '/assets/characters/Joel-1.png',
     },
     {
       speaker: 'Sharker',
       text: 'We don\'t have time.',
-      characterImage: '/assets/characters/Rab-1.png',
+      characterImage: '/assets/characters/Rab/Rab_Concerned.png',
     },
     {
       speaker: 'Pxl',

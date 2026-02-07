@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Press_Start_2P } from 'next/font/google';
 import { GameState, LevelType, PlayerData, Obstacle } from './types';
-import { 
-  PLAYERS_INIT, 
-  SCREEN_WIDTH, 
-  SCREEN_HEIGHT, 
-  LEVELS, 
+import {
+  PLAYERS_INIT,
+  SCREEN_WIDTH,
+  SCREEN_HEIGHT,
+  LEVELS,
   LEVEL_TIME,
   INITIAL_LIVES,
   PLAYER_X,
@@ -21,7 +21,7 @@ import HUD from './components/HUD';
 import Overlays from './components/Overlays';
 import './pxl-runner.css';
 
-const pressStart2P = Press_Start_2P({ 
+const pressStart2P = Press_Start_2P({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
@@ -49,7 +49,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
   const [timer, setTimer] = useState(LEVEL_TIME);
   const [countdown, setCountdown] = useState(3);
   const [scale, setScale] = useState(1);
-  
+
   const requestRef = useRef<number>(0);
   const lastTimeRef = useRef<number>(0);
   const obstaclesRef = useRef<Obstacle[][]>([[], [], [], [], []]);
@@ -100,15 +100,15 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
 
   const handleAnimalSelect = (animalId: string) => {
     const newPlayers = [...players];
-    
+
     // Find the selected animal from ANIMALS array
     const selectedAnimal = ANIMALS.find(a => a.id === animalId);
-    
+
     if (selectedAnimal) {
       // Store the asset path instead of emoji
       newPlayers[selectingPlayerIndex].animal = selectedAnimal.assetPath;
     }
-    
+
     setPlayers(newPlayers);
 
     if (selectingPlayerIndex < numPlayers - 1) {
@@ -124,7 +124,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
     setCountdown(3);
     obstaclesRef.current = [[], [], [], [], []];
     spawnTimerRef.current = [0, 0, 0, 0, 0];
-    
+
     setPlayers(prev => prev.map(p => ({
       ...p,
       lives: INITIAL_LIVES,
@@ -167,7 +167,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
           const p = next[idx];
           if (!p.isJumping && !p.isDead && !p.finishTime) {
             p.isJumping = true;
-            p.vy = -12; 
+            p.vy = -12;
           }
         }
         return next;
@@ -212,7 +212,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
               player.isDead = false;
               player.lives = INITIAL_LIVES;
               player.y = GROUND_Y;
-              player.progress = 0; 
+              player.progress = 0;
               obstaclesRef.current[i] = [];
             }
             allFinished = false;
@@ -282,17 +282,17 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
 
   return (
     <div className={`pxl-runner-container ${pressStart2P.className} w-full h-screen overflow-hidden flex items-center justify-center select-none`}>
-      <div 
+      <div
         style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT, transform: `scale(${scale})`, transformOrigin: 'center center' }}
         className="relative bg-black flex flex-col overflow-hidden shadow-2xl"
       >
         {gameState === GameState.PLAYER_COUNT_SELECTION && <PlayerCountSelection onSelect={handlePlayerCountSelect} />}
         {gameState === GameState.ANIMAL_SELECTION && (
-          <AnimalSelection 
-            currentPlayer={players[selectingPlayerIndex]} 
+          <AnimalSelection
+            currentPlayer={players[selectingPlayerIndex]}
             selectingIndex={selectingPlayerIndex}
             totalToSelect={numPlayers}
-            onSelect={handleAnimalSelect} 
+            onSelect={handleAnimalSelect}
           />
         )}
         {(gameState === GameState.PLAYING || gameState === GameState.PAUSED || gameState === GameState.COUNTDOWN || gameState === GameState.TRANSITION) && (
@@ -300,37 +300,44 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
             <HUD timer={timer} level={currentLevel} players={players} />
             <div className="flex-1 flex flex-col">
               {players.map((p, i) => (
-                <div 
-                  key={p.id} 
-                  className="flex-1 relative border-b-4 border-opacity-40 overflow-hidden" 
-                  style={{ borderColor: p.color, backgroundColor: LEVELS[currentLevel].bgColor + '22' }}
+                <div
+                  key={p.id}
+                  className="flex-1 relative border-b-4 border-opacity-40 overflow-hidden"
+                  style={{
+                    borderColor: p.color,
+                    backgroundColor: LEVELS[currentLevel].bgColor + '22',
+                    backgroundImage: `url(${LEVELS[currentLevel].backgroundImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat'
+                  }}
                 >
                   <div className="absolute top-4 left-4 z-10 flex items-center gap-3 bg-black/70 px-4 py-2 rounded border border-white/20">
                     <span className="text-[14px] text-white font-bold">{p.codename} ({p.key})</span>
                     <div className="flex gap-1">
-                        {[...Array(INITIAL_LIVES)].map((_, li) => (
-                          <span key={li} className="text-lg">{li < p.lives ? '❤️' : '🖤'}</span>
-                        ))}
+                      {[...Array(INITIAL_LIVES)].map((_, li) => (
+                        <span key={li} className="text-lg">{li < p.lives ? '❤️' : '🖤'}</span>
+                      ))}
                     </div>
                   </div>
                   {!p.isDead && (
-                    <div 
+                    <div
                       className={`absolute z-20 ${p.isInvincible ? 'animate-pulse opacity-60' : ''}`}
-                      style={{ left: PLAYER_X, top: p.y - 70 }}
+                      style={{ left: PLAYER_X, top: p.y - 55 }}
                     >
                       <div className="relative flex items-center justify-center">
                         {/* Animal sprite - main character */}
-                        <img 
+                        <img
                           src={p.animal}
                           alt={p.codename}
                           className="w-16 h-16 object-contain"
                           style={{ imageRendering: 'pixelated' }}
                         />
                         {/* Character avatar - positioned based on animal */}
-                        <img 
-                          src={p.assetPath} 
+                        <img
+                          src={p.assetPath}
                           className="absolute -translate-x-1/2 -translate-y-1/2 w-10 h-10 object-contain"
-                          style={{ 
+                          style={{
                             imageRendering: 'pixelated',
                             ...getCharacterPosition(p.animal)
                           }}

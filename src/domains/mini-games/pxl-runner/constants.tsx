@@ -34,6 +34,7 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
     speed: 280,
     spawnFreq: [1.5, 2.5],
     bgColor: '#F4D03F',
+    backgroundImage: '/assets/minigames/pxl-runner/backgrounds/Desert.png',
     obstacles: [
       { type: 'Small Cactus', width: 24, height: 32, emoji: '🌵' },
       { type: 'Large Rock', width: 32, height: 40, emoji: '🪨' },
@@ -45,6 +46,7 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
     speed: 336,
     spawnFreq: [1.2, 2.0],
     bgColor: '#27AE60',
+    backgroundImage: '/assets/minigames/pxl-runner/backgrounds/rainforest.png',
     obstacles: [
       { type: 'Low Vine', width: 20, height: 36, emoji: '🌿' },
       { type: 'Tree Trunk', width: 36, height: 44, emoji: '🪵' },
@@ -56,9 +58,11 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
     speed: 437,
     spawnFreq: [1.0, 1.5],
     bgColor: '#ECF0F1',
+    backgroundImage: '/assets/minigames/pxl-runner/backgrounds/snowstorm.png',
     obstacles: [
       { type: 'Ice Spike', width: 22, height: 38, emoji: '🍦' },
       { type: 'Snowdrift', width: 38, height: 42, emoji: '☃️' },
+
       { type: 'Rock', width: 40, height: 46, emoji: '🪨' },
     ],
   },
