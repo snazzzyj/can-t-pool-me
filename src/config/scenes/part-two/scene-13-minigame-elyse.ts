@@ -8,7 +8,7 @@ import { ShootTheLabubuScene } from '@/domains/mini-games/shoot-the-labubu/Shoot
 
 export const scene13MinigameElyse: Scene = {
   sceneId: 13,
-  title: 'Operator (Elyse Game)',
+  title: 'Meet the Crew',
   backgroundImage: '/assets/backgrounds/scene-13.jpg',
   backgroundMusic: '/assets/audio/music/scene-13.mp3',
   duration: 30,

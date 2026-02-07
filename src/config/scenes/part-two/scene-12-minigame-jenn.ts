@@ -8,7 +8,7 @@ import PuzzlePerfectScene from '@/domains/mini-games/puzzle-perfect/PuzzlePerfec
 
 export const scene12MinigameJenn: Scene = {
   sceneId: 12,
-  title: 'Breaking In (Hacktress Game)',
+  title: 'Breaking In',
   backgroundImage: '/assets/backgrounds/scene-12.jpg',
   backgroundMusic: '/assets/audio/music/scene-12.mp3',
   duration: 20,

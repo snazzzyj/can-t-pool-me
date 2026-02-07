@@ -7,5 +7,5 @@ import type { TransitionSlide } from '@/shared/types/game';
 
 export const transition08heistBegins: TransitionSlide = {
   type: 'transition',
-  title: 'Game on',
-  subtitle: 'The team schemes',};
+  title: 'Meet the Crew',
+};

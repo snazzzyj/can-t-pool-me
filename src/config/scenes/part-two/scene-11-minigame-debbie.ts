@@ -8,7 +8,7 @@ import PixelRunnerScene from '@/domains/mini-games/pxl-runner/PxlRunnerScene';
 
 export const scene11MinigameDebbie: Scene = {
   sceneId: 11,
-  title: 'On the Way to Save the Day',
+  title: 'Roadtrip',
   backgroundImage: '/assets/backgrounds/scene-11.jpg',
   backgroundMusic: '/assets/audio/music/scene-11.mp3',
   duration: 20,
