@@ -123,7 +123,11 @@ export function DialogueScene({ onComplete }: Props) {
         <img
           src={getAssetPath(scene.backgroundImage)}
           alt={scene.title}
-          className="absolute inset-0 w-full h-full object-cover object-bottom-right"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            objectPosition: scene.backgroundPosition || 'center',
+            transform: scene.backgroundTransform || undefined
+          }}
         />
       )}
 

@@ -9,6 +9,8 @@ export const scene05JennRab: Scene = {
   sceneId: 5,
   title: 'Jenn & Rab',
   backgroundImage: '/assets/backgrounds/Jenn_Screen.png',
+  backgroundPosition: 'center bottom',
+  backgroundTransform: 'scale(1) translateY(-10%)',
   backgroundMusic: '/assets/audio/music/scene-1.mp3',
 
   characters: [
@@ -18,7 +20,7 @@ export const scene05JennRab: Scene = {
       zIndex: 9,
       scale: 3,
       offsetX: '10%',
-      offsetY: '55%',
+      offsetY: '62%',
     },
     {
       image: '/assets/characters/Jenn-1.png',
@@ -26,7 +28,7 @@ export const scene05JennRab: Scene = {
       zIndex: 10,
       scale: 3,
       offsetX: '10%',
-      offsetY: '55%',
+      offsetY: '62%',
     },
 
     {
@@ -35,7 +37,7 @@ export const scene05JennRab: Scene = {
       zIndex: 10,
       scale: 3,
       offsetX: '82%',
-      offsetY: '55%',
+      offsetY: '62%',
       mirror: true,
     }
   ],

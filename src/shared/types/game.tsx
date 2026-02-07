@@ -36,6 +36,8 @@ export type Scene = {
   readonly title: string;
   readonly order?: number;
   readonly backgroundImage: string;
+  readonly backgroundPosition?: string;
+  readonly backgroundTransform?: string;
   readonly dialogues: ReadonlyArray<SceneDialogue>;
   readonly backgroundMusic?: string;
   readonly musicVolume?: number;
