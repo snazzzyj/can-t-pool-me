@@ -28,6 +28,7 @@ export type SceneDialogue = {
   readonly speaker: string;
   readonly text: string;
   readonly characterImage?: string;
+  readonly backgroundImage?: string;
 };
 
 export type Scene = {

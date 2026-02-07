@@ -9,9 +9,9 @@ import type { Scene } from '@/shared/types/game';
 export const scene07TeamAssembly: Scene = {
   sceneId: 7,
   title: 'The Kidnapping',
-  backgroundImage: '/assets/characters/Mushi-Hostage.png',
+  backgroundImage: '/assets/backgrounds/Elyse_Screen.png',
   backgroundPosition: 'center top',
-  backgroundTransform: 'scale(0.5) translateY(-15%)',
+  backgroundTransform: 'scale(1) translateY(-25%)',
   backgroundMusic: '/assets/audio/music/scene-7.mp3',
   duration: 60,
 
@@ -33,17 +33,14 @@ export const scene07TeamAssembly: Scene = {
       characterImage: '/assets/characters/Rab-1.png',
     },
     {
-      speaker: 'Narrator',
+      speaker: 'Rab\'s Phone',
       text: 'RING RING, RING RING',
-    },
-    {
-      speaker: 'Narrator',
-      text: 'Anonymous caller calls Rab\'s phone',
+      backgroundImage: '/assets/backgrounds/Mysterious_Call.png',
     },
     {
       speaker: 'Mysterious Caller',
       text: 'You just don\'t know how to listen do you? Well it\'s too late now. We\'ve taken your son.',
-      characterImage: '/assets/characters/Hooded-Caller.png',
+    backgroundImage: '/assets/characters/Mushi-Hostage.png',
     },
     {
       speaker: 'Rab',
@@ -71,10 +68,6 @@ export const scene07TeamAssembly: Scene = {
       characterImage: '/assets/characters/Jenn-1.png',
     },
     {
-      speaker: 'Narrator',
-      text: 'Mysterious Caller puts Mushi on FaceTime',
-    },
-    {
       speaker: 'Mysterious Caller',
       text: 'SHUT UP. If you don\'t destroy all of the evidence you have on us…',
       characterImage: '/assets/characters/Hooded-Caller.png',
@@ -98,6 +91,7 @@ export const scene07TeamAssembly: Scene = {
       speaker: 'Elyse',
       text: 'So what are we going to do?',
       characterImage: '/assets/characters/Elyse-1.png',
+      backgroundImage: '/assets/backgrounds/Elyse_Screen.png',
     },
     {
       speaker: 'Rab',

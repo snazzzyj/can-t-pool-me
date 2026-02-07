@@ -8,8 +8,9 @@ import type { Scene } from '@/shared/types/game';
 export const scene03ElyseRab: Scene = {
   sceneId: 3,
   title: 'Elyse & Rab',
-  backgroundImage: '/assets/backgrounds/scene-4.jpg',
+  backgroundImage: '/assets/backgrounds/Elyse_Screen.png',
   backgroundMusic: '/assets/audio/Scheming%20music.mp3#t=20',
+  backgroundTransform: 'scale(1) translateY(-20%)',
   dialogues: [
     {
       speaker: 'Rab',

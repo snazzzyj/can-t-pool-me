@@ -8,7 +8,8 @@ import type { Scene } from '@/shared/types/game';
 export const scene01FinnRab: Scene = {
   sceneId: 1,
   title: 'Finn & Rab',
-  backgroundImage: '/assets/backgrounds/scene-1.jpg',
+  backgroundImage: '/assets/backgrounds/Finn_Scene.png',
+  backgroundTransform: 'scale(1) translateY(-25%)',
   backgroundMusic: '/assets/audio/music/scene-1.mp3',
   duration: 50,
   dialogues: [

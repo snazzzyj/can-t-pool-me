@@ -8,17 +8,11 @@ import type { Scene } from '@/shared/types/game';
 export const scene02MysteriousCaller: Scene = {
   sceneId: 2,
   title: 'Mysterious Caller',
-  backgroundImage: '/assets/backgrounds/scene-3.jpg',
+  backgroundImage: '/assets/backgrounds/Pool_Article.png',
+  backgroundTransform: 'scale(1) translateY(-10%)',
+  backgroundPosition: 'center top',
   backgroundMusic: '/assets/audio/Scheming%20music.mp3',
-  characters: [
-    {
-      image: '/assets/characters/Newspaper-1.png',
-      position: 'center',
-      scale: 6.0,
-      animation: 'spin-in',
-      offsetY: '35%',
-    },
-  ],
+
   dialogues: [
     {
       speaker: 'Narrator',
@@ -32,6 +26,8 @@ export const scene02MysteriousCaller: Scene = {
     {
       speaker: 'Narrator',
       text: 'RING RING, RING RING',
+      backgroundImage: '/assets/backgrounds/Mysterious_Call.png',
+
     },
     {
       speaker: 'Narrator',
@@ -45,6 +41,8 @@ export const scene02MysteriousCaller: Scene = {
       speaker: 'Mysterious Caller',
       text: 'We know what you\'re doing and we suggest you stop immediately.',
       characterImage: '/assets/characters/Hooded-Caller.png',
+      backgroundImage: '/assets/backgrounds/Picked up phone.png',
+
     },
     {
       speaker: 'Rab',

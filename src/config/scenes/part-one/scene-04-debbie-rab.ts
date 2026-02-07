@@ -10,7 +10,7 @@ export const scene04DebbieRab: Scene = {
   title: 'Debbie & Rab',
   backgroundImage: '/assets/backgrounds/Deb_Screen.png',
   backgroundPosition: 'center bottom',
-  backgroundTransform: 'scale(1.1) translateY(-20%)',
+  backgroundTransform: 'scale(1.1) translateY(-5%)',
   backgroundMusic: '/assets/audio/music/scene-5.mp3',
   duration: 45,
 
@@ -21,7 +21,7 @@ export const scene04DebbieRab: Scene = {
       zIndex: 10,
       scale: 5,
       offsetX: '60%',
-      offsetY: '50%',
+      offsetY: '40%',
     },
   ],
 

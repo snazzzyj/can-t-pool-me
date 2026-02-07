@@ -93,6 +93,13 @@ export function DialogueScene({ onComplete }: Props) {
   const currentDialogue = dialogues[dialogueIndex];
   const isLastDialogue = dialogueIndex >= dialogues.length - 1;
 
+  // Determine current background image
+  // Look for the most recent background change in the dialogues array up to current index
+  const activeBackgroundImage = dialogues
+    .slice(0, dialogueIndex + 1)
+    .reverse()
+    .find(d => d.backgroundImage)?.backgroundImage || scene.backgroundImage;
+
   const handleNext = () => {
     if (isLastDialogue) {
       if (scene.minigameComponent) {
@@ -119,9 +126,9 @@ export function DialogueScene({ onComplete }: Props) {
   return (
     <div className="relative w-full h-screen bg-black">
       {/* Background Image */}
-      {scene.backgroundImage && (
+      {activeBackgroundImage && (
         <img
-          src={getAssetPath(scene.backgroundImage)}
+          src={getAssetPath(activeBackgroundImage)}
           alt={scene.title}
           className="absolute inset-0 w-full h-full object-cover"
           style={{
