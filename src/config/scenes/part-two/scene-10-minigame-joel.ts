@@ -9,7 +9,7 @@ import HackingMainframeScene from '@/domains/mini-games/hacking-mainframe/Hackin
 export const scene10MinigameJoel: Scene = {
   sceneId: 16,
   title: 'Hacking the Mainframe',
-  backgroundImage: '/assets/backgrounds/scene-10.jpg',
+  backgroundImage: '/assets/backgrounds/scheming_plan.png',
   backgroundMusic: '/assets/audio/music/scene-10.mp3',
   duration: 10,
   dialogues: [

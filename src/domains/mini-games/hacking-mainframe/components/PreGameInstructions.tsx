@@ -1,6 +1,11 @@
-
 import React from 'react';
 import { PLAYER_DISPLAY_NAMES, PLAYER_ORDER } from '../constants';
+import { Press_Start_2P } from 'next/font/google';
+
+const pressStart2P = Press_Start_2P({
+  weight: '400',
+  subsets: ['latin']
+});
 
 interface PreGameInstructionsProps {
   onStart: () => void;
@@ -8,15 +13,15 @@ interface PreGameInstructionsProps {
 
 const PreGameInstructions: React.FC<PreGameInstructionsProps> = ({ onStart }) => {
   return (
-    <div 
+    <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4"
       onClick={onStart}
     >
       <div className="max-w-4xl w-full border-4 border-green-500 p-8 rounded-lg shadow-[0_0_30px_rgba(34,197,94,0.3)] bg-black font-mono">
-        <h1 className="text-4xl text-center text-green-500 font-bold mb-8 animate-pulse">
+        <h1 className={`text-4xl text-center text-white-500 font-bold mb-8 ${pressStart2P.className}`}>
           HACKING THE MAINFRAME
         </h1>
-        
+
         <p className="text-xl text-green-400 mb-8 text-center uppercase tracking-widest">
           RELAY MODE INITIALIZED
         </p>
