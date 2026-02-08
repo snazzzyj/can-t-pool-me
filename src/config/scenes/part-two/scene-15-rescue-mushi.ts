@@ -4,13 +4,17 @@
  */
 
 import type { Scene } from '@/shared/types/game';
+import MushiIntro from './MushiIntro';
 
 export const scene15RescueMushi: Scene = {
   sceneId: 15,
   title: 'Rescue Mushi',
-  backgroundImage: '/assets/backgrounds/scene-15.jpg',
+  backgroundImage: '/assets/minigames/shoot-the-labubu/backgrounds/Villain_Lair.png',
+  backgroundTransform: 'scale(1) translateY(-10%)',
   backgroundMusic: '/assets/audio/music/scene-15.mp3',
   duration: 30,
+  customIntro: MushiIntro,
+
   dialogues: [
     {
       speaker: 'Everyone',

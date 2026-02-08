@@ -19,6 +19,7 @@ type Props = {
 export function DialogueScene({ onComplete }: Props) {
   const [dialogueIndex, setDialogueIndex] = useState(0);
   const [showMinigame, setShowMinigame] = useState(false);
+  const [introComplete, setIntroComplete] = useState(true);
   const dispatch = useDispatch();
 
   const sceneId = useSelector(selectSceneId);
@@ -31,6 +32,8 @@ export function DialogueScene({ onComplete }: Props) {
 
   useEffect(() => {
     setDialogueIndex(0);
+    // reset intro state when scene changes
+    setIntroComplete(!(sceneData && 'customIntro' in sceneData && sceneData.customIntro));
     // If scene has minigame and no dialogues, show it immediately
     if (sceneData && 'minigameComponent' in sceneData && sceneData.minigameComponent && (!('dialogues' in sceneData) || sceneData.dialogues.length === 0)) {
       setShowMinigame(true);
@@ -78,6 +81,17 @@ export function DialogueScene({ onComplete }: Props) {
 
   // Handle regular dialogue scenes
   const scene = sceneData as Scene;
+
+  // If the scene provides a custom intro component, show it first
+  if (scene.customIntro && !introComplete) {
+    const IntroComponent = scene.customIntro;
+    return (
+      <>
+        <IntroComponent onComplete={() => setIntroComplete(true)} />
+        {features.SCENE_NAVIGATION_MENU && <SceneNavigationMenu />}
+      </>
+    );
+  }
 
   if (showMinigame && scene.minigameComponent) {
     const MinigameComponent = scene.minigameComponent;
