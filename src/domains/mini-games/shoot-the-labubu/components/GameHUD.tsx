@@ -38,10 +38,10 @@ export const GameHUD: React.FC<GameHUDProps> = ({
         className={`${pressStart2P.className} absolute left-0 right-0 top-0 z-10 flex items-center justify-between bg-black/70 px-5 py-3 text-white`}
         style={{ height: TOP_BAR_HEIGHT }}
       >
-        <div className="text-sm">
+        <div className="w-1/3 text-left text-sm">
           Level {level} – Wave {wave}/3
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex w-1/3 flex-col items-center justify-center">
           <div className="mb-1 text-xs text-white/80">HP: {sharedHealth}/{maxHealth}</div>
           <div
             className="h-5 w-[200px] overflow-hidden rounded bg-gray-800"
@@ -53,7 +53,7 @@ export const GameHUD: React.FC<GameHUDProps> = ({
             />
           </div>
         </div>
-        <div className="text-sm tabular-nums">{timerStr}</div>
+        <div className="w-1/3 text-right text-sm tabular-nums">{timerStr}</div>
       </div>
 
       {/* Bottom: shooter ammo + collector body counts */}
@@ -61,10 +61,10 @@ export const GameHUD: React.FC<GameHUDProps> = ({
         className={`${pressStart2P.className} absolute left-0 right-0 bottom-0 z-10 flex items-end justify-between bg-black/70 px-4 py-3 text-white`}
         style={{ top: BOTTOM_BAR_TOP, height: SCREEN_HEIGHT - BOTTOM_BAR_TOP }}
       >
-        <div className="text-xs">
+        <div className="w-1/4 text-left text-xs">
           Elyse: {collectors.elyse.bodiesCaught} bodies
         </div>
-        <div className="flex gap-8">
+        <div className="flex w-1/2 justify-center gap-8">
           {(['rab', 'jenn', 'joel'] as const).map((id) => {
             const s = shooters[id];
             const name = id === 'rab' ? 'Rab' : id === 'jenn' ? 'Jenn' : 'Joel';
@@ -85,7 +85,7 @@ export const GameHUD: React.FC<GameHUDProps> = ({
             );
           })}
         </div>
-        <div className="text-xs">
+        <div className="w-1/4 text-right text-xs">
           Debbie: {collectors.debbie.bodiesCaught} bodies
         </div>
       </div>

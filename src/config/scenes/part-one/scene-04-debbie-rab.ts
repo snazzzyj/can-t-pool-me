@@ -21,7 +21,7 @@ export const scene04DebbieRab: Scene = {
       zIndex: 10,
       scale: 5,
       offsetX: '60%',
-      offsetY: '40%',
+      offsetY: '30%',
     },
   ],
 

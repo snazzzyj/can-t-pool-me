@@ -3,13 +3,13 @@
  * Each pattern is an array of { delayMs, x } for spawn timing and horizontal position.
  */
 
-import { SCREEN_WIDTH, LABUBUS_PER_WAVE } from '../constants';
+import { LABUBUS_PER_WAVE } from '../constants';
 import type { LabubuColor } from '../types';
 import { LABUBU_COLORS } from '../constants';
 
-const LEFT = 400;
+const LEFT = 600;
 const CENTER = 960;
-const RIGHT = 1520;
+const RIGHT = 1320;
 
 function spread(n: number, minX: number, maxX: number): number[] {
   const step = (maxX - minX) / Math.max(1, n - 1);
@@ -33,7 +33,7 @@ function level1Wave1(): { delayMs: number; x: number }[] {
 /** Level 1 Wave 2: Gentle horizontal wave */
 function level1Wave2(): { delayMs: number; x: number }[] {
   const positions: { delayMs: number; x: number }[] = [];
-  const xs = spread(15, 300, SCREEN_WIDTH - 300);
+  const xs = spread(15, 550, 1370);
   xs.forEach((x, i) => {
     positions.push({ delayMs: i * 600, x: x + Math.sin(i * 0.8) * 80 });
   });
@@ -74,8 +74,8 @@ function level2Wave1(): { delayMs: number; x: number }[] {
 /** Level 2 Wave 2: V-formation with center focus */
 function level2Wave2(): { delayMs: number; x: number }[] {
   const positions: { delayMs: number; x: number }[] = [];
-  const left = spread(10, 250, CENTER - 50);
-  const right = spread(10, CENTER + 50, SCREEN_WIDTH - 250);
+  const left = spread(10, 550, CENTER - 50);
+  const right = spread(10, CENTER + 50, 1370);
   left.forEach((x, i) => positions.push({ delayMs: i * 300, x }));
   right.forEach((x, i) => positions.push({ delayMs: i * 300, x }));
   return positions.slice(0, 20);
@@ -95,8 +95,8 @@ function level2Wave3(): { delayMs: number; x: number }[] {
 /** Level 3 Wave 1: Chaotic swarm */
 function level3Wave1(): { delayMs: number; x: number }[] {
   const positions: { delayMs: number; x: number }[] = [];
-  const minX = 150;
-  const maxX = SCREEN_WIDTH - 150;
+  const minX = 550;
+  const maxX = 1370;
   for (let i = 0; i < 25; i++) {
     const x = minX + Math.random() * (maxX - minX);
     positions.push({ delayMs: i * 250, x });
@@ -107,8 +107,8 @@ function level3Wave1(): { delayMs: number; x: number }[] {
 /** Level 3 Wave 2: Pincer formation */
 function level3Wave2(): { delayMs: number; x: number }[] {
   const positions: { delayMs: number; x: number }[] = [];
-  const fromLeft = spread(13, 100, CENTER);
-  const fromRight = spread(12, CENTER, SCREEN_WIDTH - 100);
+  const fromLeft = spread(13, 500, CENTER);
+  const fromRight = spread(12, CENTER, 1420);
   fromLeft.forEach((x, i) => positions.push({ delayMs: i * 200, x }));
   fromRight.forEach((x, i) => positions.push({ delayMs: i * 200, x }));
   return positions.slice(0, 25);
@@ -117,7 +117,7 @@ function level3Wave2(): { delayMs: number; x: number }[] {
 /** Level 3 Wave 3: Full screen cascade */
 function level3Wave3(): { delayMs: number; x: number }[] {
   const positions: { delayMs: number; x: number }[] = [];
-  const xs = spread(25, 100, SCREEN_WIDTH - 100);
+  const xs = spread(25, 500, 1420);
   xs.forEach((x, i) => {
     positions.push({ delayMs: i * 150, x });
   });

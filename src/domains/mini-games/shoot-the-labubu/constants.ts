@@ -13,7 +13,7 @@ export const TOP_BAR_HEIGHT = 80;
 /** Y position where Labubus count as "reached shooter line" (damage) */
 export const SHOOTER_LINE_Y = 880;
 /** Bottom bar starts */
-export const BOTTOM_BAR_TOP = 920;
+export const BOTTOM_BAR_TOP = 1000;
 
 /** Shared health pool */
 export const MAX_HEALTH = 30;
@@ -55,9 +55,9 @@ export const HP_PER_HEAL = 5;
 
 /** Shooter lane X positions (center of lane) */
 export const SHOOTER_LANE_X: Record<'left' | 'center' | 'right', number> = {
-  left: 400,
+  left: 600,
   center: 960,
-  right: 1520,
+  right: 1320,
 };
 
 /** Shooter portrait Y (above ammo bar) */
@@ -65,13 +65,12 @@ export const SHOOTER_PORTRAIT_Y = 950;
 /** Shooter movement speed px/s */
 export const SHOOTER_SPEED = 400;
 /** Collector track: min and max X for bucket center */
-export const COLLECTOR_MIN_X = 200;
-export const COLLECTOR_MAX_X = 1720;
+export const COLLECTOR_MIN_X = 500;
+export const COLLECTOR_MAX_X = 1420;
 
-/** Shooter track bounds (prevent them from leaving their designated areas if desired, or allow full screen) */
-/** For now, let's allow them to move across the whole screen but stay within safe margins */
-export const SHOOTER_MIN_X = 100;
-export const SHOOTER_MAX_X = 1820;
+/** Shooter track bounds */
+export const SHOOTER_MIN_X = 500;
+export const SHOOTER_MAX_X = 1420;
 
 /** Level configs: labubus per wave, base speed (px/s), wave duration, ammo per shooter */
 export const LEVEL_CONFIGS: Record<1 | 2 | 3, LevelConfig> = {

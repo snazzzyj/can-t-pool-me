@@ -53,8 +53,10 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
           style={{
             width: SCREEN_WIDTH,
             height: SCREEN_HEIGHT,
-            transform: `scale(${scale})`,
-            transformOrigin: 'center center',
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: `translate(-50%, -50%) scale(${scale})`,
           }}
         >
           <div className="level-bg level-1 absolute inset-0" />
@@ -73,8 +75,10 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
           style={{
             width: SCREEN_WIDTH,
             height: SCREEN_HEIGHT,
-            transform: `scale(${scale})`,
-            transformOrigin: 'center center',
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: `translate(-50%, -50%) scale(${scale})`,
           }}
         >
           <div className={`level-bg level-${state.currentLevel} absolute inset-0`} />
@@ -93,8 +97,10 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
           style={{
             width: SCREEN_WIDTH,
             height: SCREEN_HEIGHT,
-            transform: `scale(${scale})`,
-            transformOrigin: 'center center',
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: `translate(-50%, -50%) scale(${scale})`,
           }}
         >
           <div className={`level-bg level-${state.currentLevel} absolute inset-0`} />
@@ -118,8 +124,10 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
           style={{
             width: SCREEN_WIDTH,
             height: SCREEN_HEIGHT,
-            transform: `scale(${scale})`,
-            transformOrigin: 'center center',
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: `translate(-50%, -50%) scale(${scale})`,
           }}
         >
           <div className={`level-bg level-${state.currentLevel} absolute inset-0`} />
@@ -143,8 +151,10 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
         style={{
           width: SCREEN_WIDTH,
           height: SCREEN_HEIGHT,
-          transform: `scale(${scale}) translate3d(${shakeX}px, 0, 0)`,
-          transformOrigin: 'center center',
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: `translate(-50%, -50%) scale(${scale}) translate3d(${shakeX}px, 0, 0)`,
         }}
       >
         {/* Level background */}

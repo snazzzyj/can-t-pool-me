@@ -33,10 +33,10 @@ export const scene05JennRab: Scene = {
 
     {
       image: '/assets/characters/Rab-1.png',
-      position: 'right',
+      position: 'left',
       zIndex: 10,
       scale: 3,
-      offsetX: '82%',
+      offsetX: '83%',
       offsetY: '62%',
       mirror: true,
     }

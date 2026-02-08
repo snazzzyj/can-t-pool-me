@@ -1,4 +1,3 @@
-import React from 'react';
 import { PLAYER_DISPLAY_NAMES, PLAYER_ORDER } from '../constants';
 import { Press_Start_2P } from 'next/font/google';
 
@@ -37,16 +36,24 @@ const PreGameInstructions: React.FC<PreGameInstructionsProps> = ({ onStart }) =>
         </div>
 
         <div className="flex justify-center items-center gap-4 mb-8">
-          {PLAYER_ORDER.map((player, idx) => (
-            <div key={player} className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-green-900 border border-green-500 rounded-full flex items-center justify-center font-bold text-white mb-2">
-                {idx + 1}
+          {PLAYER_ORDER.map((player, idx) => {
+            const displayName = PLAYER_DISPLAY_NAMES[player];
+            const match = displayName.match(/^(.+?)\s*\((.+?)\)$/);
+            const name = match ? match[1].trim() : displayName;
+            const codename = match ? match[2].trim() : '';
+
+            return (
+              <div key={player} className="flex flex-col items-center">
+                <div className="w-12 h-12 bg-green-900 border border-green-500 rounded-full flex items-center justify-center font-bold text-white mb-2">
+                  {idx + 1}
+                </div>
+                <div className="text-[10px] text-green-500 text-center w-20 leading-tight">
+                  <div>{name}</div>
+                  <div>({codename})</div>
+                </div>
               </div>
-              <span className="text-[10px] text-green-500 text-center w-20 leading-tight">
-                {PLAYER_DISPLAY_NAMES[player]}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="text-center animate-bounce text-2xl text-yellow-500 font-bold">
