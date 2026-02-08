@@ -37,7 +37,7 @@ export const scene01FinnRab: Scene = {
     },
     {
       speaker: 'Finn',
-      text: 'Nothin much, just chillin with the Fam and *insert weird flex from Finn*',
+      text: 'Nothin much, just chillin with the Fam on a super yacht in Costa Rica',
       characterImage: '/assets/characters/Finn.png',
     },
     {
@@ -72,18 +72,13 @@ export const scene01FinnRab: Scene = {
     },
     {
       speaker: 'Finn',
-      text: 'I think you should *insert genuine advice that Finn would actually say*',
+      text: 'Yeah man go for it. Live your truth.',
       characterImage: '/assets/characters/Finn.png',
     },
     {
       speaker: 'Rab',
       text: 'Alright man, I\'m gonna do more thinking on it. Goodnight! Or Good morning or whatever time it is there.',
       characterImage: '/assets/characters/Rab-1.png',
-    },
-    {
-      speaker: 'Finn',
-      text: 'Haha alright, good luck man!',
-      characterImage: '/assets/characters/Finn.png',
     },
   ],
 };
