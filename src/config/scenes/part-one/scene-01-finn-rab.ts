@@ -12,6 +12,18 @@ export const scene01FinnRab: Scene = {
   backgroundTransform: 'scale(1) translateY(-25%)',
   backgroundMusic: '/assets/audio/music/scene-1.mp3',
   duration: 50,
+
+  characters: [
+    {
+      image: '/assets/characters/Bro-Facetime.png',
+      position: 'left',
+      zIndex: 5,
+      scale: 0.4,
+      offsetX: '22%',
+      offsetY: '33%',
+    },
+  ],
+
   dialogues: [
     {
       speaker: 'Finn',
