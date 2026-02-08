@@ -10,7 +10,12 @@ export const PlayerSelection: React.FC<PlayerSelectionProps> = ({ onSelect }) =>
       {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
         <div className="w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-800 to-slate-950" />
-        <div className="absolute inset-0 bg-[url('/assets/textures/grid.png')] opacity-20" />
+        {/* Grid pattern created with CSS */}
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: `linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent),
+                            linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent)`,
+          backgroundSize: '50px 50px'
+        }} />
       </div>
 
       <div className="z-10 flex flex-col items-center">

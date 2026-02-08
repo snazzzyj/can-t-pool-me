@@ -13,6 +13,7 @@ import GameOverScreen from './components/GameOverScreen';
 import PreGameInstructions from './components/PreGameInstructions';
 import CountdownOverlay from './components/CountdownOverlay';
 import { Press_Start_2P } from 'next/font/google';
+import { getLevelBackgroundStyle } from './utils/backgroundStyles';
 import './shoot-the-labubu.css';
 
 const pressStart2P = Press_Start_2P({ weight: '400', subsets: ['latin'], display: 'swap' });
@@ -59,7 +60,7 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
             transform: `translate(-50%, -50%) scale(${scale})`,
           }}
         >
-          <div className="level-bg level-1 absolute inset-0" />
+          <div className="absolute inset-0" style={getLevelBackgroundStyle(1)} />
           <PreGameInstructions onStart={startGame} />
         </div>
       </div>
@@ -81,7 +82,7 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
             transform: `translate(-50%, -50%) scale(${scale})`,
           }}
         >
-          <div className={`level-bg level-${state.currentLevel} absolute inset-0`} />
+          <div className="absolute inset-0" style={getLevelBackgroundStyle(state.currentLevel as 1 | 2 | 3)} />
           <CountdownOverlay />
         </div>
       </div>
@@ -103,7 +104,7 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
             transform: `translate(-50%, -50%) scale(${scale})`,
           }}
         >
-          <div className={`level-bg level-${state.currentLevel} absolute inset-0`} />
+          <div className="absolute inset-0" style={getLevelBackgroundStyle(state.currentLevel as 1 | 2 | 3)} />
           <GameOverScreen
             bodiesCaught={state.stats.totalBodiesCaught}
             wavesSurvived={state.currentWave}
@@ -130,7 +131,7 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
             transform: `translate(-50%, -50%) scale(${scale})`,
           }}
         >
-          <div className={`level-bg level-${state.currentLevel} absolute inset-0`} />
+          <div className="absolute inset-0" style={getLevelBackgroundStyle(state.currentLevel as 1 | 2 | 3)} />
           <StatsScreen
             level={state.currentLevel}
             stats={state.stats}
@@ -158,7 +159,7 @@ export default function ShootTheLabubu({ onComplete, onRetry }: ShootTheLabubuPr
         }}
       >
         {/* Level background */}
-        <div className={`level-bg level-${state.currentLevel} absolute inset-0`} />
+        <div className="absolute inset-0" style={getLevelBackgroundStyle(state.currentLevel as 1 | 2 | 3)} />
 
         {/* Game area: labubus (z-2), bullets (z-3), falling bodies (z-1), collectors (z-4), shooters (z-4) */}
         <div className="absolute inset-0" style={{ top: 0, left: 0, right: 0, bottom: 0 }}>

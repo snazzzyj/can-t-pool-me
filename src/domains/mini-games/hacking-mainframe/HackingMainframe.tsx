@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getAssetPath } from '@/lib/assetPath';
 import { GameStatus } from './types';
 import { useHackingMainframe } from './hooks/useHackingMainframe';
 import MatrixBackground from './components/MatrixBackground';
@@ -24,7 +25,7 @@ const HackingMainframe: React.FC<HackingMainframeProps> = ({ onComplete }) => {
   // Start background music when game enters playing state
   useBackgroundMusic(
     status === GameStatus.PRE_GAME || status === GameStatus.PLAYING || status === GameStatus.COUNTDOWN
-      ? HACKING_MAINFRAME_AUDIO.backgroundMusic
+      ? getAssetPath(HACKING_MAINFRAME_AUDIO.backgroundMusic)
       : undefined,
     0.5
   );
