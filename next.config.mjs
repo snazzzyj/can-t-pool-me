@@ -9,6 +9,12 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+  typescript: {
+    tsconfigPath: './tsconfig.json',
+  },
 }
 
 export default nextConfig
