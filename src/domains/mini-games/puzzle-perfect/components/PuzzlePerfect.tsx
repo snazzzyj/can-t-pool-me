@@ -128,7 +128,7 @@ export const PuzzlePerfect: React.FC<PuzzlePerfectProps> = ({ onComplete, onFail
       )}
 
       {/* Top HUD */}
-      <div className="w-full flex justify-between items-center z-10">
+      <div className="w-full flex justify-between items-center z-10 pr-24">
         <GameTimer
           timeLimit={roundConfig.timeLimit}
           timeLeft={timeLeft}

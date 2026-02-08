@@ -17,13 +17,14 @@ export const PlayerIndicator: React.FC<PlayerIndicatorProps> = ({ players, curre
               <span className="text-xs font-bold text-cyan-400 animate-bounce absolute -top-6">YOUR TURN</span>
             )}
             <div
-              className={`rounded-full w-16 h-16 border-2 overflow-hidden transition-all duration-300 ${isActive ? 'scale-110 shadow-[0_0_15px_currentColor]' : 'opacity-50 grayscale scale-90'}`}
+              className={`rounded-full w-16 h-16 border-2 overflow-hidden transition-all duration-300 flex items-center justify-center ${isActive ? 'scale-110 shadow-[0_0_15px_currentColor]' : 'opacity-50 grayscale scale-90'}`}
               style={{ borderColor: isActive ? player.color : '#334155', color: player.color }}
             >
-              {/* Placeholder for character image - assuming simple colored circle or img */}
-              <div className="w-full h-full bg-slate-800 flex items-center justify-center">
-                <span className="text-xl font-bold">{player.name[0]}</span>
-              </div>
+              <img
+                src={player.portrait}
+                alt={player.name}
+                className="w-full h-full object-contain"
+              />
             </div>
             {isActive && (
               <span className="text-sm font-bold tracking-wider" style={{ color: player.color }}>
