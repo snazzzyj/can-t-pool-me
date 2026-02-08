@@ -45,6 +45,7 @@ export type Scene = {
   readonly duration?: number;
   readonly nextScene?: number;
   readonly minigameComponent?: React.ComponentType<{ onComplete: () => void }>;
+  readonly customIntro?: React.ComponentType<{ onComplete: () => void }>;
 
   readonly characters?: ReadonlyArray<{
     readonly image: string;

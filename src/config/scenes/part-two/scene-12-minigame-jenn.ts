@@ -9,7 +9,9 @@ import PuzzlePerfectScene from '@/domains/mini-games/puzzle-perfect/PuzzlePerfec
 export const scene12MinigameJenn: Scene = {
   sceneId: 12,
   title: 'Breaking In',
-  backgroundImage: '/assets/backgrounds/scene-12.jpg',
+  backgroundImage: '/assets/backgrounds/mansion_night.png',
+  backgroundTransform: 'scale(1) translateY(-5%)',
+  backgroundPosition: 'center',
   backgroundMusic: '/assets/audio/music/scene-12.mp3',
   duration: 20,
   dialogues: [
@@ -32,6 +34,7 @@ export const scene12MinigameJenn: Scene = {
       speaker: 'Hackerman',
       text: 'What the?... There\'s a captcha blocking our access.',
       characterImage: '/assets/characters/Joel-1.png',
+      backgroundImage: '/assets/characters/laptop_puzzle.png',
     },
     {
       speaker: 'Hacktress',

@@ -9,7 +9,7 @@ import BossBattleScene from '@/domains/mini-games/boss-battle/BossBattleScene';
 export const scene14BossBattle: Scene = {
   sceneId: 14,
   title: 'Boss Battle',
-  backgroundImage: '/assets/backgrounds/scene-14.jpg',
+  backgroundImage: '/assets/minigames/shoot-the-labubu/backgrounds/Villain_Lair.png',
   backgroundMusic: '/assets/audio/music/scene-14.mp3',
   duration: 20,
   dialogues: [

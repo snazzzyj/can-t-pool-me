@@ -11,7 +11,9 @@ export const scene04DebbieRab: Scene = {
   backgroundImage: '/assets/backgrounds/Deb_Screen.png',
   backgroundPosition: 'center bottom',
   backgroundTransform: 'scale(1.1) translateY(-5%)',
-  backgroundMusic: '/assets/audio/music/scene-5.mp3',
+  backgroundMusic: '/assets/audio/coffee-shop.mp3',
+  musicVolume: 0.5,
+
   duration: 45,
 
   characters: [

@@ -19,8 +19,8 @@ export const PlayerSelection: React.FC<PlayerSelectionProps> = ({ onSelect }) =>
         </h1>
 
         <div className="mt-12 p-8 border-2 border-cyan-500/30 rounded-lg bg-black/50 backdrop-blur-sm text-center w-full max-w-2xl shadow-[0_0_30px_rgba(6,182,212,0.2)]">
-          <p className="text-xl text-cyan-100 mb-8 tracking-wide font-mono">INITIATE CONNECTION SEQUENCE</p>
-          <p className="text-sm text-slate-400 mb-6 uppercase tracking-widest">Select Active Nodes (Players)</p>
+          <p className="text-xl text-cyan-100 mb-2 tracking-wide font-mono">INITIATE CONNECTION SEQUENCE</p>
+          <p className="text-sm text-slate-400 mb-6 uppercase tracking-widest">Select Players</p>
 
           <div className="flex flex-wrap justify-center gap-4">
             {[1, 2, 3, 4, 5].map(count => (

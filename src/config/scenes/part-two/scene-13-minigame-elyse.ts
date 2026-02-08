@@ -9,7 +9,7 @@ import { ShootTheLabubuScene } from '@/domains/mini-games/shoot-the-labubu/Shoot
 export const scene13MinigameElyse: Scene = {
   sceneId: 13,
   title: 'Guards down',
-  backgroundImage: '/assets/backgrounds/scene-13.jpg',
+  backgroundImage: '/assets/minigames/shoot-the-labubu/backgrounds/Mansion_Entrance.png',
   backgroundMusic: '/assets/audio/music/scene-13.mp3',
   duration: 30,
   minigameComponent: ShootTheLabubuScene,
