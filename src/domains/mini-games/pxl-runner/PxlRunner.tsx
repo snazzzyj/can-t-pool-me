@@ -206,7 +206,6 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
       const timerChanged = Math.floor(timerRef.current) !== Math.floor(prevTimer);
 
       setPlayers(prevPlayers => {
-        let allFinished = true;
         let hasStateChanges = false;
         const nextPlayers: PlayerData[] = [];
 
@@ -248,7 +247,6 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
               obstaclesRef.current[i] = [];
               hasStateChanges = true;
             }
-            allFinished = false;
             nextPlayers.push(p);
             continue;
           }
@@ -260,8 +258,6 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
           if (p.progress >= totalDist) {
             p.finishTime = time;
             hasStateChanges = true;
-          } else {
-            allFinished = false;
           }
 
           // Spawn obstacles
