@@ -1,6 +1,7 @@
 import React from 'react';
 import { Press_Start_2P } from 'next/font/google';
 import { ANIMALS } from '../constants';
+import { getAssetPath } from '@/shared/utils/game';
 
 const pressStart2P = Press_Start_2P({ 
   weight: '400',
@@ -28,7 +29,7 @@ const AnimalSelection: React.FC<AnimalSelectionProps> = ({ currentPlayer, select
         <div className="flex flex-col items-center mb-6">
           <div className="w-24 h-24 mb-4 rounded-full border-4 border-white bg-slate-800 overflow-hidden flex items-center justify-center p-2">
             <img 
-              src={currentPlayer.assetPath} 
+              src={getAssetPath(currentPlayer.assetPath)} 
               className="w-full h-full object-contain" 
               alt={currentPlayer.codename} 
               style={{ imageRendering: 'pixelated' }}
@@ -49,7 +50,7 @@ const AnimalSelection: React.FC<AnimalSelectionProps> = ({ currentPlayer, select
               className="p-6 bg-black/40 hover:bg-white hover:text-black border-4 border-white/10 hover:border-white transition-all rounded flex flex-col items-center group"
             >
               <img 
-                src={animal.assetPath} 
+                src={getAssetPath(animal.assetPath)} 
                 alt={animal.name}
                 className="w-16 h-16 mb-3 group-hover:scale-110 transition-transform object-contain"
                 style={{ imageRendering: 'pixelated' }}

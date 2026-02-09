@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { PLAYER_CONFIG, FINAL_LEVEL_CONFIG } from '../constants';
+import { getAssetPath } from '@/shared/utils/game';
 
 interface FinalLevelProps {
   onComplete: (success: boolean, finalPressCount: number) => void;
@@ -79,7 +80,7 @@ export const FinalLevel: React.FC<FinalLevelProps> = ({ onComplete, onPress }) =
         {PLAYER_CONFIG.map(player => (
           <div key={player.id} className="character-lane">
             <img
-              src={player.portrait}
+              src={getAssetPath(player.portrait)}
               alt={player.name}
               className={`character-swing-sprite ${activeSwings[player.id] ? 'swinging' : ''}`}
             />

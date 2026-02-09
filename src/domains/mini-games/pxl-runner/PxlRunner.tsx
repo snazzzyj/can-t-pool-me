@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Press_Start_2P } from 'next/font/google';
 import { GameState, LevelType, PlayerData, Obstacle } from './types';
+import { getAssetPath } from '@/shared/utils/game';
 import {
   PLAYERS_INIT,
   SCREEN_WIDTH,
@@ -306,7 +307,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
                   style={{
                     borderColor: p.color,
                     backgroundColor: LEVELS[currentLevel].bgColor + '22',
-                    backgroundImage: `url(${LEVELS[currentLevel].backgroundImage})`,
+                    backgroundImage: `url(${getAssetPath(LEVELS[currentLevel].backgroundImage)})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat'
@@ -328,14 +329,14 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
                       <div className="relative flex items-center justify-center">
                         {/* Animal sprite - main character */}
                         <img
-                          src={p.animal}
+                          src={getAssetPath(p.animal)}
                           alt={p.codename}
                           className="w-16 h-16 object-contain"
                           style={{ imageRendering: 'pixelated' }}
                         />
                         {/* Character avatar - positioned based on animal */}
                         <img
-                          src={p.assetPath}
+                          src={getAssetPath(p.assetPath)}
                           className="absolute -translate-x-1/2 -translate-y-1/2 w-10 h-10 object-contain"
                           style={{
                             imageRendering: 'pixelated',

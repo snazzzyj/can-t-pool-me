@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import { getAssetPath } from '@/shared/utils/game';
 
 type Props = {
   onComplete: () => void;
 };
 
-const cageSrc = '/assets/characters/Mushi%20cage.png';
-const mushiSrc = '/assets/characters/Mushi-hd.png';
+const cageSrc = getAssetPath('/assets/characters/Mushi%20cage.png');
+const mushiSrc = getAssetPath('/assets/characters/Mushi-hd.png');
 
 export default function MushiIntro({ onComplete }: Props) {
   const [stage, setStage] = useState<'shake' | 'fade' | 'done'>('shake');

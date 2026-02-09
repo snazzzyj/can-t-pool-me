@@ -1,5 +1,6 @@
 import React from 'react';
 import { PLAYER_CONFIG } from '../constants';
+import { getAssetPath } from '@/shared/utils/game';
 
 interface PreGameInstructionsProps {
   onStart: () => void;
@@ -15,7 +16,7 @@ export const PreGameInstructions: React.FC<PreGameInstructionsProps> = ({ onStar
       <div className="key-assignment-list">
         {PLAYER_CONFIG.map(player => (
           <div key={player.id} className="key-assignment-item">
-            <img src={player.portrait} alt={player.name} />
+            <img src={getAssetPath(player.portrait)} alt={player.name} />
             <strong>{player.name}</strong>
             <span className="key-box">{player.key}</span>
           </div>

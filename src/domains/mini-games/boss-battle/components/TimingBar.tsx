@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { getAssetPath } from '@/shared/utils/game';
 import { PlayerResult } from '../types';
 import { useTimingBar } from '../hooks/useTimingBar';
 
@@ -45,7 +46,7 @@ export const TimingBar: React.FC<TimingBarProps> = ({
   return (
     <div className="boss-timing-bar-container">
       <div className="player-info">
-        <img src={characterPortrait} alt="Portrait" className="portrait" />
+        <img src={getAssetPath(characterPortrait)} alt="Portrait" className="portrait" />
         <span className="key-hint">{assignedKey}</span>
       </div>
 

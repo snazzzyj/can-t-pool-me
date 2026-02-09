@@ -1,5 +1,6 @@
 import React from 'react';
 import { PlayerInfo } from '../types/puzzle-perfect.types';
+import { getAssetPath } from '@/shared/utils/game';
 
 interface PlayerIndicatorProps {
   players: PlayerInfo[];
@@ -21,7 +22,7 @@ export const PlayerIndicator: React.FC<PlayerIndicatorProps> = ({ players, curre
               style={{ borderColor: isActive ? player.color : '#334155', color: player.color }}
             >
               <img
-                src={player.portrait}
+                src={getAssetPath(player.portrait)}
                 alt={player.name}
                 className="w-full h-full object-contain"
               />
