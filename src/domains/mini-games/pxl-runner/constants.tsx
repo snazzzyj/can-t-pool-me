@@ -31,7 +31,7 @@ export const PLAYERS_INIT = [
 export const LEVELS: Record<LevelType, LevelConfig> = {
   [LevelType.DESERT]: {
     name: 'Desert',
-    speed: 180,
+    speed: 220,
     duration: 20,
     spawnFreq: [1.5, 2.5],
     bgColor: '#F4D03F',
@@ -44,7 +44,7 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
   },
   [LevelType.RAINFOREST]: {
     name: 'Rainforest',
-    speed: 200,
+    speed: 240,
     duration: 20,
     spawnFreq: [1.4, 2.2],
     bgColor: '#27AE60',
@@ -57,7 +57,7 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
   },
   [LevelType.SNOWSTORM]: {
     name: 'Snowstorm',
-    speed: 220,
+    speed: 260,
     duration: 20,
     spawnFreq: [1.2, 2.0],
     bgColor: '#ECF0F1',
