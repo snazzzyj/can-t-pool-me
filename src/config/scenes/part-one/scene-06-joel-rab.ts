@@ -12,6 +12,17 @@ export const scene06JoelRab: Scene = {
   backgroundMusic: '/assets/audio/music/scene-6.mp3',
   duration: 45,
 
+  characters: [
+    {
+      image: '/assets/characters/Joel-Vinny.png',
+      position: 'left',
+      zIndex: 10,
+      scale: 4,
+      offsetX: '30%',
+      offsetY: '45%',
+    },
+  ],
+
   dialogues: [
     {
       speaker: 'Joel',
