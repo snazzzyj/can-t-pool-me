@@ -66,11 +66,6 @@ const Overlays: React.FC<OverlaysProps> = ({ gameState, currentLevel, countdown,
         <p className="text-white text-xl text-center max-w-2xl px-10 leading-relaxed">
           YOU HAVE REACHED THE VILLAIN'S HIDEOUT!
         </p>
-        <div className="mt-12 flex gap-4">
-           {['🎉', '🎊', '🎈', '🎆', '✨'].map((emoji, i) => (
-             <span key={i} className="text-4xl animate-pulse" style={{ animationDelay: `${i * 0.2}s` }}>{emoji}</span>
-           ))}
-        </div>
         <p className="mt-20 text-[10px] text-gray-500 animate-pulse">PROCEEDING TO NEXT MISSION...</p>
       </div>
     );

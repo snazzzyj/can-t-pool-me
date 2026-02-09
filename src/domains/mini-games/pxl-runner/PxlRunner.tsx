@@ -76,7 +76,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [currentLevel]);
 
   const handlePlayerCountSelect = (count: number) => {
     setNumPlayers(count);
@@ -126,6 +126,9 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
     obstaclesRef.current = [[], [], [], [], []];
     spawnTimerRef.current = [0, 0, 0, 0, 0];
 
+    // reset the animation frame timestamp to avoid a huge delta on restart
+    lastTimeRef.current = 0;
+
     setPlayers(prev => prev.map(p => ({
       ...p,
       lives: INITIAL_LIVES,
@@ -137,7 +140,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
       progress: 0,
       finishTime: null
     })));
-  }, []);
+  }, [currentLevel]);
 
   const handleLevelComplete = useCallback(() => {
     if (currentLevel === LevelType.DESERT) {
@@ -178,82 +181,100 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [gameState]);
 
+  // Debug: log state transitions and timer for troubleshooting
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.debug('[PxlRunner] gameState change', { gameState, timer, currentLevel });
+  }, [gameState, timer, currentLevel]);
+
   const update = useCallback((time: number) => {
     if (gameState === GameState.PLAYING) {
       const deltaTime = lastTimeRef.current === 0 ? 16 : Math.min(64, time - lastTimeRef.current);
       const levelConfig = LEVELS[currentLevel];
 
+      // Calculate next timer value but don't set state yet
       setTimer(prev => {
         const next = Math.max(0, prev - deltaTime / 1000);
-        if (next === 0) setGameState(GameState.GAME_OVER);
         return next;
       });
 
       setPlayers(prevPlayers => {
-        const nextPlayers = [...prevPlayers];
         let allFinished = true;
-        nextPlayers.forEach((player, i) => {
-          if (player.finishTime) return;
-          if (player.isJumping) {
-            player.y += player.vy;
-            player.vy += GRAVITY;
-            if (player.y >= GROUND_Y) {
-              player.y = GROUND_Y;
-              player.isJumping = false;
-              player.vy = 0;
+        const nextPlayers = prevPlayers.map((player, i) => {
+          // create a shallow copy to avoid in-place mutation
+          const p = { ...player };
+          if (p.finishTime) return p;
+
+          if (p.isJumping) {
+            p.y += p.vy;
+            p.vy += GRAVITY;
+            if (p.y >= GROUND_Y) {
+              p.y = GROUND_Y;
+              p.isJumping = false;
+              p.vy = 0;
             }
           }
-          if (player.isInvincible) {
-            player.invincibilityTimer -= deltaTime;
-            if (player.invincibilityTimer <= 0) player.isInvincible = false;
+
+          if (p.isInvincible) {
+            p.invincibilityTimer -= deltaTime;
+            if (p.invincibilityTimer <= 0) p.isInvincible = false;
           }
-          if (player.isDead) {
-            player.deathTimer -= deltaTime;
-            if (player.deathTimer <= 0) {
-              player.isDead = false;
-              player.lives = INITIAL_LIVES;
-              player.y = GROUND_Y;
-              player.progress = 0;
+
+          if (p.isDead) {
+            p.deathTimer -= deltaTime;
+            if (p.deathTimer <= 0) {
+              p.isDead = false;
+              p.lives = INITIAL_LIVES;
+              p.y = GROUND_Y;
+              p.progress = 0;
               obstaclesRef.current[i] = [];
             }
             allFinished = false;
-            return;
+            return p;
           }
+
           const levelDuration = levelConfig.duration ?? LEVEL_TIME;
-          player.progress += (levelConfig.speed * deltaTime) / 1000;
+          p.progress += (levelConfig.speed * deltaTime) / 1000;
           const totalDist = levelConfig.speed * levelDuration;
-          if (player.progress >= totalDist) {
-            player.finishTime = time;
+          if (p.progress >= totalDist) {
+            p.finishTime = time;
           } else {
             allFinished = false;
           }
+
           spawnTimerRef.current[i] -= deltaTime;
-          if (spawnTimerRef.current[i] <= 0 && player.progress < totalDist * 0.95) {
+          if (spawnTimerRef.current[i] <= 0 && p.progress < totalDist * 0.95) {
             const obsConfig = levelConfig.obstacles[Math.floor(Math.random() * levelConfig.obstacles.length)];
             obstaclesRef.current[i].push({ id: Math.random().toString(), x: SCREEN_WIDTH, ...obsConfig });
             const [min, max] = levelConfig.spawnFreq;
             spawnTimerRef.current[i] = (min + Math.random() * (max - min)) * 1000;
           }
+
           obstaclesRef.current[i] = obstaclesRef.current[i].filter(obs => {
             obs.x -= (levelConfig.speed * deltaTime) / 1000;
-            if (!player.isInvincible && !player.isDead && !player.finishTime) {
-              const pRect = { x: PLAYER_X, y: player.y - 48, w: 40, h: 40 };
+            if (!p.isInvincible && !p.isDead && !p.finishTime) {
+              const pRect = { x: PLAYER_X, y: p.y - 48, w: 40, h: 40 };
               const oRect = { x: obs.x, y: GROUND_Y - obs.height, w: obs.width, h: obs.height };
               if (pRect.x < oRect.x + oRect.w && pRect.x + pRect.w > oRect.x && pRect.y < oRect.y + oRect.h && pRect.y + pRect.h > oRect.y) {
-                player.lives--;
-                if (player.lives <= 0) {
-                  player.isDead = true;
-                  player.deathTimer = DEATH_DURATION;
+                p.lives--;
+                if (p.lives <= 0) {
+                  p.isDead = true;
+                  p.deathTimer = DEATH_DURATION;
                 } else {
-                  player.isInvincible = true;
-                  player.invincibilityTimer = INVINCIBILITY_DURATION;
+                  p.isInvincible = true;
+                  p.invincibilityTimer = INVINCIBILITY_DURATION;
                 }
               }
             }
             return obs.x > -100;
           });
+
+          return p;
         });
-        if (allFinished) handleLevelComplete();
+
+        if (allFinished) {
+          handleLevelComplete();
+        }
         return nextPlayers;
       });
     }
@@ -281,6 +302,18 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
       return () => clearInterval(id);
     }
   }, [gameState]);
+
+  // Check if time has run out and not all players finished
+  useEffect(() => {
+    if (gameState === GameState.PLAYING && timer <= 0) {
+      const allFinished = players.every(p => p.finishTime !== null);
+      if (!allFinished) {
+        // eslint-disable-next-line no-console
+        console.warn('[PxlRunner] timer reached 0 and not all players finished -> GAME_OVER', { currentLevel });
+        setGameState(GameState.GAME_OVER);
+      }
+    }
+  }, [timer, players, gameState, currentLevel]);
 
   return (
     <div className={`pxl-runner-container ${pressStart2P.className} w-full h-screen overflow-hidden flex items-center justify-center select-none`}>

@@ -9,7 +9,7 @@ export const GRAVITY = 0.4;
 export const INITIAL_LIVES = 3;
 export const INVINCIBILITY_DURATION = 1000;
 export const DEATH_DURATION = 2000;
-export const LEVEL_TIME = 30;
+export const LEVEL_TIME = 20;
 
 export const ANIMALS: Animal[] = [
   { id: 'chicken', name: 'Chicken', assetPath: '/assets/minigames/pxl-runner/animals/Chicken.png' },
@@ -32,7 +32,7 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
   [LevelType.DESERT]: {
     name: 'Desert',
     speed: 280,
-    duration: 30,
+    duration: 20,
     spawnFreq: [1.5, 2.5],
     bgColor: '#F4D03F',
     backgroundImage: '/assets/minigames/pxl-runner/backgrounds/Desert.png',
@@ -45,6 +45,7 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
   [LevelType.RAINFOREST]: {
     name: 'Rainforest',
     speed: 336,
+    duration: 20,
     spawnFreq: [1.2, 2.0],
     bgColor: '#27AE60',
     backgroundImage: '/assets/minigames/pxl-runner/backgrounds/rainforest.png',
@@ -57,6 +58,7 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
   [LevelType.SNOWSTORM]: {
     name: 'Snowstorm',
     speed: 437,
+    duration: 20,
     spawnFreq: [1.0, 1.5],
     bgColor: '#ECF0F1',
     backgroundImage: '/assets/minigames/pxl-runner/backgrounds/snowstorm.png',
