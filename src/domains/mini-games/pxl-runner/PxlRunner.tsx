@@ -179,7 +179,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
           const p = next[idx];
           if (!p.isJumping && !p.isDead && !p.finishTime) {
             p.isJumping = true;
-            p.vy = -12;
+            p.vy = -8;
           }
         }
         return next;
@@ -220,8 +220,8 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
           }
 
           if (p.isJumping) {
-            p.y += p.vy;
-            p.vy += GRAVITY;
+            p.y += p.vy * (deltaTime / 16);
+            p.vy += GRAVITY * (deltaTime / 16);
             if (p.y >= GROUND_Y) {
               p.y = GROUND_Y;
               p.isJumping = false;
@@ -326,11 +326,15 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
         }
 
         // Check win condition
-        if (allFinished) {
+        // Count how many players have actually finished
+        const finishedCount = nextPlayers.filter(p => p.finishTime !== null).length;
+        const allPlayersFinished = finishedCount === nextPlayers.length;
+        
+        if (allPlayersFinished) {
           handleLevelComplete();
-        } else if (timerRef.current === 0) {
+        } else if (timerRef.current <= 0) {
           // eslint-disable-next-line no-console
-          console.warn('[PxlRunner] timer reached 0 and not all players finished -> GAME_OVER', { currentLevel });
+          console.warn('[PxlRunner] timer reached 0 and not all players finished -> GAME_OVER', { currentLevel, finishedCount, totalPlayers: nextPlayers.length });
           setGameState(GameState.GAME_OVER);
         }
 

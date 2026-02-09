@@ -31,7 +31,7 @@ export const PLAYERS_INIT = [
 export const LEVELS: Record<LevelType, LevelConfig> = {
   [LevelType.DESERT]: {
     name: 'Desert',
-    speed: 280,
+    speed: 180,
     duration: 20,
     spawnFreq: [1.5, 2.5],
     bgColor: '#F4D03F',
@@ -44,9 +44,9 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
   },
   [LevelType.RAINFOREST]: {
     name: 'Rainforest',
-    speed: 336,
+    speed: 200,
     duration: 20,
-    spawnFreq: [1.2, 2.0],
+    spawnFreq: [1.4, 2.2],
     bgColor: '#27AE60',
     backgroundImage: '/assets/minigames/pxl-runner/backgrounds/rainforest.png',
     obstacles: [
@@ -57,9 +57,9 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
   },
   [LevelType.SNOWSTORM]: {
     name: 'Snowstorm',
-    speed: 437,
+    speed: 220,
     duration: 20,
-    spawnFreq: [1.0, 1.5],
+    spawnFreq: [1.2, 2.0],
     bgColor: '#ECF0F1',
     backgroundImage: '/assets/minigames/pxl-runner/backgrounds/snowstorm.png',
     obstacles: [
