@@ -45,7 +45,7 @@ const Overlays: React.FC<OverlaysProps> = ({ gameState, currentLevel, countdown,
     return (
       <div className="absolute inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center z-[100]">
         <h2 className="text-7xl text-red-600 font-bold mb-8">GAME OVER</h2>
-        <p className="text-white mb-12 text-center max-w-md">THE TEAM FAILED TO REACH THE TARGET IN TIME. DEBBIE'S DIGITAL BRIDGE COLLAPSED!</p>
+        <p className="text-white mb-12 text-center max-w-md">THE TEAM FAILED TO REACH THE TARGET IN TIME.</p>
         <button 
           onClick={onRestart}
           className="px-10 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-xl rounded shadow-lg transition-transform hover:scale-105 active:scale-95"
@@ -62,9 +62,9 @@ const Overlays: React.FC<OverlaysProps> = ({ gameState, currentLevel, countdown,
         <div className="animate-bounce mb-8">
            <span className="text-9xl">🏆</span>
         </div>
-        <h2 className="text-7xl text-yellow-400 font-bold mb-4 drop-shadow-lg">VICTORY!</h2>
+        <h2 className="text-7xl text-yellow-400 font-bold mb-4 drop-shadow-lg">VICTORY</h2>
         <p className="text-white text-xl text-center max-w-2xl px-10 leading-relaxed">
-          DEBBIE (.PXL) HAS SUCCESSFULLY MANIPULATED THE TERRAIN. THE TEAM HAS REACHED THE VILLAIN'S HIDEOUT!
+          YOU HAVE REACHED THE VILLAIN'S HIDEOUT!
         </p>
         <div className="mt-12 flex gap-4">
            {['🎉', '🎊', '🎈', '🎆', '✨'].map((emoji, i) => (
