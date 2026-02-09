@@ -28,19 +28,22 @@
 
 /* Level 1: Mansion Entrance - warm tones, ornate */
 .level-bg.level-1 {
-  background: url('/assets/minigames/shoot-the-labubu/backgrounds/Mansion1.png');
+  /* Background image is applied inline via component to support basePath */
+  background: none;
   background-size: 100% 100%;
 }
 
 /* Level 2: Pool Hall Basement - dark, green felt */
 .level-bg.level-2 {
-  background: url('/assets/minigames/shoot-the-labubu/backgrounds/Pool_basement.png');
+  /* Background image is applied inline via component to support basePath */
+  background: none;
   background-size: 100% 100%;
 }
 
 /* Level 3: Cyberpunk Lair - neon blue, high-tech */
 .level-bg.level-3 {
-  background: url('/assets/minigames/shoot-the-labubu/backgrounds/Villain_Lair.png');
+  /* Background image is applied inline via component to support basePath */
+  background: none;
   background-size: 100% 100%;
   box-shadow: inset 0 0 200px rgba(0, 150, 255, 0.08);
 }

@@ -12,12 +12,12 @@ export const DEATH_DURATION = 2000;
 export const LEVEL_TIME = 30;
 
 export const ANIMALS: Animal[] = [
-  { id: 'chicken', name: 'Chicken', assetPath: '/assets/minigames/pxl-runner/animals/chicken.png' },
-  { id: 'snail', name: 'Snail', assetPath: '/assets/minigames/pxl-runner/animals/snail.png' },
-  { id: 'frog', name: 'Frog', assetPath: '/assets/minigames/pxl-runner/animals/frog.png' },
-  { id: 'goose', name: 'Goose', assetPath: '/assets/minigames/pxl-runner/animals/goose.png' },
-  { id: 'dino', name: 'Dino', assetPath: '/assets/minigames/pxl-runner/animals/dino.png' },
-  { id: 'rabbit', name: 'Rabbit', assetPath: '/assets/minigames/pxl-runner/animals/bun.png' },
+  { id: 'chicken', name: 'Chicken', assetPath: '/assets/minigames/pxl-runner/animals/Chicken.png' },
+  { id: 'snail', name: 'Snail', assetPath: '/assets/minigames/pxl-runner/animals/Snail.png' },
+  { id: 'frog', name: 'Frog', assetPath: '/assets/minigames/pxl-runner/animals/Frog.png' },
+  { id: 'goose', name: 'Goose', assetPath: '/assets/minigames/pxl-runner/animals/Goose.png' },
+  { id: 'dino', name: 'Dino', assetPath: '/assets/minigames/pxl-runner/animals/Dino.png' },
+  { id: 'rabbit', name: 'Rabbit', assetPath: '/assets/minigames/pxl-runner/animals/Bun.png' },
 ];
 
 export const PLAYERS_INIT = [
