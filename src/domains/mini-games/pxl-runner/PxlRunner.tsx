@@ -53,6 +53,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
 
   const requestRef = useRef<number>(0);
   const lastTimeRef = useRef<number>(0);
+  const timerRef = useRef<number>(LEVELS[LevelType.DESERT].duration ?? LEVEL_TIME);
   const obstaclesRef = useRef<Obstacle[][]>([[], [], [], [], []]);
   const spawnTimerRef = useRef<number[]>([0, 0, 0, 0, 0]);
 
@@ -121,6 +122,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
 
   const resetLevel = useCallback(() => {
     setTimer(LEVELS[currentLevel].duration ?? LEVEL_TIME);
+    timerRef.current = LEVELS[currentLevel].duration ?? LEVEL_TIME;
     setGameState(GameState.COUNTDOWN);
     setCountdown(3);
     obstaclesRef.current = [[], [], [], [], []];
@@ -192,11 +194,9 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
       const deltaTime = lastTimeRef.current === 0 ? 16 : Math.min(64, time - lastTimeRef.current);
       const levelConfig = LEVELS[currentLevel];
 
-      // Calculate next timer value but don't set state yet
-      setTimer(prev => {
-        const next = Math.max(0, prev - deltaTime / 1000);
-        return next;
-      });
+      // Update timer ref and state
+      timerRef.current = Math.max(0, timerRef.current - deltaTime / 1000);
+      setTimer(timerRef.current);
 
       setPlayers(prevPlayers => {
         let allFinished = true;
@@ -272,8 +272,14 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
           return p;
         });
 
+        // Check win condition first (if all players finished, level complete)
         if (allFinished) {
           handleLevelComplete();
+        } else if (timerRef.current === 0) {
+          // Only trigger game over if NOT all finished and timer ran out
+          // eslint-disable-next-line no-console
+          console.warn('[PxlRunner] timer reached 0 and not all players finished -> GAME_OVER', { currentLevel });
+          setGameState(GameState.GAME_OVER);
         }
         return nextPlayers;
       });
@@ -302,18 +308,6 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
       return () => clearInterval(id);
     }
   }, [gameState]);
-
-  // Check if time has run out and not all players finished
-  useEffect(() => {
-    if (gameState === GameState.PLAYING && timer <= 0) {
-      const allFinished = players.every(p => p.finishTime !== null);
-      if (!allFinished) {
-        // eslint-disable-next-line no-console
-        console.warn('[PxlRunner] timer reached 0 and not all players finished -> GAME_OVER', { currentLevel });
-        setGameState(GameState.GAME_OVER);
-      }
-    }
-  }, [timer, players, gameState, currentLevel]);
 
   return (
     <div className={`pxl-runner-container ${pressStart2P.className} w-full h-screen overflow-hidden flex items-center justify-center select-none`}>
