@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import { GameState, LevelType } from '../types';
 import { LEVELS } from '../constants';
 
@@ -10,7 +10,7 @@ interface OverlaysProps {
   onRestart: () => void;
 }
 
-const Overlays: React.FC<OverlaysProps> = ({ gameState, currentLevel, countdown, onRestart }) => {
+const Overlays: React.FC<OverlaysProps> = memo(({ gameState, currentLevel, countdown, onRestart }) => {
   if (gameState === GameState.COUNTDOWN) {
     return (
       <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center z-[100]">
@@ -72,6 +72,8 @@ const Overlays: React.FC<OverlaysProps> = ({ gameState, currentLevel, countdown,
   }
 
   return null;
-};
+});
+
+Overlays.displayName = 'Overlays';
 
 export default Overlays;

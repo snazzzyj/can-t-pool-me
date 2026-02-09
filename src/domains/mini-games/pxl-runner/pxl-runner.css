@@ -17,6 +17,10 @@
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+  
+  /* Performance: Enable GPU acceleration */
+  transform: translateZ(0);
+  will-change: auto;
 }
 
 /* Reset box-sizing for all children */
@@ -59,4 +63,19 @@
 
 .pxl-runner-container .animate-pulse-soft {
   animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Performance optimizations for game lanes */
+.pxl-runner-container .flex-1 {
+  contain: layout style paint;
+}
+
+/* Optimize obstacle rendering */
+.pxl-runner-container .absolute.z-10.text-5xl {
+  transform: translateZ(0);
+}
+
+/* Optimize player rendering */
+.pxl-runner-container .absolute.z-20 {
+  contain: content;
 }

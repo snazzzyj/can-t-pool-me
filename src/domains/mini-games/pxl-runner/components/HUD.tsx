@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import { LevelType, PlayerData } from '../types';
 import { LEVELS } from '../constants';
 
@@ -9,7 +9,7 @@ interface HUDProps {
   players: PlayerData[];
 }
 
-const HUD: React.FC<HUDProps> = ({ timer, level }) => {
+const HUD: React.FC<HUDProps> = memo(({ timer, level }) => {
   const isUrgent = timer <= 10;
   
   return (
@@ -33,6 +33,8 @@ const HUD: React.FC<HUDProps> = ({ timer, level }) => {
       </div>
     </div>
   );
-};
+});
+
+HUD.displayName = 'HUD';
 
 export default HUD;

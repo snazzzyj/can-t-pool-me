@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Press_Start_2P } from 'next/font/google';
 import { GameState, LevelType, PlayerData, Obstacle } from './types';
 import { getAssetPath } from '@/shared/utils/game';
@@ -57,16 +57,22 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
   const obstaclesRef = useRef<Obstacle[][]>([[], [], [], [], []]);
   const spawnTimerRef = useRef<number[]>([0, 0, 0, 0, 0]);
 
+  // Memoized character position map
+  const characterPositions = useMemo(() => ({
+    'Chicken.png': { left: '28%', top: '20px' },
+    'Dino.png': { left: '35%', top: '10px' },
+    'Snail.png': { left: '35%', top: '0px' },
+    'Frog.png': { left: '50%', top: '2px' },
+    'Bun.png': { left: '30%', top: '15px' },
+    'Goose.png': { left: '42%', top: '20px' },
+    default: { left: '50%', top: '0px' }
+  }), []);
+
   // Helper function to get character position based on animal
-  const getCharacterPosition = (animalPath: string) => {
-    if (animalPath.includes('Chicken.png')) return { left: '28%', top: '20px' };
-    if (animalPath.includes('Dino.png')) return { left: '35%', top: '10px' };
-    if (animalPath.includes('Snail.png')) return { left: '35%', top: '0px' };
-    if (animalPath.includes('Frog.png')) return { left: '50%', top: '2px' };
-    if (animalPath.includes('Bun.png')) return { left: '30%', top: '15px' };
-    if (animalPath.includes('Goose.png')) return { left: '42%', top: '20px' };
-    return { left: '50%', top: '0px' };
-  };
+  const getCharacterPosition = useCallback((animalPath: string) => {
+    const key = Object.keys(characterPositions).find(k => k !== 'default' && animalPath.includes(k));
+    return key ? characterPositions[key as keyof typeof characterPositions] : characterPositions.default;
+  }, [characterPositions]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -183,27 +189,35 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [gameState]);
 
-  // Debug: log state transitions and timer for troubleshooting
+  // Debug: log state transitions for troubleshooting
   useEffect(() => {
     // eslint-disable-next-line no-console
-    console.debug('[PxlRunner] gameState change', { gameState, timer, currentLevel });
-  }, [gameState, timer, currentLevel]);
+    console.debug('[PxlRunner] gameState change', gameState);
+  }, [gameState]);
 
   const update = useCallback((time: number) => {
     if (gameState === GameState.PLAYING) {
       const deltaTime = lastTimeRef.current === 0 ? 16 : Math.min(64, time - lastTimeRef.current);
       const levelConfig = LEVELS[currentLevel];
 
-      // Update timer ref and state
+      // Update timer ref and state - only update state if changed significantly
+      const prevTimer = timerRef.current;
       timerRef.current = Math.max(0, timerRef.current - deltaTime / 1000);
-      setTimer(timerRef.current);
+      const timerChanged = Math.floor(timerRef.current) !== Math.floor(prevTimer);
 
       setPlayers(prevPlayers => {
         let allFinished = true;
-        const nextPlayers = prevPlayers.map((player, i) => {
-          // create a shallow copy to avoid in-place mutation
-          const p = { ...player };
-          if (p.finishTime) return p;
+        let hasStateChanges = false;
+        const nextPlayers: PlayerData[] = [];
+
+        for (let i = 0; i < prevPlayers.length; i++) {
+          const player = prevPlayers[i];
+          const p: PlayerData = { ...player };
+
+          if (p.finishTime) {
+            nextPlayers.push(p);
+            continue;
+          }
 
           if (p.isJumping) {
             p.y += p.vy;
@@ -213,11 +227,15 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
               p.isJumping = false;
               p.vy = 0;
             }
+            hasStateChanges = true;
           }
 
           if (p.isInvincible) {
             p.invincibilityTimer -= deltaTime;
-            if (p.invincibilityTimer <= 0) p.isInvincible = false;
+            if (p.invincibilityTimer <= 0) {
+              p.isInvincible = false;
+              hasStateChanges = true;
+            }
           }
 
           if (p.isDead) {
@@ -228,34 +246,53 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
               p.y = GROUND_Y;
               p.progress = 0;
               obstaclesRef.current[i] = [];
+              hasStateChanges = true;
             }
             allFinished = false;
-            return p;
+            nextPlayers.push(p);
+            continue;
           }
 
           const levelDuration = levelConfig.duration ?? LEVEL_TIME;
           p.progress += (levelConfig.speed * deltaTime) / 1000;
           const totalDist = levelConfig.speed * levelDuration;
+
           if (p.progress >= totalDist) {
             p.finishTime = time;
+            hasStateChanges = true;
           } else {
             allFinished = false;
           }
 
+          // Spawn obstacles
           spawnTimerRef.current[i] -= deltaTime;
           if (spawnTimerRef.current[i] <= 0 && p.progress < totalDist * 0.95) {
             const obsConfig = levelConfig.obstacles[Math.floor(Math.random() * levelConfig.obstacles.length)];
             obstaclesRef.current[i].push({ id: Math.random().toString(), x: SCREEN_WIDTH, ...obsConfig });
             const [min, max] = levelConfig.spawnFreq;
             spawnTimerRef.current[i] = (min + Math.random() * (max - min)) * 1000;
+            hasStateChanges = true;
           }
 
-          obstaclesRef.current[i] = obstaclesRef.current[i].filter(obs => {
-            obs.x -= (levelConfig.speed * deltaTime) / 1000;
-            if (!p.isInvincible && !p.isDead && !p.finishTime) {
-              const pRect = { x: PLAYER_X, y: p.y - 48, w: 40, h: 40 };
-              const oRect = { x: obs.x, y: GROUND_Y - obs.height, w: obs.width, h: obs.height };
-              if (pRect.x < oRect.x + oRect.w && pRect.x + pRect.w > oRect.x && pRect.y < oRect.y + oRect.h && pRect.y + pRect.h > oRect.y) {
+          // Collision detection - optimized with early exit
+          if (!p.isInvincible && !p.isDead && !p.finishTime) {
+            const pX = PLAYER_X;
+            const pY = p.y - 48;
+            const pW = 40;
+            const pH = 40;
+
+            const obstacles = obstaclesRef.current[i];
+            for (let j = 0; j < obstacles.length; j++) {
+              const obs = obstacles[j];
+              obs.x -= (levelConfig.speed * deltaTime) / 1000;
+
+              // AABB collision detection optimized
+              const oX = obs.x;
+              const oY = GROUND_Y - obs.height;
+              const oW = obs.width;
+              const oH = obs.height;
+
+              if (pX < oX + oW && pX + pW > oX && pY < oY + oH && pY + pH > oY) {
                 p.lives--;
                 if (p.lives <= 0) {
                   p.isDead = true;
@@ -264,25 +301,46 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
                   p.isInvincible = true;
                   p.invincibilityTimer = INVINCIBILITY_DURATION;
                 }
+                hasStateChanges = true;
+                break; // Exit early - only take damage once per frame
               }
             }
-            return obs.x > -100;
-          });
 
-          return p;
-        });
+            // Remove off-screen obstacles
+            obstaclesRef.current[i] = obstacles.filter(obs => obs.x > -100);
+          } else {
+            // Still update obstacle positions even if player is dead/invincible
+            const obstacles = obstaclesRef.current[i];
+            for (let j = 0; j < obstacles.length; j++) {
+              obstacles[j].x -= (levelConfig.speed * deltaTime) / 1000;
+            }
+            obstaclesRef.current[i] = obstacles.filter(obs => obs.x > -100);
+          }
 
-        // Check win condition first (if all players finished, level complete)
+          nextPlayers.push(p);
+        }
+
+        // Only trigger state changes if something actually changed
+        if (!hasStateChanges && prevPlayers === nextPlayers) {
+          return prevPlayers;
+        }
+
+        // Check win condition
         if (allFinished) {
           handleLevelComplete();
         } else if (timerRef.current === 0) {
-          // Only trigger game over if NOT all finished and timer ran out
           // eslint-disable-next-line no-console
           console.warn('[PxlRunner] timer reached 0 and not all players finished -> GAME_OVER', { currentLevel });
           setGameState(GameState.GAME_OVER);
         }
+
         return nextPlayers;
       });
+
+      // Only update timer display if it changed
+      if (timerChanged) {
+        setTimer(timerRef.current);
+      }
     }
     lastTimeRef.current = time;
     requestRef.current = requestAnimationFrame(update);
@@ -330,18 +388,22 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
             <div className="flex-1 flex flex-col">
               {players.map((p, i) => {
                 const completed = !!p.finishTime;
+                const bgColor = LEVELS[currentLevel].bgColor + '22';
+                const bgImage = getAssetPath(LEVELS[currentLevel].backgroundImage);
+                const laneOpacity = completed ? 0.45 : 1;
+                
                 return (
                 <div
                   key={p.id}
                   className="flex-1 relative border-b-4 border-opacity-40 overflow-hidden"
                   style={{
                     borderColor: p.color,
-                    backgroundColor: LEVELS[currentLevel].bgColor + '22',
-                    backgroundImage: `url(${getAssetPath(LEVELS[currentLevel].backgroundImage)})`,
+                    backgroundColor: bgColor,
+                    backgroundImage: `url(${bgImage})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    opacity: completed ? 0.45 : 1
+                    opacity: laneOpacity
                   }}
                 >
                   <div className="absolute top-4 left-4 z-10 flex items-center gap-3 bg-black/70 px-4 py-2 rounded border border-white/20">
@@ -401,7 +463,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
                     </div>
                   )}
                   {obstaclesRef.current[i]?.map(obs => (
-                    <div key={obs.id} className="absolute z-10 text-5xl" style={{ left: obs.x, top: GROUND_Y - obs.height - 10 }}>
+                    <div key={obs.id} className="absolute z-10 text-5xl pointer-events-none" style={{ left: obs.x, top: GROUND_Y - obs.height - 10, willChange: 'transform' }}>
                       {obs.emoji}
                     </div>
                   ))}
