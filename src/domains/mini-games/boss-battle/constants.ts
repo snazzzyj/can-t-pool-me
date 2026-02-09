@@ -28,8 +28,8 @@ export const SCORING = {
 
 export const VILLAIN_ASSETS = {
   HEALTHY: '/assets/characters/Villain/Hooded-Villain.png',
-  DAZED: '/assets/characters/Villain/Dazed Heavy Eyelids.png',
-  STAGGERING: '/assets/characters/Villain/Dizzy with Halo.png',
+  DAZED: '/assets/characters/Villain/Dazed heavy eyelids.png',
+  STAGGERING: '/assets/characters/Villain/Dizzy with halo.png',
   DIZZY: '/assets/characters/Villain/Dizzy with halo.png',
   DEAD: '/assets/characters/Villain/Villain_Dead.png',
   KNOCKED_OUT: '/assets/characters/Villain/Staggering.png',

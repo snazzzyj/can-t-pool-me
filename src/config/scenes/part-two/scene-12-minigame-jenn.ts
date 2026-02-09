@@ -34,7 +34,7 @@ export const scene12MinigameJenn: Scene = {
       speaker: 'Hackerman',
       text: 'What the?... There\'s a captcha blocking our access.',
       characterImage: '/assets/characters/Joel-1.png',
-      backgroundImage: '/assets/characters/laptop_puzzle.png',
+      backgroundImage: '/assets/characters/Laptop_Puzzle.png',
     },
     {
       speaker: 'Hacktress',
