@@ -32,6 +32,7 @@ export const LEVELS: Record<LevelType, LevelConfig> = {
   [LevelType.DESERT]: {
     name: 'Desert',
     speed: 280,
+    duration: 30,
     spawnFreq: [1.5, 2.5],
     bgColor: '#F4D03F',
     backgroundImage: '/assets/minigames/pxl-runner/backgrounds/Desert.png',

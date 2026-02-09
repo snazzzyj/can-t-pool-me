@@ -56,6 +56,7 @@ export interface LevelConfig {
     height: number;
     emoji?: string;
   }>;
+  duration?: number;
 }
 
 export interface Animal {

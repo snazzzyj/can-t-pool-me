@@ -6,6 +6,7 @@ import {
   PLAYERS_INIT,
   SCREEN_WIDTH,
   SCREEN_HEIGHT,
+  LANE_HEIGHT,
   LEVELS,
   LEVEL_TIME,
   INITIAL_LIVES,
@@ -47,7 +48,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
   const [currentLevel, setCurrentLevel] = useState<LevelType>(LevelType.DESERT);
   const [players, setPlayers] = useState<PlayerData[]>([]);
   const [selectingPlayerIndex, setSelectingPlayerIndex] = useState(0);
-  const [timer, setTimer] = useState(LEVEL_TIME);
+  const [timer, setTimer] = useState(() => LEVELS[LevelType.DESERT].duration ?? LEVEL_TIME);
   const [countdown, setCountdown] = useState(3);
   const [scale, setScale] = useState(1);
 
@@ -58,12 +59,12 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
 
   // Helper function to get character position based on animal
   const getCharacterPosition = (animalPath: string) => {
-    if (animalPath.includes('Chicken.png')) return { left: '5%', top: '-5px' };
-    if (animalPath.includes('Dino.png')) return { left: '45%', top: '0px' };
+    if (animalPath.includes('Chicken.png')) return { left: '28%', top: '20px' };
+    if (animalPath.includes('Dino.png')) return { left: '35%', top: '10px' };
     if (animalPath.includes('Snail.png')) return { left: '35%', top: '0px' };
-    if (animalPath.includes('Frog.png')) return { left: '50%', top: '0px' };
-    if (animalPath.includes('Bun.png')) return { left: '48%', top: '-10px' };
-    if (animalPath.includes('Goos.png')) return { left: '42%', top: '0px' };
+    if (animalPath.includes('Frog.png')) return { left: '50%', top: '2px' };
+    if (animalPath.includes('Bun.png')) return { left: '30%', top: '15px' };
+    if (animalPath.includes('Goose.png')) return { left: '42%', top: '20px' };
     return { left: '50%', top: '0px' };
   };
 
@@ -120,7 +121,7 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
   };
 
   const resetLevel = useCallback(() => {
-    setTimer(LEVEL_TIME);
+    setTimer(LEVELS[currentLevel].duration ?? LEVEL_TIME);
     setGameState(GameState.COUNTDOWN);
     setCountdown(3);
     obstaclesRef.current = [[], [], [], [], []];
@@ -219,8 +220,9 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
             allFinished = false;
             return;
           }
+          const levelDuration = levelConfig.duration ?? LEVEL_TIME;
           player.progress += (levelConfig.speed * deltaTime) / 1000;
-          const totalDist = levelConfig.speed * LEVEL_TIME;
+          const totalDist = levelConfig.speed * levelDuration;
           if (player.progress >= totalDist) {
             player.finishTime = time;
           } else {
@@ -300,7 +302,9 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
           <>
             <HUD timer={timer} level={currentLevel} players={players} />
             <div className="flex-1 flex flex-col">
-              {players.map((p, i) => (
+              {players.map((p, i) => {
+                const completed = !!p.finishTime;
+                return (
                 <div
                   key={p.id}
                   className="flex-1 relative border-b-4 border-opacity-40 overflow-hidden"
@@ -310,7 +314,8 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
                     backgroundImage: `url(${getAssetPath(LEVELS[currentLevel].backgroundImage)})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
+                    backgroundRepeat: 'no-repeat',
+                    opacity: completed ? 0.45 : 1
                   }}
                 >
                   <div className="absolute top-4 left-4 z-10 flex items-center gap-3 bg-black/70 px-4 py-2 rounded border border-white/20">
@@ -321,6 +326,13 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
                       ))}
                     </div>
                   </div>
+
+                  {completed && (
+                    <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
+                      <div className="bg-black/60 px-6 py-3 rounded text-4xl text-white font-bold tracking-wider uppercase">LEVEL COMPLETE</div>
+                    </div>
+                  )}
+
                   {!p.isDead && (
                     <div
                       className={`absolute z-20 ${p.isInvincible ? 'animate-pulse opacity-60' : ''}`}
@@ -367,11 +379,13 @@ const PixelRunner: React.FC<PixelRunnerProps> = ({ onComplete }) => {
                       {obs.emoji}
                     </div>
                   ))}
+                  <div className="absolute left-0 w-full h-2 bg-gradient-to-r from-orange-400 to-red-600 z-20" style={{ top: GROUND_Y + 9 }}></div>
                   <div className="absolute bottom-0 left-0 w-full h-3 bg-white/10">
-                    <div className="h-full transition-all" style={{ width: `${(p.progress / (LEVELS[currentLevel].speed * LEVEL_TIME)) * 100}%`, backgroundColor: p.color }}></div>
+                    <div className="h-full transition-all" style={{ width: `${(p.progress / (LEVELS[currentLevel].speed * (LEVELS[currentLevel].duration ?? LEVEL_TIME))) * 100}%`, backgroundColor: p.color }}></div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </>
         )}

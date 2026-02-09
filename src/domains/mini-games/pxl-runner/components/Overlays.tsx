@@ -35,7 +35,7 @@ const Overlays: React.FC<OverlaysProps> = ({ gameState, currentLevel, countdown,
       <div className="absolute inset-0 bg-black flex flex-col items-center justify-center z-[100] animate-in fade-in duration-500">
         <p className="text-xl text-gray-400 mb-4 uppercase">LEVEL COMPLETE!</p>
         <h2 className="text-5xl text-white font-bold text-center">
-          PREPARING FOR {LEVELS[currentLevel === LevelType.DESERT ? LevelType.RAINFOREST : LevelType.SNOWSTORM].name}
+          PREPARING FOR {LEVELS[currentLevel].name}
         </h2>
       </div>
     );
